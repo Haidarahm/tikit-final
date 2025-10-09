@@ -12,7 +12,6 @@ export default function WorkSection() {
   }, [works, loadWorks]);
 
   const items = useMemo(() => {
-    console.log(works);
     return (works || []).map((w) => ({
       id: w.id,
       title: w.title ?? "",
@@ -31,13 +30,13 @@ export default function WorkSection() {
 
   return (
     <>
-      <div className="relative hidden md:block h-[500vh] z-10 w-full overflow-visible">
+      <div className="relative hidden md:block h-[540vh] z-10 w-full overflow-visible text-[var(--foreground)]">
         <StickyPinnedSection items={items} heightPerItemVh={150} />
       </div>
-      <div className="mobile-view gap-[30px] md:hidden relative text-white  flex flex-col w-full px-[20px]">
+      <div className="mobile-view gap-[30px] md:hidden relative text-[var(--foreground)] flex flex-col w-full px-[20px]">
         <div className="headline sticky top-0 flex w-full justify-between mt-[40px]">
           <h1 className="text-[18px] font-bold">Featured Work</h1>{" "}
-          <button className="bg-white px-2 md:hidden text-[11px] text-black rounded-full uppercase">
+          <button className="px-2 md:hidden text-[11px] rounded-full uppercase border border-[var(--foreground)] text-[var(--foreground)] bg-transparent">
             Explore Projects
           </button>
         </div>
@@ -52,10 +51,12 @@ export default function WorkSection() {
                   <h1 className="title text-[20px] font-bold">{item.title}</h1>
                 ) : null}
                 {item.subtitle ? (
-                  <div className="subtitle text-[16px]">{item.subtitle}</div>
+                  <div className="subtitle text-[16px] opacity-80">
+                    {item.subtitle}
+                  </div>
                 ) : null}
                 {item.description ? (
-                  <div className=" description text-[14px]">
+                  <div className=" description text-[14px] opacity-80">
                     {item.description}
                   </div>
                 ) : null}

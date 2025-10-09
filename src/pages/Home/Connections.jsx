@@ -37,6 +37,7 @@ const Connections = () => {
       left: "1000px",
       rotation: 100,
       duration: 1.5,
+      filter: "blur(5px)",
       ease: "power1.inOut",
       scrollTrigger: {
         trigger: scrollerEl,
@@ -51,6 +52,7 @@ const Connections = () => {
       right: "70%",
       rotation: 100,
       duration: 1.5,
+      filter: "blur(5px)",
       ease: "power1.inOut",
       scrollTrigger: {
         trigger: scrollerEl,
@@ -133,7 +135,14 @@ const Connections = () => {
           blend data with creativity to help brands reach and resonate with the
           right audience
         </p>
-        <button className="uppercase mt-[40px] text-[11px] md:text-[16px] hover:text-[var(--foreground)] dark:hover:text-white hover:bg-transparent border border-[var(--foreground)] dark:border-white transition cursor-pointer py-1 bg-[var(--foreground)] dark:bg-white rounded-full px-4 text-[var(--background)] dark:text-black w-fit">
+        <button className="uppercase mt-[40px]
+         text-[11px] md:text-[16px] hover:text-[var(--foreground)]
+          dark:hover:text-white hover:bg-transparent border
+           border-[var(--foreground)] dark:border-white transition
+            cursor-pointer py-1 bg-[var(--foreground)] dark:bg-white
+             rounded-full px-4 text-[var(--background)]
+             dark:hover:bg-transparent
+              dark:text-black w-fit">
           contact us
         </button>
       </div>

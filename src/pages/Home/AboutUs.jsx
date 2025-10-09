@@ -109,13 +109,13 @@ const AboutUs = () => {
       ref={sectionRef}
       className="section overflow-visible mt-4 md:mt-0 font-hero-light flex-col mx-auto z-10 w-[95%] md:w-6/7 "
     >
-      <div className="w-full">
+      <div className="w-full text-[var(--foreground)] ">
         <h2
           ref={titleRef}
           data-aos="fade-right"
           data-aos-duration="500"
           data-aos-delay="100"
-          className="text-white text-[18px] text-center md:text-4xl font-bold mb-2 md:mb-4"
+          className="text-[18px] text-center md:text-4xl font-bold mb-2 md:mb-4"
         >
           Who We Are
         </h2>

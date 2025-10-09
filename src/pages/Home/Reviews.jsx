@@ -50,7 +50,7 @@ const Reviews = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="flex gap-[23px] h-[180px] md:h-[300px] w-[320px] md:w-[600px] ml-[20px] p-2 md:p-7 rounded-xl text-white border border-white/15 bg-white/10 backdrop-blur-md shadow-xl"
+              className="flex gap-[23px] h-[180px] md:h-[300px] w-[320px] md:w-[600px] ml-[20px] p-2 md:p-7 rounded-xl text-[var(--foreground)] border border-white/15 bg-white/10 backdrop-blur-md shadow-xl"
             >
               <div className="icon h-full">
                 <img src={quote} alt="" className="mh-[20px] d:h-[40px] w-[20px]  md:w-[40px]" />
@@ -83,7 +83,7 @@ const Reviews = () => {
           {testimonials.map((testimonial, index) => (
              <div
               key={index}
-              className="flex gap-[23px] h-[180px] md:h-[300px] w-[320px] md:w-[600px] ml-[20px] p-2 md:p-7 rounded-xl text-white border border-white/15 bg-white/10 backdrop-blur-md shadow-xl"
+              className="flex gap-[23px] h-[180px] md:h-[300px] w-[320px] md:w-[600px] ml-[20px] p-2 md:p-7 rounded-xl text-[var(--foreground)] border border-white/15 bg-white/10 backdrop-blur-md shadow-xl"
             >
               <div className="icon h-full">
                 <img src={quote} alt="" className="mh-[20px] d:h-[40px] w-[20px]  md:w-[40px]" />

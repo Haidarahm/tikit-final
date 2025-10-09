@@ -4,8 +4,11 @@ import {
   ThreeDScrollTriggerRow,
 } from "../../components/ui/ThreeDScrollTriggerRow";
 import quote from "../../assets/icons/quot.svg";
+import { useTheme } from "../../store/ThemeContext.jsx";
 
 const Reviews = () => {
+  const { theme } = useTheme();
+  const lightBgs = ["#D4E6F4", "#E0DFFA", "#E8DCFD", "#F5D8ED"]; // light mode palette
   const testimonials = [
     {
       name: "Sophia Martinez",
@@ -50,10 +53,19 @@ const Reviews = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="flex gap-[23px] h-[180px] md:h-[300px] w-[320px] md:w-[600px] ml-[20px] p-2 md:p-7 rounded-xl text-[var(--foreground)] border border-white/15 bg-white/10 backdrop-blur-md shadow-xl"
+              className="flex gap-[23px] h-[180px] md:h-[300px] w-[320px] md:w-[600px] ml-[20px] p-2 md:p-7 rounded-xl text-[var(--foreground)] border border-white/15 dark:bg-white/10 backdrop-blur-md shadow-xl"
+              style={
+                theme === "dark"
+                  ? undefined
+                  : { backgroundColor: lightBgs[index % lightBgs.length] }
+              }
             >
               <div className="icon h-full">
-                <img src={quote} alt="" className="mh-[20px] d:h-[40px] w-[20px]  md:w-[40px]" />
+                <img
+                  src={quote}
+                  alt=""
+                  className="mh-[20px] d:h-[40px] w-[20px]  md:w-[40px]"
+                />
               </div>
 
               <div className="content flex-col flex-1 justify-between w-full flex">
@@ -67,7 +79,9 @@ const Reviews = () => {
                     className=" w-[31px] md:w-[75px] h-[31px] md:h-[75px] rounded-full "
                   />
                   <div className="name-specialist flex flex-col ml-[20px]">
-                    <div className="text-[16px] md:text-[20px]">{testimonial.name}</div>
+                    <div className="text-[16px] md:text-[20px]">
+                      {testimonial.name}
+                    </div>
                     <div className="specialist text-[12px] md:text-[18px] text-gray-400">
                       {testimonial.company}
                     </div>
@@ -81,12 +95,21 @@ const Reviews = () => {
       <ThreeDScrollTriggerContainer>
         <ThreeDScrollTriggerRow baseVelocity={3} direction={-1}>
           {testimonials.map((testimonial, index) => (
-             <div
+            <div
               key={index}
-              className="flex gap-[23px] h-[180px] md:h-[300px] w-[320px] md:w-[600px] ml-[20px] p-2 md:p-7 rounded-xl text-[var(--foreground)] border border-white/15 bg-white/10 backdrop-blur-md shadow-xl"
+              className="flex gap-[23px] h-[180px] md:h-[300px] w-[320px] md:w-[600px] ml-[20px] p-2 md:p-7 rounded-xl text-[var(--foreground)] border border-white/15 dark:bg-white/10 backdrop-blur-md shadow-xl"
+              style={
+                theme === "dark"
+                  ? undefined
+                  : { backgroundColor: lightBgs[index % lightBgs.length] }
+              }
             >
               <div className="icon h-full">
-                <img src={quote} alt="" className="mh-[20px] d:h-[40px] w-[20px]  md:w-[40px]" />
+                <img
+                  src={quote}
+                  alt=""
+                  className="mh-[20px] d:h-[40px] w-[20px]  md:w-[40px]"
+                />
               </div>
 
               <div className="content flex-col flex-1 justify-between w-full flex">
@@ -100,7 +123,9 @@ const Reviews = () => {
                     className=" w-[31px] md:w-[75px] h-[31px] md:h-[75px] rounded-full "
                   />
                   <div className="name-specialist flex flex-col ml-[20px]">
-                    <div className="text-[16px] md:text-[20px]">{testimonial.name}</div>
+                    <div className="text-[16px] md:text-[20px]">
+                      {testimonial.name}
+                    </div>
                     <div className="specialist text-[12px] md:text-[18px] text-gray-400">
                       {testimonial.company}
                     </div>
@@ -111,7 +136,6 @@ const Reviews = () => {
           ))}
         </ThreeDScrollTriggerRow>
       </ThreeDScrollTriggerContainer>
-     
     </div>
   );
 };

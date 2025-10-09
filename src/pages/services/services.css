@@ -1,0 +1,32 @@
+/* Title effect styles (SplitType-like) */
+.section-title {
+  text-transform: uppercase;
+  /* approximate Bebas Neue look if not installed; using existing fonts */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  line-height: 5.9rem; /* tuned for large sizes */
+}
+
+.section-title .char {
+  display: inline-block;
+  transform: translateY(115px);
+  transition: transform 0.5s ease;
+}
+
+/* Window-level scroll snap */
+html {
+  scroll-snap-type: y mandatory;
+  
+}
+
+body {
+  scroll-snap-type: y mandatory;
+}
+
+/* Background image styling for sections */
+.snap-section {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}

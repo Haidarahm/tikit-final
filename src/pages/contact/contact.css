@@ -1,0 +1,10 @@
+/* .line-container{
+    background-color: white;
+} */
+
+.line-container .line{
+    box-shadow: 1px 1px 6px 1px #000;
+}
+.contact-section .details{
+box-shadow: 1px 1px 6px 1px #000;
+}

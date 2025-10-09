@@ -1,0 +1,27 @@
+{
+    "nav": {
+        "home": "Accueil",
+        "work": "Travaux",
+        "about": "À propos",
+        "services": "Services",
+        "contact": "Contactez-nous"
+    },
+    "home": {
+        "title": "Accueil",
+        "description": "Page d'accueil",
+        "hero": {
+            "tagline": "Agence marketing",
+            "title": "ROI REBELS",
+            "subtitle": "Propulser les marques avec de l'influence",
+            "clients": "+300 clients satisfaits"
+        }
+    },
+    "about": {
+        "title": "À propos",
+        "description": "Page à propos"
+    },
+    "contact": {
+        "title": "Contact",
+        "description": "Page de contact"
+    }
+}

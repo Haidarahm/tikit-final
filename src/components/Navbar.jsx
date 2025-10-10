@@ -440,7 +440,7 @@ function Navbar() {
           >
             <button
               onClick={toggleTheme}
-              className="h-10 w-10 rounded-full border border-white/15 bg-primary/80 text-foreground flex items-center justify-center shadow-sm hover:ring-2 ring-primary/40 transition"
+              className="h-10 w-10 rounded-full border border-white/15 bg-[var(--secondary)] text-[var(--background)] flex items-center justify-center shadow-sm hover:ring-2 ring-primary/40 transition"
               aria-label="Toggle theme"
               aria-pressed={theme === "dark"}
               role="switch"

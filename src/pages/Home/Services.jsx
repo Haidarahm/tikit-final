@@ -18,11 +18,25 @@ const Services = () => {
   return (
     <div className="section mt-16 relative font-hero-light flex flex-col mx-auto    z-10 w-full justify-center">
       <div className="headline mb-4 px-6 md:px-10 flex w-full justify-between items-center">
-        <h1 className=" md:text-center font-bold text-[18px] md:text-[32px] ">
+        <h1 className=" text-[var(--foreground)] md:text-center font-bold text-[18px] md:text-[32px] ">
           What We Do Best
         </h1>
-        <button className="bg-white hover:bg-transparent transition duration-75 ease-in hover:text-white border border-white px-2 h-8 md:h-10 text-[11px] text-black rounded-full uppercase">
-          Explore Projects
+        <button
+          className="
+          bg-transparent
+
+            hover:text-[var(--background)]
+
+            hover:bg-[var(--secondary)]
+            border-[var(--secondary)]
+            text-[var(--secondary)] 
+         transition duration-75 ease-in
+         border
+            px-2 h-8 md:h-10
+            text-[11px]  rounded-full
+             uppercase"
+        >
+          Explore Services
         </button>
       </div>
 

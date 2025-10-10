@@ -2,61 +2,55 @@ import React from "react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import FloatingInput from "./ui/FloatingInput";
-import SVGComponent from "../pages/contact/logo"
+import SVGComponent from "../pages/contact/logo";
 const Footer = ({ className }) => {
+  const social = [
+    { href: "https://facebook.com", label: "Facebook", Icon: FaFacebookF },
+    { href: "https://instagram.com", label: "Instagram", Icon: FaInstagram },
+    { href: "https://linkedin.com", label: "LinkedIn", Icon: FaLinkedinIn },
+    { href: "https://x.com", label: "X (Twitter)", Icon: FaXTwitter },
+  ];
   return (
     <footer
       data-scroll-section
-      className={`w-full  px-[15px]  md:px-[80px]  flex flex-col text-white font-hero-light ${className}`}
+      className={`w-full  px-[15px]  md:px-[80px]  flex flex-col text-[var(--foreground)] font-hero-light ${className}`}
     >
       <div className="top-section  w-full mx-auto border-b-[1px] border-[#5D5D5D] py-8 flex items-center justify-between  md:gap-6">
         <div className="logo w-[70px] md:w-[220px] h-[30px] md:h-[80px]">
           <SVGComponent />
         </div>
         <nav aria-label="social" className="flex items-center gap-3">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black text-white hover:bg-white/10 transition-colors"
-            aria-label="Facebook"
-          >
-            <FaFacebookF size={18} />
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black text-white hover:bg-white/10 transition-colors"
-            aria-label="Instagram"
-          >
-            <FaInstagram size={18} />
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black text-white hover:bg-white/10 transition-colors"
-            aria-label="LinkedIn"
-          >
-            <FaLinkedinIn size={18} />
-          </a>
-          <a
-            href="https://x.com"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black text-white hover:bg-white/10 transition-colors"
-            aria-label="X (Twitter)"
-          >
-            <FaXTwitter size={18} />
-          </a>
+          {social.map(({ href, label, Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label={label}
+              className="group inline-flex
+               items-center
+                justify-center
+                 w-10 h-10 rounded-full
+                  border border-[var(--base)]
+                 bg-white text-[var(--base)]
+                 hover:bg-[var(--base)]
+                 hover:text-white 
+                 transition-colors duration-200"
+            >
+              <Icon
+                size={18}
+                className="transition-transform duration-200 group-hover:scale-110"
+              />
+            </a>
+          ))}
         </nav>
       </div>
       <div className="bottom-section justify-between w-full pt-[30px] md:pt-[80px] pb-[20px] md:pb-[60px]  flex flex-1 flex-col md:flex-row gap-8 md:gap-0">
         <div className="left-section gap-[20px] flex flex-col justify-around">
           <p className="text-[15px] md:text-start text-center md:text-[24px] text-gray-500 leading-[30px]">
             If you would like to work with us or just want to get
-            <br className="hidden md:block"/> in touch, we’d love to hear from you!
+            <br className="hidden md:block" /> in touch, we’d love to hear from
+            you!
           </p>
           <h1 className="text-[24px] md:text-[48px] text-center  md:text-start">
             <span className="font-bold">Contact –</span> for Client or <br />
@@ -91,7 +85,13 @@ const Footer = ({ className }) => {
               label="Email"
               containerClassName="mt-8 flex-1"
             />
-            <button className="bg-white ml-4 transition hover:text-white hover:bg-transparent cursor-pointer border border-white text-black px-2 text-[14px] h-[30px] rounded-full">
+            <button className="bg-[var(--secondary)] 
+            hover:text-[var(--secondary)]
+            hover:bg-transparent
+            border-[var(--secondary)]
+            text-[var(--background)]
+            ml-4 transition 
+              cursor-pointer border   px-2 text-[14px] h-[30px] rounded-full">
               Subscribe
             </button>
           </div>

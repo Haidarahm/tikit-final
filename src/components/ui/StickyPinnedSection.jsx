@@ -278,7 +278,6 @@ export default function StickyPinnedSection({
   return (
     <section
       ref={sectionRef}
-     
       className="relative font-hero-light w-full overflow-visible"
     >
       <div
@@ -294,9 +293,15 @@ export default function StickyPinnedSection({
             ))}
           </div>
           <button
-            className="rounded-full border font-light bg-transparent
-           text-[var(--foreground)] hover:text-white  px-5 py-2  transition-colors hover:bg-[var(--foreground)]
-            dark:hover:text-black"
+            className="rounded-full border font-light 
+           bg-transparent
+
+            hover:text-[var(--background)]
+
+            hover:bg-[var(--secondary)]
+            border-[var(--secondary)]
+            text-[var(--secondary)] px-5 py-2  transition-colors 
+            "
           >
             {Array.from("Explore Work").map((ch, i) => (
               <span key={i} className="fw-letter inline-block text-[14px]">
@@ -345,15 +350,17 @@ export default function StickyPinnedSection({
               </p>
               <div className="mt-8">
                 <button
-                  className="font-light bg-[var(--foreground)]
-                   dark:bg-white 
-                   text-[var(--background)]
+                  className="font-light bg-[var(--secondary)] 
+
+            hover:text-[var(--secondary)]
+
+            hover:bg-transparent
+            border-[var(--secondary)]
+            text-[var(--background)]
                     rounded-full border
-                     hover:text-[var(--foreground)]
                       dark:hover:text-white
                       dark:hover:bg-transparent
-                       hover:bg-transparent 
-                        border-[var(--foreground)]
+                      
                          dark:border-white px-5 py-2  
                          transition-colors  "
                   onClick={() => {

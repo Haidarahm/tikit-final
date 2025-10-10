@@ -228,6 +228,7 @@ body {
   --foreground: #363737;
   --primary: #fff;
   --secondary:#52C3C5;
+  --base:#52C3C5;
   --radius: 0.625rem;
   --tooltip: #fff;
   --container-bg: #ECFBFB;
@@ -237,6 +238,7 @@ body {
   --background: #000000;
   --container-bg: #101b22;
   --foreground: #ffffff;
+  --base:#000;
   --secondary:#ffffff;
   --tooltip: #fff;
   --radius: 0.625rem;

@@ -25,7 +25,7 @@ const Connections = () => {
   const gradientColors =
     theme === "light"
       ? ["#52C3C5", "#5269C5", "#52C3C5", "#52A0C5", "#52C3C5"] // Light theme colors
-      : ["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]; // Dark theme colors (original)
+      : ["#07D9F5", "#06AEC4", "#4E7CC6", "#CE88C6", "#FB8DEF"]; // Dark theme colors (original)
 
   // GSAP animations scoped to section container
   useEffect(() => {
@@ -135,14 +135,16 @@ const Connections = () => {
           blend data with creativity to help brands reach and resonate with the
           right audience
         </p>
-        <button className="uppercase mt-[40px]
+        <button
+          className="uppercase mt-[40px]
          text-[11px] md:text-[16px] hover:text-[var(--foreground)]
           dark:hover:text-white hover:bg-transparent border
            border-[var(--foreground)] dark:border-white transition
             cursor-pointer py-1 bg-[var(--foreground)] dark:bg-white
              rounded-full px-4 text-[var(--background)]
              dark:hover:bg-transparent
-              dark:text-black w-fit">
+              dark:text-black w-fit"
+        >
           contact us
         </button>
       </div>

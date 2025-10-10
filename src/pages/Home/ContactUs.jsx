@@ -68,8 +68,8 @@ const ContactUs = ({ className = "" }) => {
   // "bg-[#F5F7FB] text-[var(--foreground)] border border-black/5"
   return (
     <div
-      data-scroll-section
-      className={`relative my-5 md:my-10 gap-3.5  overflow-hidden text-[var(--foreground)]  font-hero-light rounded-[25px] flex flex-col mx-auto py-[40px] md:py-[60px] px-[40px] md:px-[50px]  w-[95vw] bg-[#F5F7FB]  dark:bg-black ${className}`}
+    data-scroll-section
+          className={`relative my-5 md:my-10 gap-3.5  overflow-hidden text-[var(--foreground)]  font-hero-light rounded-[25px] flex flex-col mx-auto py-[40px] md:py-[60px] px-[40px] md:px-[50px]  w-[95vw] bg-[#F5F7FB]  dark:bg-black ${className}`}
     >
       <div className="email  w-full flex flex-col md:flex-row h-2/3 justify-between items-center md:items-stretch relative z-10 ">
         <div className="texts flex justify-between flex-col relative   ">

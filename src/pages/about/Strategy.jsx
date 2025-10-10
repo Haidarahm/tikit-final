@@ -2,36 +2,43 @@ import React from "react";
 import TickWhite from "../../assets/TickWhite";
 import RotatingText from "../../components/RotatingText";
 import TextChanger from "../../components/TextChanger";
+import { useTheme } from "../../store/ThemeContext";
 
 const Strategy = () => {
+  const { theme } = useTheme();
+
   const cards = [
     {
       title: "Influencer Marketing",
       description:
         "From concept to final cut, we bring bold ideas to life. Whether it's social content, branded visuals, or full-scale commercial shoots, our production team delivers quality storytelling that captures attention and drives action.",
       color: "#548099", // sky-500
+      lightColor: "#E0E4EB",
     },
     {
       title: "Production",
       description:
         "From concept to final cut, we bring bold ideas to life. Whether it's social content, branded visuals, or full-scale commercial shoots, our production team delivers quality storytelling that captures attention and drives action.",
       color: "#7E5DB9", // violet-400
+      lightColor: "#D4D8E3",
     },
     {
       title: "Social Media Management",
       description:
         "From concept to final cut, we bring bold ideas to life. Whether it's social content, branded visuals, or full-scale commercial shoots, our production team delivers quality storytelling that captures attention and drives action.",
       color: "#483CB3", // orange-500
+      lightColor: "#E8EAF1",
     },
     {
       title: "Branding",
       description:
         "From concept to final cut, we bring bold ideas to life. Whether it's social content, branded visuals, or full-scale commercial shoots, our production team delivers quality storytelling that captures attention and drives action.",
       color: "#B46CA7", // green-500
+      lightColor: "#E2E5EB",
     },
   ];
   return (
-    <div data-scroll-section className="text-white">
+    <div data-scroll-section className="text-[var(--foreground)]">
       <div
         className="title text-[28px] sm:text-[40px] md:text-[70px] capitalize text-center my-[40px] md:my-[80px] loco-text-up px-4"
         data-scroll
@@ -39,9 +46,9 @@ const Strategy = () => {
         data-scroll-repeat
       >
         No fluff.
-        <div className="flex justify-center md:h-[75px] items-center">
+        <div className="flex justify-center text-[var(--foreground)] md:h-[75px] items-center">
           <span className="transition">Just</span>
-          <h1 className=" font-bold text-white overflow-hidden flex items-center ml-4">
+          <h1 className=" font-bold  overflow-hidden flex items-center ml-4">
             <TextChanger
               texts={[
                 "expert strategy",
@@ -77,7 +84,7 @@ const Strategy = () => {
             data-scroll-class="is-inview"
             data-scroll-repeat
             style={{
-              backgroundColor: `${card.color}1A`,
+              backgroundColor: `${theme === "light" ? card.lightColor : card.color}1A`,
               transitionDelay: `${i * 120}ms`,
             }}
           >
@@ -96,11 +103,11 @@ const Strategy = () => {
                 data-scroll-repeat
                 style={{ transitionDelay: `${300 + i * 120}ms` }}
               >
-                <TickWhite className="text-[#] w-[60px] md:w-[60px] inline-block h-[50x] px-4 md:px-2 md:h-[60px]" />
+                <TickWhite color={theme==="light"?"#52C3C5":"#ffffff"} className=" w-[60px] md:w-[60px] inline-block h-[50x] px-4 md:px-2 md:h-[60px]" />
                 {card.title}
               </div>
               <div
-                className="text-white/80 text-[16px] sm:text-[18px] md:text-[24px]  loco-text-up leading-[30px]"
+                className="text-[var(--foreground/80 text-[16px] sm:text-[18px] md:text-[24px]  loco-text-up leading-[30px]"
                 data-scroll
                 data-scroll-class="is-inview"
                 data-scroll-repeat

@@ -1,6 +1,9 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import background from "../../assets/backgrounds/Team.png";
+import { useTheme } from "../../store/ThemeContext";
 const Team = () => {
+  const { theme } = useTheme();
+
   const imageUrls = useMemo(() => {
     const modules = import.meta.glob(
       "../../assets/images/*.{png,jpg,jpeg,webp}",
@@ -114,10 +117,13 @@ const Team = () => {
         data-scroll-target="#team-section"
       >
         <div
-          className="left-section rounded-[10px] z-20 md:z-50 md:absolute md:left-0 md:top-0 w-full md:w-[30%] md:h-full sticky top-0 flex items-center px-6 md:px-[50px] py-6 md:py-0 text-[28px] sm:text-[40px] md:text-[64px] bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${background})` }}
+          className={`${theme==="light"?"light":"dark"} left-section  rounded-[10px] z-20 md:z-50 md:absolute md:left-0 md:top-0 w-full md:w-[30%] md:h-full sticky top-0 flex items-center px-6 md:px-[50px] py-6 md:py-0 text-[28px] sm:text-[40px] md:text-[64px] bg-cover bg-center bg-no-repeat"`}
+          style={{
+            backgroundImage: ` url(${theme === "light" ? "" : background})`,
+            backgroundColor: "#fff",
+          }}
         >
-          <h1 className="leading-[1.1]">
+          <h1 className="text-[var(--foreground)] leading-[1.1]">
             Our <br /> creative team
           </h1>
         </div>
@@ -142,8 +148,8 @@ const Team = () => {
                   draggable={false}
                 />
                 <div className="details flex flex-col justify-center items-center absolute bottom-12 left-1/2 -translate-1/2 bg-black/40 rounded-[10px] w-3/4 h-[120px]">
-                <div className="name text-[24px]">Haidar Ahmad</div>
-                <div className="jop text-[16px]"> Gamer</div>
+                  <div className="name text-[24px]">Haidar Ahmad</div>
+                  <div className="jop text-[16px]"> Gamer</div>
                 </div>
               </div>
             ))}

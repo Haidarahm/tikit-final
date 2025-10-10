@@ -26,8 +26,11 @@
   opacity: 1;
   transform: translateY(0);
 }
-#team-section .left-section {
+#team-section .left-section.dark {
   box-shadow: 20px 1px 49px 70px rgba(0, 0, 0, 0.5);
+}
+#team-section .left-section.light {
+  box-shadow: 20px 1px 49px 70px rgba(255, 255, 255, 0.5);
 }
 
 /* Strategy section - Locomotive reveal animations */

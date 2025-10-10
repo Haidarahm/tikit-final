@@ -3,7 +3,11 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const SVGComponent = (props) => {
+const SVGComponent = ({
+  color = "#FFFFFF",
+  logoJumpColor = "#35d3cf",
+  ...props
+}) => {
   const svgRef = useRef(null);
 
   useEffect(() => {
@@ -34,7 +38,7 @@ const SVGComponent = (props) => {
       const originalFill = window.getComputedStyle(el).fill;
 
       gsap.set(el, {
-        stroke: el.classList.contains("logo-jump-1") ? "#35d3cf" : "#FFFFFF",
+        stroke: el.classList.contains("logo-jump-1") ? logoJumpColor : color,
         strokeWidth: 2,
         fill: originalFill,
         fillOpacity: 0, // start invisible
@@ -87,8 +91,8 @@ const SVGComponent = (props) => {
     >
       <defs>
         <style>
-          {`.cls-2{fill:#FFFFFF;}
-            .logo-jump-1{fill:#35d3cf;}`}
+          {`.cls-2{fill:${color};}
+            .logo-jump-1{fill:${logoJumpColor};}`}
         </style>
       </defs>
       <g id="Layer_2" data-name="Layer 2">

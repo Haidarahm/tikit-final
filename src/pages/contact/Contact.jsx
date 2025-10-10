@@ -6,7 +6,7 @@ import "./contact.css";
 import Footer from "../../components/Footer";
 const Contact = () => {
   return (
-    <div className="contact-section snap-mandatory snap-y w-full text-white   font-hero-light">
+    <div className="contact-section snap-mandatory snap-y w-full    font-hero-light">
       <Hero />
       <AnimatedLines />
       <Action />

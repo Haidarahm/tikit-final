@@ -1,12 +1,19 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import GradientText from "../../components/GradientText";
+import { useTheme } from "../../store/ThemeContext";
 
 const Hero = () => {
   const h1WrapRef = useRef(null);
   const h1Ref = useRef(null);
   const h2WrapRef = useRef(null);
   const h2Ref = useRef(null);
+  const { theme } = useTheme();
+
+  const gradientColors =
+    theme === "light"
+      ? ["#52C3C5", "#5269C5", "#52C3C5", "#52A0C5", "#52C3C5"] // Light theme colors
+      : ["#07D9F5", "#06AEC4", "#4E7CC6", "#CE88C6", "#FB8DEF"]; // Dark theme colors (original)
 
   useLayoutEffect(() => {
     if (!h1Ref.current || !h2Ref.current) return;
@@ -28,7 +35,7 @@ const Hero = () => {
   return (
     <section
       data-scroll-section
-      className="snap-start snap-always h-[50vh] md:h-screen w-full flex items-center justify-center"
+      className="text-[var(--foreground)] snap-start snap-always h-[50vh] md:h-screen w-full flex items-center justify-center"
     >
       <div className="text-center mt-[104px]">
         <div ref={h1WrapRef} className="overflow-hidden">
@@ -42,7 +49,7 @@ const Hero = () => {
         <div ref={h2WrapRef} className="overflow-hidden">
           <div ref={h2Ref} className="will-change-transform translate-y-full">
             <GradientText
-              colors={["#07D9F5", "#06AEC4", "#4E7CC6", "#CE88C6", "#FB8DEF"]}
+              colors={gradientColors}
               animationSpeed={5}
               showBorder={false}
               className="text-[32px] md:text-[96px] leading-[40px] md:leading-[100px] mb-8 capitalize font-bold"

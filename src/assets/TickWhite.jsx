@@ -6,7 +6,7 @@ const TickWhite = (props) => (
     {...props}
   >
     <defs>
-      <style>{".cls-4{fill:#FFFFFF;}"}</style>
+      <style>{`.cls-4{fill:${props.color};}`}</style>
     </defs>
     <g id="Layer_2" data-name="Layer 2">
       <g id="Layer_1-2" data-name="Layer 1">

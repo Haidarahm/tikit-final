@@ -2,8 +2,11 @@ import React from "react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import FloatingInput from "./ui/FloatingInput";
-import SVGComponent from "../pages/contact/logo";
+import SVGComponent from "../assets/logo";
+import { useTheme } from "../store/ThemeContext.jsx";
+
 const Footer = ({ className }) => {
+  const { theme } = useTheme();
   const social = [
     { href: "https://facebook.com", label: "Facebook", Icon: FaFacebookF },
     { href: "https://instagram.com", label: "Instagram", Icon: FaInstagram },
@@ -17,7 +20,11 @@ const Footer = ({ className }) => {
     >
       <div className="top-section  w-full mx-auto border-b-[1px] border-[#5D5D5D] py-8 flex items-center justify-between  md:gap-6">
         <div className="logo w-[70px] md:w-[220px] h-[30px] md:h-[80px]">
-          <SVGComponent />
+          <SVGComponent
+            color={theme === "dark" ? "#FFFFFF" : "#363737"}
+            logoJumpColor={theme === "dark" ? "#FFFFFF" : "#52C3C5"}
+            className="p-1 md:p-2 h-full overflow-visible"
+          />
         </div>
         <nav aria-label="social" className="flex items-center gap-3">
           {social.map(({ href, label, Icon }) => (
@@ -85,13 +92,15 @@ const Footer = ({ className }) => {
               label="Email"
               containerClassName="mt-8 flex-1"
             />
-            <button className="bg-[var(--secondary)] 
+            <button
+              className="bg-[var(--secondary)] 
             hover:text-[var(--secondary)]
             hover:bg-transparent
             border-[var(--secondary)]
             text-[var(--background)]
             ml-4 transition 
-              cursor-pointer border   px-2 text-[14px] h-[30px] rounded-full">
+              cursor-pointer border   px-2 text-[14px] h-[30px] rounded-full"
+            >
               Subscribe
             </button>
           </div>

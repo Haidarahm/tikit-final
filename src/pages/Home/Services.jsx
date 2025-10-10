@@ -51,7 +51,9 @@ const Services = () => {
           <div
             key={index}
             className={`flex pb-4 justify-center text-[20px] mb-4 ${
-              index < items.length - 1 ? "border-white border-b-2" : ""
+              index < items.length - 1
+                ? "border-[var(--secondary)] border-b-2"
+                : ""
             }`}
             data-aos="flip-up"
             data-aos-delay={index * 150}
@@ -60,7 +62,9 @@ const Services = () => {
             data-aos-once="false"
             data-aos-mirror="true"
           >
-            <h2 className="text-lg font-semibold mt-2">{item.text}</h2>
+            <h2 className="text-lg font-semibold mt-2 text-[var(--secondary)]">
+              {item.text}
+            </h2>
           </div>
         ))}
       </div>

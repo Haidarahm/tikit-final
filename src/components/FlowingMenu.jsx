@@ -51,7 +51,7 @@ function MenuItem({ link, text, image }) {
 
   const repeatedMarqueeContent = Array.from({ length: 4 }).map((_, idx) => (
     <React.Fragment key={idx}>
-      <span className="text-[#060010] uppercase font-normal text-[4vh] leading-[1.2] p-[1vh_1vw_0]">{text}</span>
+      <span className="text-[var(--background)] uppercase font-normal text-[4vh] leading-[1.2] p-[1vh_1vw_0]">{text}</span>
       <div
         className="w-[200px] h-[7vh] my-[2em] mx-[2vw] p-[1em_0] rounded-[50px] bg-cover bg-center"
         style={{ backgroundImage: `url(${image})` }}
@@ -60,9 +60,9 @@ function MenuItem({ link, text, image }) {
   ));
 
   return (
-    <div className="flex-1 relative overflow-hidden text-center shadow-[0_-1px_0_0_#fff] py-6" ref={itemRef}>
+    <div className="flex-1 relative overflow-hidden text-center shadow-[0_-1px_0_0_var(--secondary)] py-6" ref={itemRef}>
       <a
-        className="flex items-center justify-center h-full relative cursor-pointer uppercase no-underline font-semibold text-white text-[20px] md:text-[4vh] hover:text-[#060010] focus:text-white focus-visible:text-[#060010]"
+        className="flex items-center justify-center h-full relative cursor-pointer uppercase no-underline font-semibold text-[var(--secondary)] text-[20px] md:text-[4vh] hover:text-[var(--background)] focus:text-[var(--background)] focus-visible:text-[var(--background)]"
         href={link}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -70,7 +70,7 @@ function MenuItem({ link, text, image }) {
         {text}
       </a>
       <div
-        className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none bg-white translate-y-[101%]"
+        className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none bg-[var(--secondary)] translate-y-[101%]"
         ref={marqueeRef}
       >
         <div className="h-full w-[200%] flex" ref={marqueeInnerRef}>

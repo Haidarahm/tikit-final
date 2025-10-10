@@ -83,7 +83,7 @@ const Connections = () => {
   return (
     <div
       ref={sectionContainerRef}
-      className="relative text-[var(--foreground)] dark:text-white md:h-[100vh] flex flex-col w-full justify-center font-hero-light section-container-scroll mt-[60px]"
+      className="relative text-[var(--foreground)] dark:text-white md:h-[100vh] flex flex-col w-full justify-center font-hero-light section-container-scroll md:mt-[20px]"
     >
       <img
         src={theme === "light" ? element2 : element2Dark}

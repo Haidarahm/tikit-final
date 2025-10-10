@@ -123,12 +123,12 @@ export default function InfiniteScroll({
 
   return (
     <div
-      className="relative z-10 flex text-white font-hero-light items-center justify-end w-full overflow-hidden overscroll-none border-t-2 border-b-2 border-t-dotted border-b-dotted border-transparent"
+      className="relative z-10 flex text-[var(--foreground)] font-hero-light items-center justify-end w-full overflow-hidden overscroll-none border-t-2 border-b-2 border-t-dotted border-b-dotted border-transparent"
       ref={wrapperRef}
       style={{ maxHeight }}
     >
-      <div className="absolute top-0 left-0 w-full h-1/4 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-full h-1/4 bg-gradient-to-b from-[var(--background)] to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-[var(--background)] to-transparent z-10 pointer-events-none"></div>
 
       <div
         className="flex flex-col overscroll-contain px-4 cursor-grab origin-center"
@@ -140,7 +140,7 @@ export default function InfiniteScroll({
       >
         {items.map((item, i) => (
           <div
-            className="flex items-center justify-center p-4 text-xl font-semibold text-center border-2 border-white rounded-[15px] select-none box-border relative"
+            className="flex items-center justify-center p-4 text-xl font-semibold text-center border-2 border-[var(--foreground)] rounded-[15px] select-none box-border relative"
             key={i}
             style={{
               height: `${itemMinHeight}px`,

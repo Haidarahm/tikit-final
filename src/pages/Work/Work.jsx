@@ -7,7 +7,7 @@ import theReveImg from "../../assets/work/the-reve.webp";
 import image1 from "../../assets/images/card-1.jpg";
 import image2 from "../../assets/images/card-2.jpg";
 import image3 from "../../assets/images/card-3.jpg";
-
+import { useTheme } from "../../store/ThemeContext.jsx";
 import "./work.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -33,6 +33,7 @@ const imagesArr = [
 ];
 
 const Work = () => {
+  const { theme } = useTheme();
   const imagesRef = useRef([]);
   const paragraphContainerRef = useRef(null);
   const paragraphRef = useRef(null);
@@ -42,6 +43,11 @@ const Work = () => {
   const descTitleRef = useRef(null);
   const descParaWrapRef = useRef(null);
   const descParaRef = useRef(null);
+
+  const gradientColors =
+  theme === "light"
+    ? ["#52C3C5", "#5269C5", "#52C3C5", "#52A0C5", "#52C3C5"] // Light theme colors
+    : ["#07D9F5", "#06AEC4", "#4E7CC6", "#CE88C6", "#FB8DEF"]; // Dark theme colors (original)
 
   useEffect(() => {
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
@@ -109,7 +115,7 @@ const Work = () => {
 
   return (
     <div className="work-section font-hero-light flex flex-col h-[calc(100%+10vh)]">
-      <div className="h-[75vh] flex flex-col justify-around items-center w-full description text-white mt-[104px]">
+      <div className="h-[75vh] flex flex-col justify-around items-center w-full description  mt-[104px]">
         <div className="w-full"></div>
         <div ref={titleContainerRef} className="overflow-hidden">
           <div
@@ -117,7 +123,7 @@ const Work = () => {
             className="title will-change-transform translate-y-full"
           >
             <GradientText
-              colors={["#07D9F5", "#06AEC4", "#4E7CC6", "#CE88C6", "#FB8DEF"]}
+              colors={gradientColors}
               animationSpeed={5}
               showBorder={false}
               className="text-[32px] md:text-[96px] leading-[40px] md:leading-[100px] mb-8 capitalize font-bold"
@@ -126,7 +132,7 @@ const Work = () => {
             </GradientText>
           </div>
         </div>
-        <div className="description relative z-30 text-center md:text-start flex md:flex-row flex-col text-white px-[20px] md:px-[30px] gap-4 md:gap-12 justify-center items-center">
+        <div className="description relative z-30 text-center md:text-start flex md:flex-row flex-col text-[var(--foreground)] px-[20px] md:px-[30px] gap-4 md:gap-12 justify-center items-center">
           <div ref={descTitleWrapRef} className="overflow-hidden w-[20%]">
             <div
               ref={descTitleRef}

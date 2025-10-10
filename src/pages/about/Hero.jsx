@@ -31,10 +31,10 @@ const Hero = () => {
   return (
     <div data-scroll-section className="  flex flex-col">
       <div style={{ height: "500px", position: "relative" }}>
-        <div className="overlay absolute h-full w-full bg-black opacity-50 z-20 "></div>
+        <div className="overlay absolute h-full w-full bg-[var(--background)] opacity-50 z-20 "></div>
 
         <div
-          className="title z-30 w-full md:pl-[60px] text-center md:text-start absolute text-[32px] md:text-[64px] capitalize  flex items-center  font-bold leading-[60px] h-full text-white"
+          className="title z-30 w-full md:pl-[60px] text-[var(--foreground)] text-center md:text-start absolute text-[32px] md:text-[64px] capitalize  flex items-center  font-bold leading-[60px] h-full "
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-delay="200"
@@ -52,7 +52,7 @@ const Hero = () => {
           pauseOnHover={true}
         />
       </div>
-      <div className="description relative z-30 text-center md:text-start flex-1 flex md:flex-row flex-col text-white px-[20px] md:px-[60px] gap-4 md:gap-14 justify-center items-center">
+      <div className="description relative z-30 text-center md:text-start flex-1 flex md:flex-row flex-col text-[var(--foreground)] px-[20px] md:px-[60px] gap-4 md:gap-14 justify-center items-center">
         <div className="title uppercase font-bold mt-4 md:mt-0 text-[20px] md:text-[34px] w-2/7 ">
           About Us
         </div>

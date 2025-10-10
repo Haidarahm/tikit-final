@@ -7,7 +7,7 @@ const Images = () => {
   return (
     <div
       data-scroll-section
-      className="text-white px-4 md:px-[60px] font-hero-light grid gap-[10px] md:gap-[15px] grid-cols-1 md:grid-cols-7 auto-rows-[200px] md:grid-rows-4"
+      className="text-[var(--foreground)] px-4 md:px-[60px] font-hero-light grid gap-[10px] md:gap-[15px] grid-cols-1 md:grid-cols-7 auto-rows-[200px] md:grid-rows-4"
     >
       {/* Image 1 */}
       <div
@@ -25,7 +25,7 @@ const Images = () => {
 
       {/* Text 1 with scroll speed */}
       <div
-        className="text reveal-text md:col-span-2 md:row-span-2 capitalize bg-[#00000019] rounded-[15px] font-light text-[22px] sm:text-[28px] md:text-[42px] flex justify-center items-center px-4 md:px-[60px]"
+        className="text reveal-text md:col-span-2 md:row-span-2 capitalize bg-[#52c3c522] dark:bg-[#00000019]   rounded-[15px] font-light text-[22px] sm:text-[28px] md:text-[42px] flex justify-center items-center px-4 md:px-[60px]"
         data-scroll
         data-scroll-class="is-inview"
         data-scroll-repeat
@@ -38,7 +38,7 @@ const Images = () => {
 
       {/* Image 2 */}
       <div
-        className="reveal-img md:col-span-2 md:row-span-2"
+        className="reveal-img md:col-span-2 md:row-span-2 relative z-20"
         data-scroll
         data-scroll-class="is-inview"
         data-scroll-repeat
@@ -52,7 +52,7 @@ const Images = () => {
 
       {/* Text 2 with slower speed */}
       <div
-        className="text reveal-text md:col-span-2 md:row-span-2 bg-[#00000019] capitalize rounded-[15px] font-light text-[22px] sm:text-[28px] md:text-[42px] flex justify-center items-center px-4 md:px-[60px]"
+        className="text relative reveal-text md:col-span-2 md:row-span-2 bg-[#52c3c522] dark:bg-[#00000019] capitalize rounded-[15px] font-light text-[22px] sm:text-[28px] md:text-[42px] flex justify-center items-center px-4 md:px-[60px]"
         data-scroll
         data-scroll-class="is-inview"
         data-scroll-repeat

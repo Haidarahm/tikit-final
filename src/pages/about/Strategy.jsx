@@ -103,11 +103,11 @@ const Strategy = () => {
                 data-scroll-repeat
                 style={{ transitionDelay: `${300 + i * 120}ms` }}
               >
-                <TickWhite color={theme==="light"?"#52C3C5":"#ffffff"} className=" w-[60px] md:w-[60px] inline-block h-[50x] px-4 md:px-2 md:h-[60px]" />
+                <TickWhite color={theme==="light"?"#ffffff":"#ffffff"} className=" w-[60px] md:w-[60px] inline-block h-[50x] px-4 md:px-2 md:h-[60px]" />
                 {card.title}
               </div>
               <div
-                className="text-[var(--foreground/80 text-[16px] sm:text-[18px] md:text-[24px]  loco-text-up leading-[30px]"
+                className="text-[var(--foreground)]/80 text-[16px] sm:text-[18px] md:text-[24px]  loco-text-up leading-[30px]"
                 data-scroll
                 data-scroll-class="is-inview"
                 data-scroll-repeat

@@ -10,6 +10,7 @@ import img43 from "../../assets/services/43.png";
 import img44 from "../../assets/services/44.png";
 import Footer from "../../components/Footer";
 import ContactUs from "../Home/ContactUs";
+import { useTheme } from "../../store/ThemeContext"; // Import the theme context
 
 const splitTextToSpans = (element) => {
   if (!element || element.dataset.splitDone === "true") return;
@@ -18,7 +19,6 @@ const splitTextToSpans = (element) => {
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   if (isMobile) {
-    // Split by words on mobile; preserve spaces as text nodes so wrapping occurs between words
     const tokens = originalText.split(/(\s+)/);
     tokens.forEach((token) => {
       if (/^\s+$/.test(token)) {
@@ -27,7 +27,6 @@ const splitTextToSpans = (element) => {
         const span = document.createElement("span");
         span.textContent = token;
         span.style.display = "inline-inline";
-        // Use inline-block to keep the word together while allowing wrap between words
         span.style.display = "inline-block";
         span.style.opacity = "0";
         span.style.transform = "translateY(100%)";
@@ -36,7 +35,6 @@ const splitTextToSpans = (element) => {
       }
     });
   } else {
-    // Desktop: keep letter-based split/animation
     originalText.split("").forEach((char) => {
       const span = document.createElement("span");
       span.textContent = char === " " ? "\u00A0" : char;
@@ -52,14 +50,13 @@ const splitTextToSpans = (element) => {
 
 const Services = () => {
   const sectionRefs = useRef([]);
+  const { theme } = useTheme(); // Get current theme
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const sections = gsap.utils.toArray(".snap-section");
     if (sections.length < 2) return;
-
-    // Smooth native scrolling only; page-by-page snapping removed
 
     sectionRefs.current.forEach((section) => {
       const title = section.querySelector("h2");
@@ -68,8 +65,6 @@ const Services = () => {
       splitTextToSpans(title);
       const titleSpans = title.querySelectorAll("span");
       titleSpans.forEach((s) => s.classList.add("char"));
-
-      // We'll animate list items as blocks (no per-letter split) for a distinct effect
 
       const animateIn = () => {
         gsap.to(titleSpans, {
@@ -106,7 +101,6 @@ const Services = () => {
       };
 
       const animateOut = () => {
-        // Stop in-flight tweens and animate out so the reset is visible
         gsap.killTweensOf(titleSpans);
         gsap.killTweensOf(listItems);
         gsap.to(titleSpans, {
@@ -192,6 +186,13 @@ const Services = () => {
     },
   ];
 
+  // Calculate overlay based on theme
+  const getSectionStyle = (image) => ({
+    backgroundImage: `url(${image})`,
+    backgroundBlendMode: theme === "dark" ? "multiply" : "overlay",
+    backgroundColor: theme === "dark" ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.7)",
+  });
+
   return (
     <div className="services-section w-full font-hero-light">
       <Hero />
@@ -200,16 +201,14 @@ const Services = () => {
           <section
             key={section.id}
             ref={(el) => (sectionRefs.current[index] = el)}
-            className="snap-section  h-screen w-full flex  items-center justify-center"
-            style={{
-              backgroundImage: `url(${section.image})`,
-              backgroundBlendMode: "multiply",
-              backgroundColor: "rgba(0,0,0,0.5)",
-            }}
+            className="snap-section h-screen w-full flex items-center justify-center"
+            style={getSectionStyle(section.image)}
             aria-label={`${section.title} service`}
           >
-            <div className="relative z-10 w-full  text-white text-center px-2 md:px-6">
-              <h2 className="section-title text-[40px]  md:text-8xl font-extrabold mb-8 leading-[5.9rem]">
+            <div className={`relative z-10 w-full text-center px-2 md:px-6 ${
+              theme === "dark" ? "text-white" : "text-[var(--foreground)]"
+            }`}>
+              <h2 className="section-title text-[40px] md:text-8xl font-extrabold mb-8 leading-[5.9rem]">
                 {section.title}
               </h2>
               <ul className="section-list space-y-3 text-2xl md:text-3xl">

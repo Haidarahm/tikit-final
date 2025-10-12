@@ -45,7 +45,7 @@ function AvatarGroupTooltip({
   return (
     <AvatarGroupTooltipPrimitive
       className={cn(
-        'bg-[var(--tooltip)] text-background z-50 w-fit rounded-md px-3 py-1.5 text-xs text-balance',
+        'bg-[var(--secondary)] text-background z-50 w-fit rounded-md px-3 py-1.5 text-xs text-balance',
         className,
       )}
       {...props}
@@ -54,7 +54,7 @@ function AvatarGroupTooltip({
         {children}
       </motion.div>
       <AvatarGroupTooltipArrowPrimitive
-        className="fill-primary size-3 data-[side='bottom']:translate-y-[1px] data-[side='right']:translate-x-[1px] data-[side='left']:translate-x-[-1px] data-[side='top']:translate-y-[-1px]"
+        className="fill-[var(--secondary)] size-3 data-[side='bottom']:translate-y-[1px] data-[side='right']:translate-x-[1px] data-[side='left']:translate-x-[-1px] data-[side='top']:translate-y-[-1px]"
         tipRadius={2}
       />
     </AvatarGroupTooltipPrimitive>

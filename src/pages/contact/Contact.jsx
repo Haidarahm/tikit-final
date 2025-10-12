@@ -8,7 +8,7 @@ const Contact = () => {
   return (
     <div className="contact-section snap-mandatory snap-y w-full    font-hero-light">
       <Hero />
-      <AnimatedLines />
+      {/* <AnimatedLines /> */}
       <Action />
       <Footer className="snap-start snap-always" />
     </div>

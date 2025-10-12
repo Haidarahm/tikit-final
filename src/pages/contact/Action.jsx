@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import GradientText from "../../components/GradientText";
+import { useTheme } from "../../store/ThemeContext";
 
 // FloatingInput Component (placeholder - replace with your actual component)
 const FloatingInput = ({ id, label, containerClassName }) => (
@@ -8,12 +9,12 @@ const FloatingInput = ({ id, label, containerClassName }) => (
       <input
         type="text"
         id={id}
-        className="w-full px-4 py-3 bg-transparent border border-white/30 rounded-lg text-white placeholder-transparent focus:border-white focus:outline-none peer"
+        className="w-full px-4 py-3 bg-transparent border dark:border-white/30 rounded-lg text-[var(--foreground)] placeholder-transparent focus:border-[var(--foreground)] focus:outline-none peer"
         placeholder={label}
       />
       <label
         htmlFor={id}
-        className="absolute left-4 -top-2.5 bg-[#000] px-1 text-white text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-2.5 peer-focus:text-sm"
+        className="absolute left-4 -top-2.5 bg-[var(--background)] px-1 text-[var(--foreground)] text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-2.5 peer-focus:text-sm"
       >
         {label}
       </label>
@@ -24,6 +25,13 @@ const FloatingInput = ({ id, label, containerClassName }) => (
 // GradientText Component (placeholder - replace with your actual component)
 
 const Action = () => {
+  const { theme } = useTheme();
+
+  const gradientColors =
+    theme === "light"
+      ? ["#52C3C5", "#5269C5", "#52C3C5", "#52A0C5", "#52C3C5"] // Light theme colors
+      : ["#07D9F5", "#06AEC4", "#4E7CC6", "#CE88C6", "#FB8DEF"]; // Dark theme colors (original)
+
   const [isSecondSlide, setIsSecondSlide] = useState(false);
 
   const handleSlideClick = (slideNumber) => {
@@ -37,11 +45,11 @@ const Action = () => {
     >
       {/* Left Section */}
       <div className="w-full lg:w-1/2 flex flex-col justify-start items-start space-y-4 md:space-y-6">
-        <h2 className="text-base md:text-2xl mb-0 lg:text-3xl xl:text-4xl text-white/80">
+        <h2 className="text-base md:text-2xl mb-0 lg:text-3xl xl:text-4xl text-[var(--foreground)]/80">
           Kick it off with Tikit!
         </h2>
         <GradientText
-          colors={["#07D9F5", "#06AEC4", "#4E7CC6", "#CE88C6", "#FB8DEF"]}
+          colors={gradientColors}
           animationSpeed={5}
           showBorder={false}
           className="text-4xl md:text-5xl ml-0 lg:text-6xl text-center md:text-start font-bold leading-tight"
@@ -49,7 +57,7 @@ const Action = () => {
           Contact Us Now{" "}
         </GradientText>
         {/* text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight */}
-        <p className="text-base md:text-lg lg:text-xl xl:text-2xl font-light text-white/90 leading-snug">
+        <p className="text-base md:text-lg lg:text-xl xl:text-2xl font-light text-[var(--foreground)]/90 leading-snug">
           We want to hear from you. Let us know how we can help!
         </p>
       </div>
@@ -57,15 +65,15 @@ const Action = () => {
       {/* Right Section */}
       <div className="w-full lg:w-1/2 flex flex-col gap-6 md:gap-8 lg:gap-10">
         {/* Toggle Switch */}
-        <div className="w-full border flex relative border-white h-12 md:h-14 rounded-full">
+        <div className="w-full border flex relative border-[var(--secondary)] h-12 md:h-14 rounded-full">
           <div
-            className={`move-item absolute w-1/2 h-full bg-white rounded-full transition-all duration-300 ease-in-out ${
+            className={`move-item absolute w-1/2 h-full bg-[var(--secondary)] rounded-full transition-all duration-300 ease-in-out ${
               isSecondSlide ? "left-1/2" : "left-0"
             }`}
           />
           <div
             className={`swiper-slide w-1/2 flex justify-center items-center relative z-10 cursor-pointer text-sm md:text-base font-medium transition-colors duration-300 ${
-              !isSecondSlide ? "text-black" : "text-white"
+              !isSecondSlide ? "text-[var(--background)]" : "text-[var(--foreground)]"
             }`}
             onClick={() => handleSlideClick(1)}
           >
@@ -73,7 +81,7 @@ const Action = () => {
           </div>
           <div
             className={`swiper-slide w-1/2 flex justify-center items-center relative z-10 cursor-pointer text-sm md:text-base font-medium transition-colors duration-300 ${
-              isSecondSlide ? "text-black" : "text-white"
+              isSecondSlide ? "text-[var(--background)]" : "text-[var(--foreground)]"
             }`}
             onClick={() => handleSlideClick(2)}
           >
@@ -110,12 +118,12 @@ const Action = () => {
               <textarea
                 id="contact-message"
                 rows={4}
-                className="w-full px-4 py-3 bg-transparent border border-white/30 rounded-lg text-white placeholder-transparent focus:border-white focus:outline-none peer resize-y min-h-[120px] md:min-h-[160px]"
+                className="w-full px-4 py-3 bg-transparent border border-[#363737] dark:border-white/30 rounded-lg text-[var(--foreground)] placeholder-transparent focus:border-[var(--foreground)] focus:outline-none peer resize-y min-h-[120px] md:min-h-[160px]"
                 placeholder="Message"
               />
               <label
                 htmlFor="contact-message"
-                className="absolute left-4 -top-2.5 bg-[#000] px-1 text-white text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-2.5 peer-focus:text-sm"
+                className="absolute left-4 -top-2.5 bg-[var(--background)] px-1 text-[var(--foreground)] text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-2.5 peer-focus:text-sm"
               >
                 Message
               </label>
@@ -123,9 +131,9 @@ const Action = () => {
           </div>
 
           {/* Submit Button */}
-          <button className="px-5 h-12 md:h-14 cursor-pointer relative col-span-1 sm:col-span-2 rounded-full group  font-medium bg-transparent text-white border border-white flex items-center justify-center transition-all hover:scale-105 overflow-hidden">
-            <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out rounded-full transform translate-y-0 bg-white group-hover:h-full opacity-90"></span>
-            <span className="relative uppercase group-hover:text-black text-sm md:text-base font-semibold">
+          <button className="px-5 h-12 md:h-14 cursor-pointer relative col-span-1 sm:col-span-2 rounded-full group  font-medium bg-transparent text-[var(--secondary)] border border-[var(--secondary)] flex items-center justify-center transition-all hover:scale-105 overflow-hidden">
+            <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out rounded-full transform translate-y-0 bg-[var(--secondary)]  group-hover:h-full opacity-90"></span>
+            <span className="relative uppercase group-hover:text-[var(--background)]  text-sm md:text-base font-semibold">
               Contact Us
             </span>
           </button>

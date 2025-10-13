@@ -1,12 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
-import hiddenImg from "../../assets/work/hidden.webp";
-import kraveImg from "../../assets/work/krave.webp";
-import porscheImg from "../../assets/work/porsche.webp";
-import rangeRoverImg from "../../assets/work/range-rover.webp";
-import theReveImg from "../../assets/work/the-reve.webp";
-import image1 from "../../assets/images/card-1.jpg";
-import image2 from "../../assets/images/card-2.jpg";
-import image3 from "../../assets/images/card-3.jpg";
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../store/ThemeContext.jsx";
 import "./work.css";
 import { gsap } from "gsap";
@@ -14,26 +7,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "../../components/Footer";
 import ContactUs from "../Home/ContactUs";
 import GradientText from "../../components/GradientText";
+import { useWorkStore } from "../../store/workStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const imagesArr = [
-  {
-    src: hiddenImg,
-    title: "Hidden Project",
-    subtitle: "A secret creative work",
-  },
-  { src: kraveImg, title: "Krave", subtitle: "Branding & Identity" },
-  { src: porscheImg, title: "Porsche", subtitle: "Automotive Campaign" },
-  { src: rangeRoverImg, title: "Range Rover", subtitle: "Luxury Experience" },
-  { src: theReveImg, title: "The Reve", subtitle: "Fashion Editorial" },
-  { src: image1, title: "Card One", subtitle: "UI/UX Design" },
-  { src: image2, title: "Card Two", subtitle: "Web Development" },
-  { src: image3, title: "Card Three", subtitle: "Photography" },
-];
-
 const Work = () => {
   const { theme } = useTheme();
+  const navigate = useNavigate();
+  const { works, loadWorks, loading } = useWorkStore();
   const imagesRef = useRef([]);
   const paragraphContainerRef = useRef(null);
   const paragraphRef = useRef(null);
@@ -45,9 +26,15 @@ const Work = () => {
   const descParaRef = useRef(null);
 
   const gradientColors =
-  theme === "light"
-    ? ["#52C3C5", "#5269C5", "#52C3C5", "#52A0C5", "#52C3C5"] // Light theme colors
-    : ["#07D9F5", "#06AEC4", "#4E7CC6", "#CE88C6", "#FB8DEF"]; // Dark theme colors (original)
+    theme === "light"
+      ? ["#52C3C5", "#5269C5", "#52C3C5", "#52A0C5", "#52C3C5"] // Light theme colors
+      : ["#07D9F5", "#06AEC4", "#4E7CC6", "#CE88C6", "#FB8DEF"]; // Dark theme colors (original)
+
+  useEffect(() => {
+    if (!works || works.length === 0) {
+      loadWorks();
+    }
+  }, [works, loadWorks]);
 
   useEffect(() => {
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
@@ -70,7 +57,7 @@ const Work = () => {
         }
       );
     });
-  }, []);
+  }, [works]);
 
   useLayoutEffect(() => {
     if (!titleContainerRef.current || !titleRef.current) return;
@@ -115,7 +102,7 @@ const Work = () => {
 
   return (
     <div className="work-section font-hero-light flex flex-col h-[calc(100%+10vh)]">
-      <div className="h-[75vh] flex flex-col justify-around items-center w-full description  mt-[104px]">
+      <div className="h-[50vh] md:h-[75vh] flex flex-col justify-around items-center w-full description  mt-[104px]">
         <div className="w-full"></div>
         <div ref={titleContainerRef} className="overflow-hidden">
           <div
@@ -126,14 +113,14 @@ const Work = () => {
               colors={gradientColors}
               animationSpeed={5}
               showBorder={false}
-              className="text-[32px] md:text-[96px] leading-[40px] md:leading-[100px] mb-8 capitalize font-bold"
+              className="text-[42px] md:text-[96px] leading-[40px] md:leading-[100px] mb-8 capitalize font-bold"
             >
               Featured Work
             </GradientText>
           </div>
         </div>
-        <div className="description relative z-30 text-center md:text-start flex md:flex-row flex-col text-[var(--foreground)] px-[20px] md:px-[30px] gap-4 md:gap-12 justify-center items-center">
-          <div ref={descTitleWrapRef} className="overflow-hidden w-[20%]">
+        <div className="description w-full relative z-30 text-center md:text-start flex md:flex-row flex-col text-[var(--foreground)] px-[20px] md:px-[30px] gap-4 md:gap-12 justify-center items-center">
+          <div ref={descTitleWrapRef} className="overflow-hidden  md:w-[20%]">
             <div
               ref={descTitleRef}
               className="title font-bold mt-4 md:mt-0 text-[20px] md:text-[24px] will-change-transform translate-y-full"
@@ -162,33 +149,52 @@ const Work = () => {
         </div> */}
       </div>
 
-      {/* Image Grid */}
+      {/* Image Grid (fetched) */}
       <div className="images grid grid-cols-1 md:grid-cols-2 grid-rows-4 gap-4 md:h-[300vh] p-4">
-        {imagesArr.map((item, i) => (
+        {(works || []).map((w, i) => (
           <div
-            key={i}
+            key={w.id ?? i}
             ref={(el) => (imagesRef.current[i] = el)}
             className="group relative shadow-lg  rounded-lg overflow-hidden"
             style={{ height: "10%" }}
           >
-            <img
-              src={item.src}
-              alt={item.title}
-              className="w-full h-full object-cover  rounded-lg"
-            />
+            {w.media ? (
+              <img
+                src={w.media}
+                alt={w.title ?? "work"}
+                className="w-full h-full object-cover  rounded-lg"
+                loading="lazy"
+              />
+            ) : (
+              <div className="w-full h-full bg-[var(--muted)]" />
+            )}
 
-            {/* Overlay */}
+            {/* Overlay: only title & subtitle */}
             <div className=" content-work absolute  inset-0 flex flex-col items-center overflow-hidden justify-center bg-black/30 md:bg-black/60 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
-              <h3 className="text-white text-[30px] font-bold ">
-                {item.title}
-              </h3>
-              <p className="text-gray-200 text-[20px] mb-4">{item.subtitle}</p>
-              <button className="px-4 py-2 rounded-full border border-white bg-transparent text-white hover:bg-white hover:text-black transition">
+              {w.title ? (
+                <h3 className="text-white text-[30px] font-bold ">{w.title}</h3>
+              ) : null}
+              {w.subtitle ? (
+                <p className="text-gray-200 text-[20px] mb-4">{w.subtitle}</p>
+              ) : null}
+              <button
+                className="px-4 py-2 rounded-full border border-white bg-transparent text-white hover:bg-white hover:text-black transition"
+                onClick={() => {
+                  const id = w.id;
+                  if (id != null)
+                    navigate(`/details/${encodeURIComponent(id)}`);
+                }}
+              >
                 View Work
               </button>
             </div>
           </div>
         ))}
+        {(!works || works.length === 0) && !loading ? (
+          <div className="col-span-full text-center text-sm opacity-70">
+            No works found.
+          </div>
+        ) : null}
       </div>
       <ContactUs />
       <Footer />

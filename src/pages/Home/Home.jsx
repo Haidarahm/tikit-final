@@ -83,7 +83,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="sections overflow-hidden  relative w-full home-scroll-trigger">
+    <div id="home" className="sections overflow-hidden  relative w-full home-scroll-trigger">
       {/* Element 1 */}
       <img
         src={theme === "dark" ? element1Dark : element1}

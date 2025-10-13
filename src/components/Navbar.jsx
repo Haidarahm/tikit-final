@@ -317,8 +317,10 @@ function Navbar() {
           >
             <div
               ref={logoRef}
+              
               className="w-10 h-10 md:w-12 md:h-12 transform-gpu"
             >
+              
               <SVGComponent
                 color={theme === "dark" ? "#FFFFFF" : "#363737"}
                 logoJumpColor={theme === "dark" ? "#FFFFFF" : "#52C3C5"}

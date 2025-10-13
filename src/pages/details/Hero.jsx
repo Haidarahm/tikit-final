@@ -27,7 +27,7 @@ const Hero = ({ id }) => {
   return (
     <div
       data-scroll-section
-      className="min-h-screen w-full flex justify-center items-center text-[var(--foreground)] relative font-hero-light"
+      className=" min-h-[60vh] md:min-h-screen w-full flex justify-center items-center text-[var(--foreground)] relative font-hero-light"
     >
       <div
         data-scroll

@@ -41,7 +41,7 @@ const ServiceDetails = () => {
     <div
       ref={scrollRef}
       data-scroll-container
-      className="min-h-screen bg-black text-white"
+      className="min-h-screen bg-[var(--background)]"
     >
       <Hero id={id} />
       <Content id={id} />

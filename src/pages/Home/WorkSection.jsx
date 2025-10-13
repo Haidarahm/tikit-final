@@ -47,9 +47,22 @@ export default function WorkSection() {
               className="element-wrapper flex flex-col w-full gap-[30px]"
             >
               <div className="text flex flex-col gap-[10px]">
-                {item.title ? (
-                  <h1 className="title text-[20px] font-bold">{item.title}</h1>
-                ) : null}
+              <div className="flex items-center justify-between">
+                {item.title && (
+                  <h2 className="text-[20px] font-bold">{item.title}</h2>
+                )}
+                <button
+                  className="rounded-full border font-light 
+                    border-[var(--secondary)] text-[var(--secondary)] text-[11px] uppercase 
+                    px-4 py-1 
+                    transition-colors"
+                  onClick={() =>
+                    navigate(`/details/${encodeURIComponent(item.id)}`)
+                  }
+                >
+                  View Work
+                </button>
+              </div>
                 {item.subtitle ? (
                   <div className="subtitle text-[16px] opacity-80">
                     {item.subtitle}
@@ -66,6 +79,7 @@ export default function WorkSection() {
                   {item.media}
                 </div>
               ) : null}
+               
             </div>
           ))}
           {(!items || items.length === 0) && !loading ? (

@@ -28,11 +28,11 @@ const Hero = ({ id }) => {
   return (
     <div
       data-scroll-section
-      className="min-h-screen flex justify-center items-center text-white relative font-hero-light"
+      className="min-h-[60vh] md:min-h-screen  flex justify-center items-center text-[var(--foreground)] relative font-hero-light"
     >
       <div
         data-scroll
-        className="overlay absolute z-10 bg-black/30 w-full h-full"
+        className="overlay absolute z-10 bg-white/50 dark:bg-black/30 w-full h-full"
       ></div>
       {loading || !details ? (
         <div

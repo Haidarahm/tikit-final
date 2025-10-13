@@ -38,10 +38,10 @@ const Content = ({ id }) => {
   return (
     <div
       data-scroll-section
-      className="min-h-screen flex flex-col gap-20 text-white relative font-hero-light py-20 px-4 md:px-16"
+      className="min-h-screen flex flex-col gap-20 text-[var(--foreground)] relative font-hero-light py-20 px-4 md:px-16"
     >
       {items.length === 0 ? (
-        <p className="text-center text-white text-lg">
+        <p className="text-center text-[var(--foreground)] text-lg">
           No service cases found.
         </p>
       ) : (
@@ -64,12 +64,12 @@ const Content = ({ id }) => {
                     {item.title}
                   </h2>
                   {item.subtitle && (
-                    <h3 className="text-xl md:text-2xl font-semibold text-[#40ffaa]">
+                    <h3 className="text-xl md:text-2xl font-semibold text-[var(--secondary)]">
                       {item.subtitle}
                     </h3>
                   )}
                   {item.description && (
-                    <p className="text-base md:text-lg text-white/80">
+                    <p className="text-base md:text-lg text-[var(--foreground)]">
                       {item.description}
                     </p>
                   )}
@@ -132,12 +132,12 @@ const Content = ({ id }) => {
               >
                 <h2 className="text-3xl md:text-5xl font-bold">{item.title}</h2>
                 {item.subtitle && (
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#40ffaa]">
+                  <h3 className="text-xl md:text-2xl font-semibold text-[var(--secondary)]">
                     {item.subtitle}
                   </h3>
                 )}
                 {item.description && (
-                  <p className="text-base md:text-lg text-white/80 max-w-[600px]">
+                  <p className="text-base md:text-lg text-[var(--foreground)]/80 max-w-[600px]">
                     {item.description}
                   </p>
                 )}

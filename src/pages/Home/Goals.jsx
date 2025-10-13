@@ -50,7 +50,7 @@ function Goals() {
   };
 
   return (
-    <div className="section font-hero-light flex flex-col md:flex-row mx-auto md:h-[400vh]  z-10 w-full md:w-6/7">
+    <div className="section font-hero-light flex flex-col md:flex-row mx-auto md:h-[390vh]  z-10 w-full md:w-6/7">
       <ScrollStack
         useWindowScroll={true}
         itemDistance={0}
@@ -89,7 +89,7 @@ function Goals() {
           return (
             <div
               key={goal.id}
-              className={`flex my-12 mx-[4px] p-4 rounded-[10px] items-center overflow-hidden ${getBackgroundClass(goal)}`}
+              className={`flex my-6 md:my-12 mx-[4px] p-4 rounded-[10px] items-center overflow-hidden ${getBackgroundClass(goal)}`}
               data-aos={animationDirection}
               data-aos-delay={animationDelay}
               data-aos-duration="800"

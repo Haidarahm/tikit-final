@@ -233,6 +233,20 @@ body {
   --tooltip: #363737;
   --container-bg: #ECFBFB;
 }
+@layer utilities {
+  @keyframes fadeInOut {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .animate-fade-loop {
+    animation: fadeInOut 2s ease-in-out infinite;
+  }
+}
 .dark {
   /* Dark theme: background + text only */
   --background: #000000;

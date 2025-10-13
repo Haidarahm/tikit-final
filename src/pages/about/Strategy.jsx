@@ -97,7 +97,7 @@ const Strategy = () => {
             />
             <div className="p-4 md:px-4 md:py-8 relative z-10">
               <div
-                className="text-[22px] sm:text-[28px] md:text-[36px] font-semibold mb-2 loco-text-up"
+                className="text-[22px] text-white sm:text-[28px] md:text-[36px] font-semibold mb-2 loco-text-up"
                 data-scroll
                 data-scroll-class="is-inview"
                 data-scroll-repeat
@@ -107,7 +107,7 @@ const Strategy = () => {
                 {card.title}
               </div>
               <div
-                className="text-[var(--foreground)]/80 text-[16px] sm:text-[18px] md:text-[24px]  loco-text-up leading-[30px]"
+                className="text-[var(--primary)]/80 text-[16px] sm:text-[18px] md:text-[24px]  loco-text-up leading-[30px]"
                 data-scroll
                 data-scroll-class="is-inview"
                 data-scroll-repeat

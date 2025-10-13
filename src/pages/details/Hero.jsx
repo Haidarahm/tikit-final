@@ -27,11 +27,11 @@ const Hero = ({ id }) => {
   return (
     <div
       data-scroll-section
-      className="min-h-screen flex justify-center items-center text-white relative font-hero-light"
+      className="min-h-screen w-full flex justify-center items-center text-[var(--foreground)] relative font-hero-light"
     >
       <div
         data-scroll
-        className="overlay absolute z-10 bg-black/30 w-full h-full"
+        className="overlay absolute z-10 bg-white/50 dark:bg-black/30 transition w-full h-full"
       ></div>
       {loading || !details ? (
         <div
@@ -55,7 +55,7 @@ const Hero = ({ id }) => {
         className="texts flex flex-col relative z-20"
       >
         <h1
-          className={`title text-[92px] font-bold transition-all duration-1000 ease-out ${
+          className={`title text-[62px] md:text-[92px] font-bold transition-all duration-1000 ease-out ${
             show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >

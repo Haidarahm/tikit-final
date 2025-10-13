@@ -11,6 +11,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import LogoIntro from "./components/LogoIntro";
 import TickLoader from "./components/TickLoader";
+import Loader from "./components/Loader.jsx";
 
 // Lazy load components
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -24,7 +25,7 @@ const Services = lazy(() => import("./pages/services/Services"));
 const Contact = lazy(() => import("./pages/contact/Contact"));
 
 // Loading component
-const LoadingSpinner = () => <TickLoader />;
+const LoadingSpinner = () => <Loader />;
 
 const Layout = () => (
  <>

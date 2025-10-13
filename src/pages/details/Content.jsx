@@ -25,7 +25,7 @@ const Content = ({ id }) => {
   return (
     <div
       data-scroll-section
-      className="min-h-screen flex flex-col gap-20 text-white relative font-hero-light py-20 px-4 md:px-16"
+      className="min-h-screen flex flex-col gap-20 text-[var(--foreground)] relative font-hero-light py-20 px-4 md:px-16"
     >
       {loading && items.length === 0 ? (
         <div className="w-full h-[40vh] bg-white/10 animate-pulse rounded-[15px]" />
@@ -45,10 +45,10 @@ const Content = ({ id }) => {
                   <h2 className="text-3xl md:text-5xl font-bold">
                     {item.title}
                   </h2>
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#40ffaa]">
+                  <h3 className="text-xl md:text-2xl font-semibold text-[var(--secondary)]">
                     {item.subtitle}
                   </h3>
-                  <p className="text-base md:text-lg text-white/80">
+                  <p className="text-base md:text-lg text-[var(--foreground)]">
                     {item.description}
                   </p>
                 </div>
@@ -114,10 +114,10 @@ const Content = ({ id }) => {
                 data-scroll-speed={idx % 2 === 0 ? "1" : "-1"}
               >
                 <h2 className="text-3xl md:text-5xl font-bold">{item.title}</h2>
-                <h3 className="text-xl md:text-2xl font-semibold text-[#40ffaa]">
+                <h3 className="text-xl md:text-2xl font-semibold text-[var(--secondary)]">
                   {item.subtitle}
                 </h3>
-                <p className="text-base md:text-lg text-white/80 max-w-[600px]">
+                <p className="text-base md:text-lg text-[var(--foreground)] max-w-[600px]">
                   {item.description}
                 </p>
               </div>

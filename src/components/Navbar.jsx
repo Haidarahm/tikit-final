@@ -317,10 +317,8 @@ function Navbar() {
           >
             <div
               ref={logoRef}
-              
               className="w-10 h-10 md:w-12 md:h-12 transform-gpu"
             >
-              
               <SVGComponent
                 color={theme === "dark" ? "#FFFFFF" : "#363737"}
                 logoJumpColor={theme === "dark" ? "#FFFFFF" : "#52C3C5"}
@@ -483,9 +481,9 @@ function Navbar() {
             }`}
             aria-label="Toggle mobile menu"
           >
-            <span className="hamburger-line w-6 h-0.5 bg-white transform transition-all duration-300"></span>
-            <span className="hamburger-line w-6 h-0.5 bg-white transform transition-all duration-300"></span>
-            <span className="hamburger-line w-6 h-0.5 bg-white transform transition-all duration-300"></span>
+            <span className="hamburger-line w-6 h-0.5 bg-[var(--foreground)] transform transition-all duration-300"></span>
+            <span className="hamburger-line w-6 h-0.5 bg-[var(--foreground)] transform transition-all duration-300"></span>
+            <span className="hamburger-line w-6 h-0.5 bg-[var(--foreground)] transform transition-all duration-300"></span>
           </button>
         </div>
       </nav>
@@ -493,7 +491,7 @@ function Navbar() {
       {/* Mobile Menu Overlay */}
       <div
         ref={mobileMenuRef}
-        className="fixed inset-0 z-40 bg-[#101b22] hidden flex-col items-center justify-center lg:hidden"
+        className="fixed inset-0 z-40 hidden flex-col items-center justify-center lg:hidden bg-[var(--container-bg)]"
         style={{ display: "none" }}
       >
         <div className="flex flex-col items-center space-y-8">
@@ -502,7 +500,7 @@ function Navbar() {
               key={to}
               to={to}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="mobile-nav-item text-white text-3xl md:text-4xl  uppercase tracking-wider hover:text-gray-300 transition-colors duration-300"
+              className="mobile-nav-item text-[var(--foreground)] text-3xl md:text-4xl  uppercase tracking-wider hover:opacity-70 transition-colors duration-300"
             >
               {t(key)}
             </Link>
@@ -521,7 +519,7 @@ function Navbar() {
           <div className="mobile-nav-item w-full px-6 mt-6">
             <button
               onClick={() => setIsLangOpen((v) => !v)}
-              className="w-full flex items-center justify-between text-white text-2xl md:text-3xl font-light uppercase tracking-wider"
+              className="w-full flex items-center justify-between text-[var(--foreground)] text-2xl md:text-3xl font-light uppercase tracking-wider"
             >
               <span>
                 {language === "en" ? "En" : language === "fr" ? "Fn" : "Ar"}
@@ -555,7 +553,7 @@ function Navbar() {
                 ].map((opt) => (
                   <button
                     key={opt.value}
-                    className="text-white/90 hover:text-white text-xl md:text-2xl font-light uppercase tracking-wider"
+                    className="text-[var(--foreground)] hover:opacity-80 text-xl md:text-2xl font-light uppercase tracking-wider"
                     onClick={() => {
                       setLanguage(opt.value);
                       setIsLangOpen(false);

@@ -233,6 +233,17 @@ body {
   --tooltip: #363737;
   --container-bg: #ECFBFB;
 }
+
+.dark {
+  /* Dark theme: background + text only */
+  --background: #000000;
+  --container-bg: #101b22;
+  --foreground: #ffffff;
+  --base:#000;
+  --secondary:#ffffff;
+  --tooltip: #fff;
+  --radius: 0.625rem;
+}
 @layer utilities {
   @keyframes fadeInOut {
     0%, 100% {
@@ -246,16 +257,6 @@ body {
   .animate-fade-loop {
     animation: fadeInOut 2s ease-in-out infinite;
   }
-}
-.dark {
-  /* Dark theme: background + text only */
-  --background: #000000;
-  --container-bg: #101b22;
-  --foreground: #ffffff;
-  --base:#000;
-  --secondary:#ffffff;
-  --tooltip: #fff;
-  --radius: 0.625rem;
 }
 @theme {
   --translate-101: 101%;

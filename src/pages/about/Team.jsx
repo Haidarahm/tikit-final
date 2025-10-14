@@ -1,15 +1,26 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import background from "../../assets/backgrounds/Team.png";
 import { useTheme } from "../../store/ThemeContext";
+import goalImage1 from "../../assets/images/goal-image-1.png";
+import goalImage2 from "../../assets/images/goal-image-2.png";
+import goalImage3 from "../../assets/images/goal-image-3.png";
+import goalImage4 from "../../assets/images/goal-image-4.png";
+import cardImage1 from "../../assets/images/card-1.jpg";
+import cardImage2 from "../../assets/images/card-2.jpg";
+import cardImage3 from "../../assets/images/card-3.jpg";
 const Team = () => {
   const { theme } = useTheme();
 
   const imageUrls = useMemo(() => {
-    const modules = import.meta.glob(
-      "../../assets/images/*.{png,jpg,jpeg,webp}",
-      { eager: true, as: "url" }
-    );
-    return Object.values(modules);
+    return [
+      goalImage1,
+      goalImage2,
+      goalImage3,
+      goalImage4,
+      cardImage1,
+      cardImage2,
+      cardImage3,
+    ];
   }, []);
 
   const containerRef = useRef(null);
@@ -117,7 +128,9 @@ const Team = () => {
         data-scroll-target="#team-section"
       >
         <div
-          className={`${theme==="light"?"light":"dark"} left-section  rounded-[10px] z-20 md:z-50 md:absolute md:left-0 md:top-0 w-full md:w-[30%] md:h-full sticky top-0 flex items-center px-6 md:px-[50px] py-6 md:py-0 text-[28px] sm:text-[40px] md:text-[64px] bg-cover bg-center bg-no-repeat"`}
+          className={`${
+            theme === "light" ? "light" : "dark"
+          } left-section  rounded-[10px] z-20 md:z-50 md:absolute md:left-0 md:top-0 w-full md:w-[30%] md:h-full sticky top-0 flex items-center px-6 md:px-[50px] py-6 md:py-0 text-[28px] sm:text-[40px] md:text-[64px] bg-cover bg-center bg-no-repeat"`}
           style={{
             backgroundImage: ` url(${theme === "light" ? "" : background})`,
             backgroundColor: "#fff",

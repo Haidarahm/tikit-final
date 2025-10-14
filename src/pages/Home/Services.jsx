@@ -16,7 +16,7 @@ const Services = () => {
   }));
 
   return (
-    <div className="section mt-16 relative font-hero-light flex flex-col mx-auto    z-10 w-full justify-center">
+    <div className="section my-6 md:my-16 relative font-hero-light flex flex-col mx-auto    z-10 w-full justify-center">
       <div className="headline mb-4 px-6 md:px-10 flex w-full justify-between items-center">
         <h1 className=" text-[var(--foreground)] md:text-center font-bold text-[18px] md:text-[32px] ">
           What We Do Best

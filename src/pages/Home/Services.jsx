@@ -3,11 +3,13 @@ import FlowingMenu from "../../components/FlowingMenu";
 import { useServicesStore } from "../../store/servicesStore";
 import { useNavigate } from "react-router-dom";
 import { useI18nLanguage } from "../../store/I18nLanguageContext.jsx";
+import { useTranslation } from "react-i18next";
 
 const Services = () => {
   const navigate = useNavigate();
   const { services, loadServices } = useServicesStore();
-  const { language } = useI18nLanguage();
+  const { language, isRtl } = useI18nLanguage();
+  const { t } = useTranslation();
 
   useEffect(() => {
     loadServices({ lang: language, page: 1, per_page: 4 });
@@ -20,10 +22,15 @@ const Services = () => {
   }));
 
   return (
-    <div className="section my-6 md:my-16 relative font-hero-light flex flex-col mx-auto    z-10 w-full justify-center">
+    <div
+      className={`section my-6 md:my-16 relative ${
+        isRtl ? "font-cairo" : "font-hero-light"
+      } flex flex-col mx-auto    z-10 w-full justify-center`}
+      dir={isRtl ? "rtl" : "ltr"}
+    >
       <div className="headline mb-4 px-6 md:px-10 flex w-full justify-between items-center">
         <h1 className=" text-[var(--foreground)] md:text-center font-bold text-[18px] md:text-[32px] ">
-          What We Do Best
+          {t("home.services.title")}
         </h1>
         <button
           onClick={() => {
@@ -43,7 +50,7 @@ const Services = () => {
             text-[11px]  rounded-full
              uppercase"
         >
-          Explore Services
+          {t("home.services.explore")}
         </button>
       </div>
 

@@ -44,6 +44,10 @@
                     "description": "Touchez de vrais publics avec un contenu pertinent. Nous faisons croître un trafic qui convertit réellement."
                 }
             ]
+        },
+        "services": {
+            "title": "Ce que nous faisons le mieux",
+            "explore": "Explorer les services"
         }
     },
     "about": {

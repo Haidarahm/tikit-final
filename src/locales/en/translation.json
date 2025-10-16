@@ -25,6 +25,10 @@
                 "awards": { "text1": "Award", "text2": "Achievements" }
             }
         },
+        "services": {
+            "title": "What We Do Best",
+            "explore": "Explore Services"
+        },
         "goals": {
             "items": [
                 {

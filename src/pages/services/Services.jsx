@@ -60,7 +60,7 @@ const Services = () => {
 
     sectionRefs.current.forEach((section) => {
       const title = section.querySelector("h2");
-      const listItems = section.querySelectorAll("li");
+      const descPara = section.querySelector(".section-desc");
 
       splitTextToSpans(title);
       const titleSpans = title.querySelectorAll("span");
@@ -74,51 +74,40 @@ const Services = () => {
           stagger: { each: 0.05, from: 0, ease: "none" },
           ease: "back.out(0.8)",
         });
-
-        gsap.fromTo(
-          listItems,
-          {
-            y: 30,
-            autoAlpha: 0,
-            rotateX: -45,
-            skewY: 4,
-            scale: 0.95,
-            filter: "blur(6px)",
-          },
-          {
-            y: 0,
-            autoAlpha: 1,
-            rotateX: 0,
-            skewY: 0,
-            scale: 1,
-            filter: "blur(0px)",
-            duration: 0.7,
-            stagger: { each: 0.12, from: "start" },
-            delay: 0.15,
-            ease: "power3.out",
-          }
-        );
+        if (descPara) {
+          gsap.fromTo(
+            descPara,
+            { y: 20, autoAlpha: 0, filter: "blur(4px)" },
+            {
+              y: 0,
+              autoAlpha: 1,
+              filter: "blur(0px)",
+              duration: 0.6,
+              ease: "power2.out",
+              delay: 0.15,
+            }
+          );
+        }
       };
 
       const animateOut = () => {
         gsap.killTweensOf(titleSpans);
-        gsap.killTweensOf(listItems);
+        if (descPara) gsap.killTweensOf(descPara);
         gsap.to(titleSpans, {
           opacity: 0,
           y: "100%",
           duration: 0.2,
           ease: "power2.in",
         });
-        gsap.to(listItems, {
-          autoAlpha: 0,
-          y: 30,
-          rotateX: -30,
-          skewY: 3,
-          scale: 0.98,
-          filter: "blur(4px)",
-          duration: 0.2,
-          ease: "power2.in",
-        });
+        if (descPara) {
+          gsap.to(descPara, {
+            autoAlpha: 0,
+            y: 20,
+            filter: "blur(4px)",
+            duration: 0.25,
+            ease: "power2.in",
+          });
+        }
       };
 
       animateOut();
@@ -143,45 +132,29 @@ const Services = () => {
     {
       id: 1,
       title: "Brand Strategy",
-      items: [
-        "Brand positioning & messaging",
-        "Visual identity development",
-        "Market research & analysis",
-        "Competitive landscape mapping",
-      ],
+      description:
+        "Brand positioning and messaging, visual identity development, market research and analysis, and competitive landscape mapping.",
       image: img41,
     },
     {
       id: 2,
       title: "Digital Design",
-      items: [
-        "UI/UX design systems",
-        "Web & mobile interfaces",
-        "Interactive prototypes",
-        "User experience optimization",
-      ],
+      description:
+        "UI/UX design systems, web and mobile interfaces, interactive prototypes, and user experience optimization.",
       image: img42,
     },
     {
       id: 3,
       title: "Creative Campaigns",
-      items: [
-        "Multi-channel campaigns",
-        "Social media strategies",
-        "Content creation & curation",
-        "Performance analytics",
-      ],
+      description:
+        "Multi-channel campaigns, social media strategies, content creation and curation, and performance analytics.",
       image: img43,
     },
     {
       id: 4,
       title: "Technical Solutions",
-      items: [
-        "Frontend development",
-        "Backend architecture",
-        "API integration",
-        "Performance optimization",
-      ],
+      description:
+        "Frontend development, backend architecture, API integration, and performance optimization.",
       image: img44,
     },
   ];
@@ -190,7 +163,8 @@ const Services = () => {
   const getSectionStyle = (image) => ({
     backgroundImage: `url(${image})`,
     backgroundBlendMode: theme === "dark" ? "multiply" : "overlay",
-    backgroundColor: theme === "dark" ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.7)",
+    backgroundColor:
+      theme === "dark" ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.7)",
   });
 
   return (
@@ -205,17 +179,25 @@ const Services = () => {
             style={getSectionStyle(section.image)}
             aria-label={`${section.title} service`}
           >
-            <div className={`relative z-10 w-full text-center px-2 md:px-6 ${
-              theme === "dark" ? "text-white" : "text-[var(--foreground)]"
-            }`}>
+            <div
+              className={`relative z-10 w-full text-center px-2 md:px-6 ${
+                theme === "dark" ? "text-white" : "text-[var(--foreground)]"
+              }`}
+            >
               <h2 className="section-title text-[40px] md:text-8xl font-extrabold mb-8 leading-[5.9rem]">
                 {section.title}
               </h2>
-              <ul className="section-list space-y-3 text-2xl md:text-3xl">
-                {section.items.map((item, itemIndex) => (
-                  <li key={itemIndex}>{item}</li>
-                ))}
-              </ul>
+              <p className="section-desc max-w-4xl mx-auto text-xl md:text-2xl leading-relaxed opacity-0 will-change-transform">
+                {section.description}
+              </p>
+              <div className="mt-6 flex justify-center">
+                <button
+                  className="font-light bg-[var(--secondary)] text-[var(--background)] rounded-full border border-[var(--secondary)] dark:border-white px-4 md:px-5 py-1.5 md:py-2 text-[12px] md:text-[14px] transition-all duration-200 ease-out hover:scale-[1.03] hover:shadow-md hover:ring-1 hover:ring-[var(--secondary)] dark:hover:ring-white hover:brightness-105"
+                  type="button"
+                >
+                  Explore Service
+                </button>
+              </div>
             </div>
           </section>
         ))}

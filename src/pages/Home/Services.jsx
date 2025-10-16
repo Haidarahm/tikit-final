@@ -2,14 +2,16 @@ import React, { useEffect } from "react";
 import FlowingMenu from "../../components/FlowingMenu";
 import { useServicesStore } from "../../store/servicesStore";
 import { useNavigate } from "react-router-dom";
+import { useI18nLanguage } from "../../store/I18nLanguageContext.jsx";
 
 const Services = () => {
   const navigate = useNavigate();
   const { services, loadServices } = useServicesStore();
+  const { language } = useI18nLanguage();
 
   useEffect(() => {
-    loadServices();
-  }, []);
+    loadServices({ lang: language, page: 1, per_page: 4 });
+  }, [language, loadServices]);
 
   const items = (services || []).map((s) => ({
     link: `service-details/${s?.id}`,

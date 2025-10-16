@@ -1,16 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import Hero from "./Hero";
 import "./services.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-import img41 from "../../assets/services/41.png";
-import img42 from "../../assets/services/42.png";
-import img43 from "../../assets/services/43.png";
-import img44 from "../../assets/services/44.png";
 import Footer from "../../components/Footer";
 import ContactUs from "../Home/ContactUs";
 import { useTheme } from "../../store/ThemeContext"; // Import the theme context
+import { useServicesStore } from "../../store/servicesStore";
+import { useI18nLanguage } from "../../store/I18nLanguageContext.jsx";
 
 const splitTextToSpans = (element) => {
   if (!element || element.dataset.splitDone === "true") return;
@@ -51,6 +48,12 @@ const splitTextToSpans = (element) => {
 const Services = () => {
   const sectionRefs = useRef([]);
   const { theme } = useTheme(); // Get current theme
+  const { services, loadServices, loading } = useServicesStore();
+  const { language } = useI18nLanguage();
+
+  useEffect(() => {
+    loadServices({ lang: language, page: 1, per_page: 10 });
+  }, [language, loadServices]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -128,36 +131,15 @@ const Services = () => {
     };
   }, []);
 
-  const sections = [
-    {
-      id: 1,
-      title: "Brand Strategy",
-      description:
-        "Brand positioning and messaging, visual identity development, market research and analysis, and competitive landscape mapping.",
-      image: img41,
-    },
-    {
-      id: 2,
-      title: "Digital Design",
-      description:
-        "UI/UX design systems, web and mobile interfaces, interactive prototypes, and user experience optimization.",
-      image: img42,
-    },
-    {
-      id: 3,
-      title: "Creative Campaigns",
-      description:
-        "Multi-channel campaigns, social media strategies, content creation and curation, and performance analytics.",
-      image: img43,
-    },
-    {
-      id: 4,
-      title: "Technical Solutions",
-      description:
-        "Frontend development, backend architecture, API integration, and performance optimization.",
-      image: img44,
-    },
-  ];
+  const sections = useMemo(() => {
+    const list = Array.isArray(services) ? services : [];
+    return list.map((s) => ({
+      id: s.id,
+      title: s.title ?? "",
+      description: s.description ?? "",
+      image: s.media ?? "",
+    }));
+  }, [services]);
 
   // Calculate overlay based on theme
   const getSectionStyle = (image) => ({
@@ -201,6 +183,9 @@ const Services = () => {
             </div>
           </section>
         ))}
+        {!loading && (!sections || sections.length === 0) ? (
+          <div className="text-center py-10 opacity-70">No services found.</div>
+        ) : null}
       </div>
       <ContactUs className="snap-section snap-start h-screen flex items-center justify-center" />
       <Footer className="snap-section snap-start h-screen flex items-center" />

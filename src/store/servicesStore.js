@@ -16,15 +16,21 @@ export const useServicesStore = create((set, get) => ({
   setLang: (lang) => set({ lang }),
 
   // Fetch list of services
-  loadServices: async (lang) => {
+  loadServices: async (params) => {
+    const { lang, page, per_page } = params || {};
     const effectiveLang = lang ?? get().lang ?? "en";
     set({ loading: true, error: null });
     try {
-      const data = await fetchAllServices(effectiveLang);
+      const data = await fetchAllServices({
+        lang: effectiveLang,
+        page,
+        per_page,
+      });
       set({
         services: Array.isArray(data) ? data : data?.data ?? [],
         loading: false,
       });
+      set({ lang: effectiveLang });
     } catch (err) {
       set({ error: err?.message || "Failed to load services", loading: false });
     }

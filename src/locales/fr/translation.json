@@ -14,6 +14,16 @@
             "title": "ROI REBELS",
             "subtitle": "Propulser les marques avec de l'influence",
             "clients": "+300 clients satisfaits"
+        },
+        "numbers": {
+            "headline": "La meilleure mesure du succès ?",
+            "subheadline": "Des clients fidèles. La plupart travaillent avec nous bien au-delà d'un seul projet",
+            "items": {
+                "happyClients": { "text1": "Clients", "text2": "Heureux" },
+                "years": { "text1": "Années", "text2": "d'expérience" },
+                "projects": { "text1": "Projets", "text2": "Réalisés" },
+                "awards": { "text1": "Prix", "text2": "et Distinctions" }
+            }
         }
     },
     "about": {

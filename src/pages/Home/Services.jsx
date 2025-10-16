@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import FlowingMenu from "../../components/FlowingMenu";
 import { useServicesStore } from "../../store/servicesStore";
+import { useNavigate } from "react-router-dom";
 
 const Services = () => {
+  const navigate = useNavigate();
   const { services, loadServices } = useServicesStore();
 
   useEffect(() => {
@@ -22,6 +24,9 @@ const Services = () => {
           What We Do Best
         </h1>
         <button
+          onClick={() => {
+            navigate("/services");
+          }}
           className="
           bg-transparent
 

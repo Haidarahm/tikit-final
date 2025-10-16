@@ -8,6 +8,7 @@ import Footer from "../../components/Footer";
 import ContactUs from "../Home/ContactUs";
 import GradientText from "../../components/GradientText";
 import { useWorkStore } from "../../store/workStore";
+import { useI18nLanguage } from "../../store/I18nLanguageContext.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,6 +16,7 @@ const Work = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
   const { works, loadWorks, loading } = useWorkStore();
+  const { language } = useI18nLanguage();
   const imagesRef = useRef([]);
   const paragraphContainerRef = useRef(null);
   const paragraphRef = useRef(null);
@@ -31,10 +33,8 @@ const Work = () => {
       : ["#07D9F5", "#06AEC4", "#4E7CC6", "#CE88C6", "#FB8DEF"]; // Dark theme colors (original)
 
   useEffect(() => {
-    if (!works || works.length === 0) {
-      loadWorks();
-    }
-  }, [works, loadWorks]);
+    loadWorks({ lang: language, page: 1, per_page: 10 });
+  }, [loadWorks, language]);
 
   useEffect(() => {
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;

@@ -10,6 +10,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GradientText from "../../components/GradientText";
 import { useTheme } from "../../store/ThemeContext.jsx";
+import { useNavigate } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 
 // Helper function to split text into words
@@ -18,6 +19,7 @@ const splitText = (text) => {
 };
 
 const Connections = () => {
+  const navigate = useNavigate();
   const sectionContainerRef = useRef(null);
   const { theme } = useTheme();
 
@@ -136,6 +138,9 @@ const Connections = () => {
           right audience
         </p>
         <button
+        onClick={() => {
+          navigate("/contact");
+        }}
           className="uppercase mt-[40px]
          text-[11px] md:text-[16px] hover:text-[var(--foreground)]
           dark:hover:text-white hover:bg-transparent border

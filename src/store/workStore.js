@@ -15,20 +15,48 @@ export const useWorkStore = create((set, get) => ({
   selectedWorkId: undefined,
   loading: false,
   error: null,
+  // simple client-side pagination defaults
+  page: 1,
+  pageSize: 3,
 
   setLang: (lang) => set({ lang }),
   setSelectedWork: (id) => set({ selectedWorkId: id }),
 
-  // Fetch list of works
-  loadWorks: async (lang) => {
+  setPage: (page) => set({ page: Math.max(1, Number(page) || 1) }),
+  nextPage: () => {
+    const { page } = get();
+    set({ page: page + 1 });
+  },
+  prevPage: () => {
+    const { page } = get();
+    set({ page: Math.max(1, page - 1) });
+  },
+
+  // Derive current page slice (client-side)
+  getPagedWorks: () => {
+    const { works, page, pageSize } = get();
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize;
+    return (works || []).slice(start, end);
+  },
+
+  // Fetch list of works (accept optional pagination params; backend may ignore)
+  loadWorks: async ({ lang, page, per_page }) => {
     const effectiveLang = lang ?? get().lang ?? "en";
     set({ loading: true, error: null });
     try {
-      const data = await fetchAllWorks(effectiveLang);
+      const effectivePerPage = per_page ?? get().pageSize ?? 3;
+      const data = await fetchAllWorks({
+        lang: effectiveLang,
+        page,
+        per_page: effectivePerPage,
+      });
       set({
         works: Array.isArray(data) ? data : data?.data ?? [],
         loading: false,
       });
+      // remember lang for subsequent calls
+      set({ lang: effectiveLang });
     } catch (err) {
       set({ error: err?.message || "Failed to load works", loading: false });
     }

@@ -1,8 +1,10 @@
 import { api } from "../config/backend";
 
 // GET /api/works?lang={lang} (defaults to "en")
-export const fetchAllWorks = async (lang) => {
-  const response = await api.get("/api/works", { lang: lang ?? "en" });
+export const fetchAllWorks = async ({ lang, page, per_page }) => {
+  const response = await api.get("/api/works", {
+    params: { lang: lang ?? "en", page, per_page },
+  });
   return response.data;
 };
 

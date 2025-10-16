@@ -14,6 +14,16 @@
             "title": "ROI REBELS",
             "subtitle": "Fueling brands with influence",
             "clients": "+300 Happy Clients"
+        },
+        "numbers": {
+            "headline": "The best measure of success?",
+            "subheadline": "Clients who stay. Most of ours work with us well beyond one project",
+            "items": {
+                "happyClients": { "text1": "Happy", "text2": "Clients" },
+                "years": { "text1": "Years", "text2": "Of Experiences" },
+                "projects": { "text1": "Completed", "text2": "Projects" },
+                "awards": { "text1": "Award", "text2": "Achievements" }
+            }
         }
     },
     "about": {

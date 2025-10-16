@@ -50,7 +50,7 @@ function Goals() {
   };
 
   return (
-    <div className="section font-hero-light flex flex-col md:flex-row mx-auto md:h-[390vh]  z-10 w-full md:w-6/7">
+    <div className="section font-hero-light flex flex-col md:flex-row mx-auto md:h-[380vh]  z-10 w-full md:w-6/7">
       <ScrollStack
         useWindowScroll={true}
         itemDistance={0}

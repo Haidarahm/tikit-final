@@ -24,6 +24,26 @@
                 "projects": { "text1": "Completed", "text2": "Projects" },
                 "awards": { "text1": "Award", "text2": "Achievements" }
             }
+        },
+        "goals": {
+            "items": [
+                {
+                    "title": "Amplify your brand's reach",
+                    "description": "Reach real audiences with meaningful content. We grow traffic that actually converts."
+                },
+                {
+                    "title": "Boost campaign performance",
+                    "description": "Track results in real time and optimize every move — all managed on one smart platform."
+                },
+                {
+                    "title": "Drive real engagement",
+                    "description": "Reach real audiences with meaningful content. We grow traffic that actually converts."
+                },
+                {
+                    "title": "Drive real engagement",
+                    "description": "Reach real audiences with meaningful content. We grow traffic that actually converts."
+                }
+            ]
         }
     },
     "about": {

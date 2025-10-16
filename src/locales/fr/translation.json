@@ -24,6 +24,26 @@
                 "projects": { "text1": "Projets", "text2": "Réalisés" },
                 "awards": { "text1": "Prix", "text2": "et Distinctions" }
             }
+        },
+        "goals": {
+            "items": [
+                {
+                    "title": "Amplifier la portée de votre marque",
+                    "description": "Touchez de vrais publics avec un contenu pertinent. Nous faisons croître un trafic qui convertit réellement."
+                },
+                {
+                    "title": "Booster la performance des campagnes",
+                    "description": "Suivez les résultats en temps réel et optimisez chaque action — le tout géré sur une plateforme intelligente."
+                },
+                {
+                    "title": "Générer un engagement réel",
+                    "description": "Touchez de vrais publics avec un contenu pertinent. Nous faisons croître un trafic qui convertit réellement."
+                },
+                {
+                    "title": "Générer un engagement réel",
+                    "description": "Touchez de vrais publics avec un contenu pertinent. Nous faisons croître un trafic qui convertit réellement."
+                }
+            ]
         }
     },
     "about": {

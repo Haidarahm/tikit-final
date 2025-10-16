@@ -48,6 +48,12 @@
         "services": {
             "title": "Ce que nous faisons le mieux",
             "explore": "Explorer les services"
+        },
+        "connections": {
+            "question": "Êtes-vous un influenceur ?",
+            "headline": "Rejoignez notre liste dès aujourd'hui !",
+            "description": "Alliez données et créativité pour aider les marques à atteindre et à résonner avec la bonne audience",
+            "cta": "Contactez-nous"
         }
     },
     "about": {

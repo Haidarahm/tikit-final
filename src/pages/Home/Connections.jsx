@@ -11,6 +11,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GradientText from "../../components/GradientText";
 import { useTheme } from "../../store/ThemeContext.jsx";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useI18nLanguage } from "../../store/I18nLanguageContext.jsx";
 gsap.registerPlugin(ScrollTrigger);
 
 // Helper function to split text into words
@@ -22,6 +24,8 @@ const Connections = () => {
   const navigate = useNavigate();
   const sectionContainerRef = useRef(null);
   const { theme } = useTheme();
+  const { t } = useTranslation();
+  const { isRtl } = useI18nLanguage();
 
   // Define gradient colors based on theme
   const gradientColors =
@@ -85,7 +89,10 @@ const Connections = () => {
   return (
     <div
       ref={sectionContainerRef}
-      className="relative text-[var(--foreground)] dark:text-white md:h-[100vh] flex flex-col w-full justify-center font-hero-light section-container-scroll md:mt-[20px]"
+      className={`relative text-[var(--foreground)] dark:text-white md:h-[100vh] flex flex-col w-full justify-center ${
+        isRtl ? "font-cairo" : "font-hero-light"
+      } section-container-scroll md:mt-[20px]`}
+      dir={isRtl ? "rtl" : "ltr"}
     >
       <img
         src={theme === "light" ? element2 : element2Dark}
@@ -99,18 +106,24 @@ const Connections = () => {
         className="element2-c absolute hidden md:block top-[55vh] right-12  dark:grayscale-75 rotate-90 z-0 w-auto h-auto max-w-[300px] max-h-[300px]"
       />
       <div className="flex items-center flex-col justify-center relative z-10 w-[90vw] md:w-[80vw] mx-auto text-center">
-        <ScrollFloat
-          animationDuration={1}
-          ease="back.inOut(2)"
-          textClassName="text-[24px] md:h-[55px] md:text-[35px] pointer-events-none max-w-[600px] text-[var(--foreground)] dark:text-white"
-          scrollStart="center bottom+=20%"
-          scrollEnd="bottom bottom-=50%"
-          stagger={0.06}
-        >
-          Are you an influencer?
-        </ScrollFloat>
+        {isRtl ? (
+          <h1 className="text-[24px] md:h-[55px] md:text-[35px] pointer-events-none max-w-[600px] text-[var(--foreground)] dark:text-white">
+            {t("home.connections.question")}
+          </h1>
+        ) : (
+          <ScrollFloat
+            animationDuration={1}
+            ease="back.inOut(2)"
+            textClassName="text-[24px] md:h-[55px] md:text-[35px] pointer-events-none max-w-[600px] text-[var(--foreground)] dark:text-white"
+            scrollStart="center bottom+=20%"
+            scrollEnd="bottom bottom-=50%"
+            stagger={0.06}
+          >
+            {t("home.connections.question")}
+          </ScrollFloat>
+        )}
         <div
-          data-aos="fade-left"
+          data-aos={isRtl ? "fade-right" : "fade-left"}
           data-aos-duration="900"
           data-aos-easing="ease-out-cubic"
           data-aos-once="false"
@@ -122,7 +135,7 @@ const Connections = () => {
             showBorder={false}
             className="gradient-text pointer-events-none text-[32px] md:text-[64px] capitalize font-bold max-w-[600px]"
           >
-            Join our list today!
+            {t("home.connections.headline")}
           </GradientText>
         </div>
 
@@ -134,13 +147,12 @@ const Connections = () => {
           data-aos-once="false"
           data-aos-offset="120"
         >
-          blend data with creativity to help brands reach and resonate with the
-          right audience
+          {t("home.connections.description")}
         </p>
         <button
-        onClick={() => {
-          navigate("/contact");
-        }}
+          onClick={() => {
+            navigate("/contact");
+          }}
           className="uppercase mt-[40px]
          text-[11px] md:text-[16px] hover:text-[var(--foreground)]
           dark:hover:text-white hover:bg-transparent border
@@ -150,7 +162,7 @@ const Connections = () => {
              dark:hover:bg-transparent
               dark:text-black w-fit"
         >
-          contact us
+          {t("home.connections.cta")}
         </button>
       </div>
     </div>

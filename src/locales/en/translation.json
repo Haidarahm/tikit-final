@@ -29,6 +29,12 @@
             "title": "What We Do Best",
             "explore": "Explore Services"
         },
+        "connections": {
+            "question": "Are you an influencer?",
+            "headline": "Join our list today!",
+            "description": "Blend data with creativity to help brands reach and resonate with the right audience",
+            "cta": "Contact us"
+        },
         "goals": {
             "items": [
                 {

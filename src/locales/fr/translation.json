@@ -130,6 +130,47 @@
         "images": {
             "clients": "Nous avons +300 clients satisfaits",
             "funding": "Nous avons aidé nos clients à obtenir +100M de financement"
+        },
+        "strategy": {
+            "title": "Pas de blabla.",
+            "subtitle": "Juste",
+            "rotatingTexts": [
+                "stratégie experte",
+                "puissance créative",
+                "exécution parfaite"
+            ],
+            "cards": [
+                {
+                    "title": "Marketing d'influence",
+                    "description": "Du concept au montage final, nous donnons vie aux idées audacieuses. Qu'il s'agisse de contenu social, de visuels de marque ou de tournages commerciaux à grande échelle, notre équipe de production livre une narration de qualité qui capte l'attention et suscite l'action."
+                },
+                {
+                    "title": "Production",
+                    "description": "Du concept au montage final, nous donnons vie aux idées audacieuses. Qu'il s'agisse de contenu social, de visuels de marque ou de tournages commerciaux à grande échelle, notre équipe de production livre une narration de qualité qui capte l'attention et suscite l'action."
+                },
+                {
+                    "title": "Gestion des réseaux sociaux",
+                    "description": "Du concept au montage final, nous donnons vie aux idées audacieuses. Qu'il s'agisse de contenu social, de visuels de marque ou de tournages commerciaux à grande échelle, notre équipe de production livre une narration de qualité qui capte l'attention et suscite l'action."
+                },
+                {
+                    "title": "Identité de marque",
+                    "description": "Du concept au montage final, nous donnons vie aux idées audacieuses. Qu'il s'agisse de contenu social, de visuels de marque ou de tournages commerciaux à grande échelle, notre équipe de production livre une narration de qualité qui capte l'attention et suscite l'action."
+                }
+            ]
+        },
+        "growth": {
+            "title": "Nous créons des stratégies intelligentes et évolutives qui déclenchent une croissance réelle",
+            "description": "De la stratégie à l'exécution, nos équipes d'experts donnent vie à votre vision. La vraie mesure du succès ? Quand les clients nous choisissent à nouveau.",
+            "stats": [
+                {
+                    "amount": 12,
+                    "title": "prix pour l'innovation numérique"
+                },
+                {
+                    "amount": 99,
+                    "title": "taux de succès des projets 99%"
+                }
+            ]
         }
     },
     "contact": {

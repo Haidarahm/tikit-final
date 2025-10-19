@@ -130,6 +130,47 @@
         "images": {
             "clients": "We have +300 satisfied clients",
             "funding": "We helped our clients get +100M funding"
+        },
+        "strategy": {
+            "title": "No fluff.",
+            "subtitle": "Just",
+            "rotatingTexts": [
+                "expert strategy",
+                "creative firepower",
+                "flawless execution"
+            ],
+            "cards": [
+                {
+                    "title": "Influencer Marketing",
+                    "description": "From concept to final cut, we bring bold ideas to life. Whether it's social content, branded visuals, or full-scale commercial shoots, our production team delivers quality storytelling that captures attention and drives action."
+                },
+                {
+                    "title": "Production",
+                    "description": "From concept to final cut, we bring bold ideas to life. Whether it's social content, branded visuals, or full-scale commercial shoots, our production team delivers quality storytelling that captures attention and drives action."
+                },
+                {
+                    "title": "Social Media Management",
+                    "description": "From concept to final cut, we bring bold ideas to life. Whether it's social content, branded visuals, or full-scale commercial shoots, our production team delivers quality storytelling that captures attention and drives action."
+                },
+                {
+                    "title": "Branding",
+                    "description": "From concept to final cut, we bring bold ideas to life. Whether it's social content, branded visuals, or full-scale commercial shoots, our production team delivers quality storytelling that captures attention and drives action."
+                }
+            ]
+        },
+        "growth": {
+            "title": "We craft smart, scalable strategies that spark real growth",
+            "description": "From strategy to execution, our expert teams bring your vision to life. The real measure of success? When clients choose us again.",
+            "stats": [
+                {
+                    "amount": 12,
+                    "title": "award for digital innovation"
+                },
+                {
+                    "amount": 99,
+                    "title": "projects success rate 99%"
+                }
+            ]
         }
     },
     "contact": {

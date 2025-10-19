@@ -171,6 +171,19 @@
                     "title": "projects success rate 99%"
                 }
             ]
+        },
+        "contactUs": {
+            "subtitle": "Kick it off with Tikit!",
+            "title": "Contact Us Now",
+            "description": "We want to hear from you. let's us know",
+            "description2": "how we can help!",
+            "helpText": "let's us know how we can help!",
+            "client": "Client",
+            "influencer": "Influencer",
+            "name": "Name",
+            "email": "Email",
+            "button": "Contact Us",
+            "brandsTrust": "20+ Brands Trust Us"
         }
     },
     "contact": {

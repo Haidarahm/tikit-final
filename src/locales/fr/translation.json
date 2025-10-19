@@ -171,6 +171,19 @@
                     "title": "taux de succès des projets 99%"
                 }
             ]
+        },
+        "contactUs": {
+            "subtitle": "Commencez avec Tikit !",
+            "title": "Contactez-nous maintenant",
+            "description": "Nous voulons vous entendre. Faites-nous savoir",
+            "description2": "comment nous pouvons vous aider !",
+            "helpText": "Faites-nous savoir comment nous pouvons vous aider !",
+            "client": "Client",
+            "influencer": "Influenceur",
+            "name": "Nom",
+            "email": "Email",
+            "button": "Contactez-nous",
+            "brandsTrust": "20+ Marques nous font confiance"
         }
     },
     "contact": {

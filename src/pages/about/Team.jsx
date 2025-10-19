@@ -169,9 +169,49 @@ const Team = () => {
           </div>
         </div>
       </div>
-      {/* 
-      mobile view
-      */}
+
+      {/* Mobile View Cards */}
+      <div className="block md:hidden mt-8">
+        {/* Mobile Headline */}
+        <div className="text-center mb-8 px-4">
+          <h2 className="text-[var(--foreground)] text-[28px] font-bold leading-[1.2]">
+            Our Creative Team
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 px-4">
+          {imageUrls.map((src, index) => (
+            <div
+              key={`mobile-${index}`}
+              className="relative w-full h-[280px] rounded-[15px] overflow-hidden bg-[#111] shadow-lg loco-reveal-card"
+              data-scroll
+              data-scroll-class="is-inview"
+              data-scroll-repeat
+              style={{
+                transitionDelay: `${index * 150}ms`,
+              }}
+            >
+              <img
+                src={src}
+                alt={`team-${index + 1}`}
+                className="h-full w-full object-cover select-none"
+                draggable={false}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="details flex flex-col justify-end items-center absolute bottom-0 left-0 right-0 p-6">
+                <div className="bg-white/10 backdrop-blur-md rounded-[12px] w-full p-4 text-center">
+                  <div className="name text-white text-[20px] font-semibold mb-1">
+                    Haidar Ahmad
+                  </div>
+                  <div className="job text-white/80 text-[14px] font-light">
+                    Gamer
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

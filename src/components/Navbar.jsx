@@ -23,6 +23,7 @@ function Navbar() {
   const { t } = useTranslation();
   const [isLangOpen, setIsLangOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const langMenuRef = useRef(null);
 
   const links = [
     { to: "/home", key: "nav.home" },
@@ -121,6 +122,23 @@ function Navbar() {
     animateHamburger(isMobileMenuOpen);
     animateMobileMenu(isMobileMenuOpen);
   }, [isMobileMenuOpen]);
+
+  // Handle click outside to close language menu
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(event.target)) {
+        setIsLangOpen(false);
+      }
+    };
+
+    if (isLangOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isLangOpen]);
 
   useEffect(() => {
     AOS.init({ duration: 750, once: true });
@@ -359,7 +377,7 @@ function Navbar() {
                   </span>
                 </Link>
               ))}
-              <div className="relative">
+              <div className="relative" ref={langMenuRef}>
                 <button
                   onClick={() => setIsLangOpen((v) => !v)}
                   className="nav-item uppercase font-light text-sm opacity-0 text-[var(--foreground)] relative inline-flex items-center gap-2"
@@ -367,7 +385,7 @@ function Navbar() {
                   aria-expanded={isLangOpen}
                 >
                   <span className="relative inline-block">
-                    {language === "en" ? "En" : language === "fr" ? "Fn" : "Ar"}
+                    {language === "en" ? "En" : language === "fr" ? "Fr" : "Ar"}
                     <span
                       className="nav-underline"
                       style={{
@@ -405,17 +423,29 @@ function Navbar() {
                 </button>
                 {isLangOpen && (
                   <div
-                    className="absolute right-0 mt-3 min-w-[120px] rounded-md bg-white/5 backdrop-blur-md shadow-sm border border-white/10"
+                    className={`absolute right-0 mt-3 min-w-[120px] rounded-lg shadow-lg border z-50 ${
+                      theme === "dark"
+                        ? "bg-gray-900/95 backdrop-blur-md border-gray-700/50"
+                        : "bg-white/95 backdrop-blur-md border-gray-200/50"
+                    }`}
                     role="listbox"
                   >
                     {[
                       { value: "en", label: "En" },
-                      { value: "fr", label: "Fn" },
+                      { value: "fr", label: "Fr" },
                       { value: "ar", label: "Ar" },
                     ].map((opt) => (
                       <button
                         key={opt.value}
-                        className="block w-full text-left px-4 py-2 text-[var(--foreground)] hover:text-white hover:bg-white/10 uppercase text-sm"
+                        className={`block w-full text-left px-4 py-3 text-sm uppercase transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg ${
+                          language === opt.value
+                            ? theme === "dark"
+                              ? "bg-blue-600/20 text-blue-300 border-l-2 border-blue-400"
+                              : "bg-blue-100/50 text-[#52C3C5] border-l-2 border-[#52C3C5]/80"
+                            : theme === "dark"
+                            ? "text-gray-300 hover:text-white hover:bg-gray-800/50"
+                            : "text-gray-700 hover:text-gray-900 hover:bg-gray-100/50"
+                        }`}
                         onClick={() => {
                           setLanguage(opt.value);
                           setIsLangOpen(false);
@@ -554,7 +584,7 @@ function Navbar() {
               className="w-full flex items-center justify-between text-[var(--foreground)] text-2xl md:text-3xl font-light uppercase tracking-wider"
             >
               <span>
-                {language === "en" ? "En" : language === "fr" ? "Fn" : "Ar"}
+                {language === "en" ? "En" : language === "fr" ? "Fr" : "Ar"}
               </span>
               <svg
                 width="14"
@@ -577,15 +607,23 @@ function Navbar() {
               </svg>
             </button>
             {isLangOpen && (
-              <div className="mt-3 flex flex-col gap-2">
+              <div className="mt-4 flex flex-col gap-3">
                 {[
                   { value: "en", label: "En" },
-                  { value: "fr", label: "Fn" },
+                  { value: "fr", label: "Fr" },
                   { value: "ar", label: "Ar" },
                 ].map((opt) => (
                   <button
                     key={opt.value}
-                    className="text-[var(--foreground)] hover:opacity-80 text-xl md:text-2xl font-light uppercase tracking-wider"
+                    className={`text-xl md:text-2xl font-light uppercase tracking-wider transition-all duration-200 py-2 px-4 rounded-lg ${
+                      language === opt.value
+                        ? theme === "dark"
+                          ? "bg-blue-600/20 text-blue-300 border-l-4 border-blue-400"
+                          : "bg-blue-100/50 text-blue-700 border-l-4 border-blue-500"
+                        : theme === "dark"
+                        ? "text-gray-300 hover:text-white hover:bg-gray-800/30"
+                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-100/50"
+                    }`}
                     onClick={() => {
                       setLanguage(opt.value);
                       setIsLangOpen(false);

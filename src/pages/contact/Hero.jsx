@@ -39,7 +39,9 @@ const Hero = () => {
   return (
     <section
       data-scroll-section
-      className="text-[var(--foreground)] snap-start snap-always h-[50vh] md:h-screen w-full flex items-center justify-center"
+      className={`text-[var(--foreground)] snap-start snap-always h-[50vh] md:h-screen w-full flex items-center justify-center ${
+        isRtl ? "font-cairo" : "font-hero-light"
+      }`}
       dir={isRtl ? "rtl" : "ltr"}
     >
       <div className="text-center mt-[104px]">
@@ -57,7 +59,7 @@ const Hero = () => {
               colors={gradientColors}
               animationSpeed={5}
               showBorder={false}
-              className="text-[32px] md:text-[96px] leading-[40px] md:leading-[100px] mb-8 capitalize font-bold"
+              className="text-[32px] md:text-[96px] leading-[40px] md:leading-[170px]  mb-8 capitalize font-bold"
             >
               {t("contact.hero.subtitle")}
             </GradientText>

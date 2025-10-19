@@ -129,6 +129,21 @@
         "hero": {
             "title": "Any questions? simply ask us.",
             "subtitle": "This is you, home!"
+        },
+        "action": {
+            "subtitle": "Kick it off with Tikit!",
+            "title": "Contact Us Now",
+            "description": "We want to hear from you. Let us know how we can help!",
+            "client": "Client",
+            "influencer": "Influencer",
+            "form": {
+                "name": "Name",
+                "email": "Email",
+                "phone": "Phone",
+                "subject": "Subject",
+                "message": "Message",
+                "submit": "Contact Us"
+            }
         }
     },
     "services": {

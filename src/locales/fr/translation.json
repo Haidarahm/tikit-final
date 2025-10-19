@@ -129,6 +129,21 @@
         "hero": {
             "title": "Des questions ? Demandez-nous simplement.",
             "subtitle": "C'est vous, à la maison !"
+        },
+        "action": {
+            "subtitle": "Commencez avec Tikit !",
+            "title": "Contactez-nous maintenant",
+            "description": "Nous voulons vous entendre. Faites-nous savoir comment nous pouvons vous aider !",
+            "client": "Client",
+            "influencer": "Influenceur",
+            "form": {
+                "name": "Nom",
+                "email": "Email",
+                "phone": "Téléphone",
+                "subject": "Sujet",
+                "message": "Message",
+                "submit": "Contactez-nous"
+            }
         }
     },
     "services": {

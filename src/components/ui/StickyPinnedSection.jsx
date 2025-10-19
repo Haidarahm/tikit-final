@@ -3,6 +3,8 @@ import React, { useLayoutEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslation } from "react-i18next";
+import { useI18nLanguage } from "../../store/I18nLanguageContext.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,6 +24,8 @@ export default function StickyPinnedSection({
   const mediaRefs = useRef([]);
   const textRefs = useRef([]);
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { isRtl } = useI18nLanguage();
 
   const count = items?.length ?? 0;
 
@@ -110,51 +114,100 @@ export default function StickyPinnedSection({
           });
 
           const itemTl = gsap.timeline({ paused: true });
-          itemTl.to(lettersTitle, {
-            opacity: 1,
-            y: 0,
-            duration: 0.2,
-            stagger: 0.012,
-            ease: "power3.out",
-          });
-          if (lettersSubtitle.length) {
-            itemTl.to(
-              lettersSubtitle,
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.18,
-                stagger: 0.01,
-                ease: "power3.out",
-              },
-              ">+0.04"
-            );
-          }
-          if (lettersDesc.length) {
-            itemTl.to(
-              lettersDesc,
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.18,
-                stagger: 0.01,
-                ease: "power3.out",
-              },
-              ">+0.04"
-            );
-          }
-          if (lettersBtn.length) {
-            itemTl.to(
-              lettersBtn,
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.16,
-                stagger: 0.008,
-                ease: "power3.out",
-              },
-              ">+0.04"
-            );
+
+          // Different animation for Arabic (RTL) vs other languages
+          if (isRtl) {
+            // Arabic: animate text as whole blocks without letter splitting
+            itemTl.to(lettersTitle, {
+              opacity: 1,
+              y: 0,
+              duration: 0.4,
+              ease: "power2.out",
+            });
+            if (lettersSubtitle.length) {
+              itemTl.to(
+                lettersSubtitle,
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.3,
+                  ease: "power2.out",
+                },
+                ">+0.1"
+              );
+            }
+            if (lettersDesc.length) {
+              itemTl.to(
+                lettersDesc,
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.3,
+                  ease: "power2.out",
+                },
+                ">+0.1"
+              );
+            }
+            if (lettersBtn.length) {
+              itemTl.to(
+                lettersBtn,
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.25,
+                  ease: "power2.out",
+                },
+                ">+0.1"
+              );
+            }
+          } else {
+            // Original staggered letter-by-letter animation for LTR languages
+            itemTl.to(lettersTitle, {
+              opacity: 1,
+              y: 0,
+              duration: 0.2,
+              stagger: 0.012,
+              ease: "power3.out",
+            });
+            if (lettersSubtitle.length) {
+              itemTl.to(
+                lettersSubtitle,
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.18,
+                  stagger: 0.01,
+                  ease: "power3.out",
+                },
+                ">+0.04"
+              );
+            }
+            if (lettersDesc.length) {
+              itemTl.to(
+                lettersDesc,
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.18,
+                  stagger: 0.01,
+                  ease: "power3.out",
+                },
+                ">+0.04"
+              );
+            }
+            if (lettersBtn.length) {
+              itemTl.to(
+                lettersBtn,
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.16,
+                  stagger: 0.008,
+                  ease: "power3.out",
+                },
+                ">+0.04"
+              );
+            }
           }
 
           // Trigger the per-item text animation
@@ -271,14 +324,17 @@ export default function StickyPinnedSection({
     });
 
     return () => ctx.revert();
-  }, [count, heightPerItemVh]);
+  }, [count, heightPerItemVh, isRtl]);
 
   if (!count) return null;
 
   return (
     <section
       ref={sectionRef}
-      className="relative font-hero-light w-full overflow-visible"
+      className={`relative ${
+        isRtl ? "font-cairo" : "font-hero-light"
+      } w-full overflow-visible`}
+      dir={isRtl ? "rtl" : "ltr"}
     >
       <div
         ref={stickyRef}
@@ -286,11 +342,17 @@ export default function StickyPinnedSection({
       >
         <div className=" text-[var(--foreground)] px-10 flex  w-full font-bold absolute top-12 left-1/2 -translate-x-1/2 uppercase  items-center justify-between gap-4 ">
           <div>
-            {Array.from("Featured Work").map((ch, i) => (
-              <span key={i} className="fw-letter text-[32px]  inline-block">
-                {ch === " " ? "\u00A0" : ch}
+            {isRtl ? (
+              <span className="fw-letter text-[32px]">
+                {t("home.work.title")}
               </span>
-            ))}
+            ) : (
+              Array.from(t("home.work.title")).map((ch, i) => (
+                <span key={i} className="fw-letter text-[32px]  inline-block">
+                  {ch === " " ? "\u00A0" : ch}
+                </span>
+              ))
+            )}
           </div>
           <button
             className="rounded-full border font-light 
@@ -303,11 +365,17 @@ export default function StickyPinnedSection({
             text-[var(--secondary)] px-5 py-2  transition-colors 
             "
           >
-            {Array.from("Explore Work").map((ch, i) => (
-              <span key={i} className="fw-letter inline-block text-[14px]">
-                {ch === " " ? "\u00A0" : ch}
+            {isRtl ? (
+              <span className="fw-letter text-[14px]">
+                {t("home.work.explore")}
               </span>
-            ))}
+            ) : (
+              Array.from(t("home.work.explore")).map((ch, i) => (
+                <span key={i} className="fw-letter inline-block text-[14px]">
+                  {ch === " " ? "\u00A0" : ch}
+                </span>
+              ))
+            )}
           </button>
         </div>
         {/* Text column */}
@@ -323,30 +391,42 @@ export default function StickyPinnedSection({
               }}
             >
               <h2 className="text-2xl font-bold text-[32px] text-[var(--foreground)]">
-                {Array.from(it.title ?? "").map((ch, j) => (
-                  <span key={j} className="letter letter-title inline-block">
-                    {ch === " " ? "\u00A0" : ch}
-                  </span>
-                ))}
+                {isRtl ? (
+                  <span className="letter-title">{it.title ?? ""}</span>
+                ) : (
+                  Array.from(it.title ?? "").map((ch, j) => (
+                    <span key={j} className="letter letter-title inline-block">
+                      {ch === " " ? "\u00A0" : ch}
+                    </span>
+                  ))
+                )}
               </h2>
               {it.subtitle ? (
                 <p className="text-[var(--foreground)] text-[20px]">
-                  {Array.from(it.subtitle ?? "").map((ch, j) => (
-                    <span
-                      key={j}
-                      className="letter letter-subtitle inline-block"
-                    >
-                      {ch === " " ? "\u00A0" : ch}
-                    </span>
-                  ))}
+                  {isRtl ? (
+                    <span className="letter-subtitle">{it.subtitle ?? ""}</span>
+                  ) : (
+                    Array.from(it.subtitle ?? "").map((ch, j) => (
+                      <span
+                        key={j}
+                        className="letter letter-subtitle inline-block"
+                      >
+                        {ch === " " ? "\u00A0" : ch}
+                      </span>
+                    ))
+                  )}
                 </p>
               ) : null}
               <p className="mt-6 w-full font-light text-[var(--foreground)] text-[24px]">
-                {Array.from(it.description ?? "").map((ch, j) => (
-                  <span key={j} className="letter letter-desc inline-block">
-                    {ch === " " ? "\u00A0" : ch}
-                  </span>
-                ))}
+                {isRtl ? (
+                  <span className="letter-desc">{it.description ?? ""}</span>
+                ) : (
+                  Array.from(it.description ?? "").map((ch, j) => (
+                    <span key={j} className="letter letter-desc inline-block">
+                      {ch === " " ? "\u00A0" : ch}
+                    </span>
+                  ))
+                )}
               </p>
               <div className="mt-8">
                 <button
@@ -372,14 +452,20 @@ export default function StickyPinnedSection({
                     } catch (_) {}
                   }}
                 >
-                  {Array.from("View Work").map((ch, j) => (
-                    <span
-                      key={j}
-                      className="letter  text-[14px] letter-btn inline-block"
-                    >
-                      {ch === " " ? "\u00A0" : ch}
+                  {isRtl ? (
+                    <span className="letter-btn text-[14px]">
+                      {t("home.work.viewWork")}
                     </span>
-                  ))}
+                  ) : (
+                    Array.from(t("home.work.viewWork")).map((ch, j) => (
+                      <span
+                        key={j}
+                        className="letter  text-[14px] letter-btn inline-block"
+                      >
+                        {ch === " " ? "\u00A0" : ch}
+                      </span>
+                    ))
+                  )}
                 </button>
               </div>
             </div>

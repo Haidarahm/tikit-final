@@ -63,6 +63,23 @@
                     "description": "Reach real audiences with meaningful content. We grow traffic that actually converts."
                 }
             ]
+        },
+        "aboutUs": {
+            "title": "Who We Are",
+            "description": "We create and innovate digital experiences through strategic collaboration and creativity. Each project engages and inspires, aiming to drive impactful results."
+        },
+        "contactUs": {
+            "subtitle": "Kick it off with Tikit!",
+            "title": "Contact Us Now",
+            "description": "We want to hear from you. let's us know",
+            "description2": "how we can help!",
+            "helpText": "let's us know how we can help!",
+            "client": "Client",
+            "influencer": "Influencer",
+            "name": "Name",
+            "email": "Email",
+            "button": "Contact Us",
+            "brandsTrust": "20+ Brands Trust Us"
         }
     },
     "about": {

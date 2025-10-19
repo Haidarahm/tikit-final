@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useTranslation } from "react-i18next";
+import { useI18nLanguage } from "../../store/I18nLanguageContext.jsx";
 
 import img1 from "../../assets/who-we-are/1.webp";
 import img2 from "../../assets/who-we-are/2.webp";
@@ -21,6 +23,8 @@ const AboutUs = () => {
   const gridRef = useRef(null);
   const [inView, setInView] = useState(false);
   const [imagesInView, setImagesInView] = useState(new Set());
+  const { t } = useTranslation();
+  const { isRtl } = useI18nLanguage();
 
   // Initialize AOS
   useEffect(() => {
@@ -107,28 +111,29 @@ const AboutUs = () => {
   return (
     <div
       ref={sectionRef}
-      className="section overflow-visible mt-4 md:mt-0 font-hero-light flex-col mx-auto z-10 w-[95%] md:w-6/7 "
+      className={`section overflow-visible mt-4 md:mt-0 ${
+        isRtl ? "font-cairo" : "font-hero-light"
+      } flex-col mx-auto z-10 w-[95%] md:w-6/7`}
+      dir={isRtl ? "rtl" : "ltr"}
     >
       <div className="w-full text-[var(--foreground)] ">
         <h2
           ref={titleRef}
-          data-aos="fade-right"
+          data-aos={isRtl ? "fade-left" : "fade-right"}
           data-aos-duration="500"
           data-aos-delay="100"
           className="text-[18px] text-center md:text-4xl font-bold mb-2 md:mb-4"
         >
-          Who We Are
+          {t("home.aboutUs.title")}
         </h2>
         <p
           ref={descriptionRef}
-          data-aos="fade-left"
+          data-aos={isRtl ? "fade-right" : "fade-left"}
           data-aos-duration="500"
           data-aos-delay="200"
           className="text-[16px] md:text-[32px] font-light text-center mb-[40px]"
         >
-          We create and innovate digital experiences through strategic
-          collaboration and creativity. Each project engages and inspires,
-          aiming to drive impactful results.
+          {t("home.aboutUs.description")}
         </p>
         <div
           ref={gridRef}

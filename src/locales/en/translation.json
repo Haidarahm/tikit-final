@@ -126,6 +126,10 @@
             "title": "We are Tikit — a full-service marketing agency",
             "sectionTitle": "About Us",
             "description": "Driven by insight and creativity: the story behind \"Tikit\" — a regional agency powering brands, building trust, and delivering results."
+        },
+        "images": {
+            "clients": "We have +300 satisfied clients",
+            "funding": "We helped our clients get +100M funding"
         }
     },
     "contact": {

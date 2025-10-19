@@ -2,12 +2,20 @@ import React from "react";
 import image1 from "../../assets/aboutus/about-1.webp";
 import image2 from "../../assets/aboutus/about-2.webp";
 import image3 from "../../assets/aboutus/about-3.webp";
+import { useTranslation } from "react-i18next";
+import { useI18nLanguage } from "../../store/I18nLanguageContext";
 
 const Images = () => {
+  const { t } = useTranslation();
+  const { isRtl } = useI18nLanguage();
+
   return (
     <div
       data-scroll-section
-      className="text-[var(--foreground)] px-4 md:px-[60px] font-hero-light grid gap-[10px] md:gap-[15px] grid-cols-1 md:grid-cols-7 auto-rows-[200px] md:grid-rows-4"
+      className={`text-[var(--foreground)] px-4 md:px-[60px] grid gap-[10px] md:gap-[15px] grid-cols-1 md:grid-cols-7 auto-rows-[200px] md:grid-rows-4 ${
+        isRtl ? "font-cairo" : "font-hero-light"
+      }`}
+      dir={isRtl ? "rtl" : "ltr"}
     >
       {/* Image 1 */}
       <div
@@ -31,9 +39,7 @@ const Images = () => {
         data-scroll-repeat
         data-scroll-speed="2"
       >
-        <h1>
-          We have <span className="font-bold">+300</span> satisfied clients
-        </h1>
+        <h1>{t("about.images.clients")}</h1>
       </div>
 
       {/* Image 2 */}
@@ -58,10 +64,7 @@ const Images = () => {
         data-scroll-repeat
         data-scroll-speed="-1"
       >
-        <h1>
-          We helped our clients get <span className="font-bold">+100M</span>{" "}
-          funding
-        </h1>
+        <h1>{t("about.images.funding")}</h1>
       </div>
 
       {/* Image 3 */}

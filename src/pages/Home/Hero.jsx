@@ -40,7 +40,7 @@ function Hero() {
         easing: "ease-out-quart",
       });
       AOS.refresh();
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timerId);
   }, []);
@@ -90,14 +90,14 @@ function Hero() {
           <h2
             className=" font-light text-lg sm:text-xl md:text-2xl lg:text-[27px]"
             data-aos="fade-down"
-            data-aos-delay="1500"
+            data-aos-delay="1000"
           >
             {t("home.hero.tagline")}
           </h2>
           <h1
             className=" font-bold text-3xl font-hero-light sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] leading-tight"
             data-aos="fade-down"
-            data-aos-delay="2000"
+            data-aos-delay="1300"
           >
             ROI REBELS
           </h1>
@@ -107,7 +107,7 @@ function Hero() {
         <div
           className="subtitle mt-4 md:mt-6"
           data-aos="fade-down"
-          data-aos-delay="2500"
+          data-aos-delay="1600"
         >
           <h3 className=" font-light text-[var(--foreground)]  text-xl sm:text-2xl md:text-3xl lg:text-[36px] text-center px-4">
             {t("home.hero.subtitle")}
@@ -118,7 +118,7 @@ function Hero() {
         <div
           className="avatar mt-8 md:mt-[50px]"
           data-aos="fade-down"
-          data-aos-delay="3000"
+          data-aos-delay="1800"
         >
           <AvatarGroupDemo />
           <div className="text text-center mt-2 md:mt-[10px]">

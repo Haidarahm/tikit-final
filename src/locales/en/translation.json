@@ -35,6 +35,15 @@
             "description": "Blend data with creativity to help brands reach and resonate with the right audience",
             "cta": "Contact us"
         },
+        "work": {
+            "title": "Featured Work",
+            "explore": "Explore Projects",
+            "viewWork": "View Work",
+            "noWorks": "No works found.",
+            "prev": "Prev",
+            "next": "Next",
+            "page": "Page"
+        },
         "goals": {
             "items": [
                 {

@@ -2,6 +2,8 @@ import React, { useEffect, useMemo } from "react";
 import StickyPinnedSection from "../../components/ui/StickyPinnedSection";
 import { useWorkStore } from "../../store/workStore";
 import { useI18nLanguage } from "../../store/I18nLanguageContext.jsx";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export default function WorkSection() {
   const {
@@ -15,7 +17,9 @@ export default function WorkSection() {
     prevPage,
     getPagedWorks,
   } = useWorkStore();
-  const { language } = useI18nLanguage();
+  const { language, isRtl } = useI18nLanguage();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadWorks({ lang: language, page, per_page: pageSize });
@@ -41,17 +45,22 @@ export default function WorkSection() {
 
   return (
     <>
-      <div className="relative hidden md:block h-[540vh] z-10 w-full overflow-visible text-[var(--foreground)]">
+      <div
+        className={`relative hidden md:block h-[540vh] z-10 w-full overflow-visible text-[var(--foreground)] ${
+          isRtl ? "font-cairo" : "font-hero-light"
+        }`}
+        dir={isRtl ? "rtl" : "ltr"}
+      >
         <StickyPinnedSection items={items} heightPerItemVh={150} />
       </div>
-      <div className="mobile-view gap-[30px] md:hidden relative text-[var(--foreground)] flex flex-col w-full px-[20px]">
-        <div className="headline sticky top-0 flex w-full justify-between mt-[40px]">
-          <h1 className="text-[18px] font-bold">Featured Work</h1>{" "}
-          <button className="px-2 md:hidden text-[11px] rounded-full uppercase border border-[var(--foreground)] text-[var(--foreground)] bg-transparent">
-            Explore Projects
-          </button>
-        </div>
-        <div className="main-content w-full flex flex-col gap-[20px]">
+      <div
+        className={`mobile-view gap-[30px] md:hidden relative text-[var(--foreground)] flex flex-col w-full px-[20px] ${
+          isRtl ? "font-cairo" : "font-hero-light"
+        }`}
+        dir={isRtl ? "rtl" : "ltr"}
+      >
+      
+        <div className="main-content w-full flex flex-col gap-[20px] mt-16">
           {(items || []).map((item, index) => (
             <div
               key={(item.title || "") + String(index)}
@@ -71,7 +80,7 @@ export default function WorkSection() {
                       navigate(`/details/${encodeURIComponent(item.id)}`)
                     }
                   >
-                    View Work
+                    {t("home.work.viewWork")}
                   </button>
                 </div>
                 {item.subtitle ? (
@@ -94,26 +103,9 @@ export default function WorkSection() {
           ))}
           {(!items || items.length === 0) && !loading ? (
             <div className="text-center text-sm opacity-70">
-              No works found.
+              {t("home.work.noWorks")}
             </div>
           ) : null}
-          {/* Pagination Controls */}
-          <div className="flex items-center justify-center gap-4 mt-4">
-            <button
-              className="px-3 py-1 rounded-full border text-[11px] uppercase"
-              disabled={page <= 1}
-              onClick={prevPage}
-            >
-              Prev
-            </button>
-            <span className="text-xs opacity-70">Page {page}</span>
-            <button
-              className="px-3 py-1 rounded-full border text-[11px] uppercase"
-              onClick={nextPage}
-            >
-              Next
-            </button>
-          </div>
         </div>
       </div>
     </>

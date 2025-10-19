@@ -2,6 +2,8 @@ import React, { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import GradientText from "../../components/GradientText";
 import { useTheme } from "../../store/ThemeContext";
+import { useTranslation } from "react-i18next";
+import { useI18nLanguage } from "../../store/I18nLanguageContext";
 
 const Hero = () => {
   const h1WrapRef = useRef(null);
@@ -9,6 +11,8 @@ const Hero = () => {
   const h2WrapRef = useRef(null);
   const h2Ref = useRef(null);
   const { theme } = useTheme();
+  const { t } = useTranslation();
+  const { isRtl } = useI18nLanguage();
 
   const gradientColors =
     theme === "light"
@@ -36,6 +40,7 @@ const Hero = () => {
     <section
       data-scroll-section
       className="text-[var(--foreground)] snap-start snap-always h-[50vh] md:h-screen w-full flex items-center justify-center"
+      dir={isRtl ? "rtl" : "ltr"}
     >
       <div className="text-center mt-[104px]">
         <div ref={h1WrapRef} className="overflow-hidden">
@@ -43,7 +48,7 @@ const Hero = () => {
             ref={h1Ref}
             className="text-[32px] md:text-[70px] leading-[40px] md:leading-[110px] capitalize py-2 will-change-transform translate-y-full"
           >
-            Any questions? simply ask us.
+            {t("contact.hero.title")}
           </h1>
         </div>
         <div ref={h2WrapRef} className="overflow-hidden">
@@ -54,7 +59,7 @@ const Hero = () => {
               showBorder={false}
               className="text-[32px] md:text-[96px] leading-[40px] md:leading-[100px] mb-8 capitalize font-bold"
             >
-              This is you, home!
+              {t("contact.hero.subtitle")}
             </GradientText>
           </div>
         </div>

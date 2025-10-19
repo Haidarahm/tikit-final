@@ -125,6 +125,20 @@
     },
     "contact": {
         "title": "Contact",
-        "description": "Contact page"
+        "description": "Contact page",
+        "hero": {
+            "title": "Any questions? simply ask us.",
+            "subtitle": "This is you, home!"
+        }
+    },
+    "services": {
+        "title": "Services",
+        "description": "Services page",
+        "hero": {
+            "title": "We make design that",
+            "subtitle": "lead and inspire",
+            "description": "Our exclusive services",
+            "subdescription": "We partner with brands that want to lead — those ready to break through the noise and bring real value to people's lives."
+        }
     }
 }

@@ -125,6 +125,20 @@
     },
     "contact": {
         "title": "Contact",
-        "description": "Page de contact"
+        "description": "Page de contact",
+        "hero": {
+            "title": "Des questions ? Demandez-nous simplement.",
+            "subtitle": "C'est vous, à la maison !"
+        }
+    },
+    "services": {
+        "title": "Services",
+        "description": "Page des services",
+        "hero": {
+            "title": "Nous créons un design qui",
+            "subtitle": "mène et inspire",
+            "description": "Nos services exclusifs",
+            "subdescription": "Nous nous associons avec des marques qui veulent mener — celles prêtes à briser le bruit et apporter une vraie valeur à la vie des gens."
+        }
     }
 }

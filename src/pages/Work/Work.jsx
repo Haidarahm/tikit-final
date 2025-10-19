@@ -9,6 +9,7 @@ import ContactUs from "../Home/ContactUs";
 import GradientText from "../../components/GradientText";
 import { useWorkStore } from "../../store/workStore";
 import { useI18nLanguage } from "../../store/I18nLanguageContext.jsx";
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,7 +17,8 @@ const Work = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
   const { works, loadWorks, loading } = useWorkStore();
-  const { language } = useI18nLanguage();
+  const { language, isRtl } = useI18nLanguage();
+  const { t } = useTranslation();
   const imagesRef = useRef([]);
   const paragraphContainerRef = useRef(null);
   const paragraphRef = useRef(null);
@@ -101,8 +103,12 @@ const Work = () => {
   }, []);
 
   return (
-    <div className="work-section font-hero-light flex flex-col h-[calc(100%+10vh)]">
-      <div className="h-[50vh] md:h-[75vh] flex flex-col justify-around items-center w-full description  mt-[104px]">
+    <div
+      className={`work-section flex flex-col h-[calc(100%+10vh)] ${
+        isRtl ? "font-cairo" : "font-hero-light"
+      }`}
+    >
+      <div className="h-[50vh] md:h-[70vh] flex flex-col justify-around items-center w-full description  mt-[104px]">
         <div className="w-full"></div>
         <div ref={titleContainerRef} className="overflow-hidden">
           <div
@@ -113,19 +119,25 @@ const Work = () => {
               colors={gradientColors}
               animationSpeed={5}
               showBorder={false}
-              className="text-[42px] md:text-[96px] leading-[40px] md:leading-[100px] mb-8 capitalize font-bold"
+              className="text-[42px] md:text-[96px] leading-[40px] md:leading-[150px] mb-8 capitalize font-bold"
             >
-              Featured Work
+              {t("work.title")}
             </GradientText>
           </div>
         </div>
-        <div className="description w-full relative z-30 text-center md:text-start flex md:flex-row flex-col text-[var(--foreground)] px-[20px] md:px-[30px] gap-4 md:gap-12 justify-center items-center">
+        <div
+          className={`description w-full relative z-30 flex md:flex-row flex-col text-[var(--foreground)] px-[20px] md:px-[30px] gap-4 md:gap-12 justify-center items-center ${
+            isRtl
+              ? "text-center md:text-end md:flex-row-reverse"
+              : " text-center md:text-start"
+          }`}
+        >
           <div ref={descTitleWrapRef} className="overflow-hidden  md:w-[20%]">
             <div
               ref={descTitleRef}
               className="title font-bold mt-4 md:mt-0 text-[20px] md:text-[24px] will-change-transform translate-y-full"
             >
-              what makes us special
+              {t("work.specialTitle")}
             </div>
           </div>
           <div ref={descParaWrapRef} className="overflow-hidden">
@@ -133,8 +145,7 @@ const Work = () => {
               ref={descParaRef}
               className="paragraph text-[16px] md:text-[22px] will-change-transform translate-y-full"
             >
-              We take a similar approach to design commercial we do impactfully
-              approache, over the flowchart of user friendly wireframe.
+              {t("work.specialDescription")}
             </div>
           </div>
         </div>
@@ -185,14 +196,14 @@ const Work = () => {
                     navigate(`/details/${encodeURIComponent(id)}`);
                 }}
               >
-                View Work
+                {t("work.viewWork")}
               </button>
             </div>
           </div>
         ))}
         {(!works || works.length === 0) && !loading ? (
           <div className="col-span-full text-center text-sm opacity-70">
-            No works found.
+            {t("work.noWorks")}
           </div>
         ) : null}
       </div>

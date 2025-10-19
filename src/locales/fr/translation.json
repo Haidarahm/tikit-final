@@ -80,7 +80,44 @@
             "email": "Email",
             "button": "Contactez-nous",
             "brandsTrust": "20+ marques nous font confiance"
+        },
+        "reviews": {
+            "testimonials": [
+                {
+                    "name": "Sophia Martinez",
+                    "company": "Global Enterprises Ltd.",
+                    "text": "AtomWallet a complètement transformé notre gestion des paiements internationaux. Les transactions sont rapides, sécurisées et sans effort."
+                },
+                {
+                    "name": "David Lee",
+                    "company": "TechBridge Solutions",
+                    "text": "Envoyer de l'argent à des partenaires à l'étranger n'a jamais été aussi fluide. Le suivi en temps réel d'AtomWallet nous donne une tranquillité d'esprit totale."
+                },
+                {
+                    "name": "Amira Hassan",
+                    "company": "FinEdge Capital",
+                    "text": "Les fonctionnalités de sécurité sont exceptionnelles. La protection multicouche garantit que nos transactions commerciales restent privées et protégées."
+                },
+                {
+                    "name": "Liam Anderson",
+                    "company": "Anderson Trading Co.",
+                    "text": "Avec AtomWallet, je peux payer les fournisseurs et recevoir des fonds mondialement sans m'inquiéter des frais cachés. Transparent et fiable !"
+                },
+                {
+                    "name": "Chen Wei",
+                    "company": "BrightPath Logistics",
+                    "text": "L'interface est si intuitive. En quelques minutes, mon équipe effectuait des paiements internationaux sans aucune formation requise."
+                }
+            ]
         }
+    },
+    "work": {
+        "title": "Travaux en vedette",
+        "description": "Page des travaux",
+        "specialTitle": "ce qui nous rend spéciaux",
+        "specialDescription": "Nous adoptons une approche similaire pour concevoir commercial que nous faisons de manière impactante, via le flux de travail de maquette conviviale.",
+        "viewWork": "Voir le travail",
+        "noWorks": "Aucun travail trouvé."
     },
     "about": {
         "title": "À propos",

@@ -30,9 +30,7 @@ export function I18nLanguageProvider({ children }) {
     // Apply global direction and font class
     const html = document.documentElement;
     if (language === "ar") {
-      html.setAttribute("dir", "rtl");
-      html.classList.add("font-cairo");
-      html.classList.remove("font-hero-light");
+      
     } else {
       html.setAttribute("dir", "ltr");
       html.classList.add("font-hero-light");
@@ -46,6 +44,11 @@ export function I18nLanguageProvider({ children }) {
       localStorage.setItem("language", lang);
     } catch {}
     i18n.changeLanguage(lang);
+
+    // Refresh the page after a short delay to ensure language change is applied
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   }, []);
 
   const isRtl = language === "ar";

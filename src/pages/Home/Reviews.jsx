@@ -5,55 +5,35 @@ import {
 } from "../../components/ui/ThreeDScrollTriggerRow";
 import quote from "../../assets/icons/quot.svg";
 import { useTheme } from "../../store/ThemeContext.jsx";
+import { useTranslation } from "react-i18next";
+import { useI18nLanguage } from "../../store/I18nLanguageContext.jsx";
 
 const Reviews = () => {
   const { theme } = useTheme();
+  const { t } = useTranslation();
+  const { isRtl } = useI18nLanguage();
   const lightBgs = ["#D4E6F4", "#E0DFFA", "#E8DCFD", "#F5D8ED"]; // light mode palette
-  const testimonials = [
-    {
-      name: "Sophia Martinez",
-      company: "Global Enterprises Ltd.",
-      avatar:
-        "https://i.pinimg.com/736x/84/8f/3b/848f3b92a3e2a6040faccad5888f851e.jpg",
-      text: "AtomWallet has completely transformed how we manage international payments. Transactions are fast, secure, and effortless.",
-    },
-    {
-      name: "David Lee",
-      company: "TechBridge Solutions",
-      avatar:
-        "https://i.pinimg.com/736x/84/8f/3b/848f3b92a3e2a6040faccad5888f851e.jpg",
-      text: "Sending money to partners abroad has never been this smooth. AtomWallet's real-time tracking gives us complete peace of mind.",
-    },
-    {
-      name: "Amira Hassan",
-      company: "FinEdge Capital",
-      avatar:
-        "https://i.pinimg.com/736x/84/8f/3b/848f3b92a3e2a6040faccad5888f851e.jpg",
-      text: "The security features are outstanding. Multi-layer protection ensures our business transactions remain private and protected.",
-    },
-    {
-      name: "Liam Anderson",
-      company: "Anderson Trading Co.",
-      avatar:
-        "https://i.pinimg.com/736x/84/8f/3b/848f3b92a3e2a6040faccad5888f851e.jpg",
-      text: "With AtomWallet, I can pay vendors and receive funds globally without worrying about hidden fees. Transparent and reliable!",
-    },
-    {
-      name: "Chen Wei",
-      company: "BrightPath Logistics",
-      avatar:
-        "https://i.pinimg.com/736x/84/8f/3b/848f3b92a3e2a6040faccad5888f851e.jpg",
-      text: "The interface is so intuitive. Within minutes, my team was making international payments without any training required.",
-    },
-  ];
+  const testimonials = t("home.reviews.testimonials", {
+    returnObjects: true,
+  }).map((testimonial) => ({
+    ...testimonial,
+    avatar:
+      "https://i.pinimg.com/736x/84/8f/3b/848f3b92a3e2a6040faccad5888f851e.jpg",
+  }));
   return (
-    <div className="reviews relative w-full md:min-h-screen font-hero-light py-10 md:py-20">
+    <div
+      className={`reviews relative w-full md:min-h-screen py-10 md:py-20 ${
+        isRtl ? "font-cairo" : "font-hero-light"
+      }`}
+    >
       <ThreeDScrollTriggerContainer>
         <ThreeDScrollTriggerRow baseVelocity={3} direction={1}>
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="flex gap-[23px] h-[180px] md:h-[300px] w-[320px] md:w-[600px] ml-[20px] p-2 md:p-7 rounded-xl text-[var(--foreground)] border border-white/15 dark:bg-white/10 backdrop-blur-md shadow-xl"
+              className={`flex gap-[23px] h-[180px] md:h-[300px] w-[320px] md:w-[600px] ml-[20px] p-2 md:p-7 rounded-xl text-[var(--foreground)] border border-white/15 dark:bg-white/10 backdrop-blur-md shadow-xl ${
+                isRtl ? "flex-row-reverse" : ""
+              }`}
               style={
                 theme === "dark"
                   ? undefined
@@ -69,16 +49,28 @@ const Reviews = () => {
               </div>
 
               <div className="content flex-col flex-1 justify-between w-full flex">
-                <p className="relative block text-wrap text-[14px] md:text-[24px] font-light">
+                <p
+                  className={`relative block text-wrap text-[14px] md:text-[24px] font-light ${
+                    isRtl ? "text-right" : "text-left"
+                  }`}
+                >
                   {testimonial.text}
                 </p>
-                <div className="user flex items-center">
+                <div
+                  className={`user flex items-center ${
+                    isRtl ? "flex-row-reverse" : ""
+                  }`}
+                >
                   <img
                     src={testimonial.avatar}
                     alt=""
                     className=" w-[31px] md:w-[75px] h-[31px] md:h-[75px] rounded-full "
                   />
-                  <div className="name-specialist flex flex-col ml-[20px]">
+                  <div
+                    className={`name-specialist flex flex-col ${
+                      isRtl ? "mr-[20px] text-right" : "ml-[20px] text-left"
+                    }`}
+                  >
                     <div className="text-[16px] md:text-[20px]">
                       {testimonial.name}
                     </div>
@@ -97,7 +89,9 @@ const Reviews = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="flex gap-[23px] h-[180px] md:h-[300px] w-[320px] md:w-[600px] ml-[20px] p-2 md:p-7 rounded-xl text-[var(--foreground)] border border-white/15 dark:bg-white/10 backdrop-blur-md shadow-xl"
+              className={`flex gap-[23px] h-[180px] md:h-[300px] w-[320px] md:w-[600px] ml-[20px] p-2 md:p-7 rounded-xl text-[var(--foreground)] border border-white/15 dark:bg-white/10 backdrop-blur-md shadow-xl ${
+                isRtl ? "flex-row-reverse" : ""
+              }`}
               style={
                 theme === "dark"
                   ? undefined
@@ -113,16 +107,28 @@ const Reviews = () => {
               </div>
 
               <div className="content flex-col flex-1 justify-between w-full flex">
-                <p className="relative block text-wrap text-[14px] md:text-[24px] font-light">
+                <p
+                  className={`relative block text-wrap text-[14px] md:text-[24px] font-light ${
+                    isRtl ? "text-right" : "text-left"
+                  }`}
+                >
                   {testimonial.text}
                 </p>
-                <div className="user flex items-center">
+                <div
+                  className={`user flex items-center ${
+                    isRtl ? "flex-row-reverse" : ""
+                  }`}
+                >
                   <img
                     src={testimonial.avatar}
                     alt=""
                     className=" w-[31px] md:w-[75px] h-[31px] md:h-[75px] rounded-full "
                   />
-                  <div className="name-specialist flex flex-col ml-[20px]">
+                  <div
+                    className={`name-specialist flex flex-col ${
+                      isRtl ? "mr-[20px] text-right" : "ml-[20px] text-left"
+                    }`}
+                  >
                     <div className="text-[16px] md:text-[20px]">
                       {testimonial.name}
                     </div>

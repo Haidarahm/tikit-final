@@ -59,7 +59,7 @@ const Hero = () => {
               colors={gradientColors}
               animationSpeed={5}
               showBorder={false}
-              className="text-[32px] md:text-[96px] leading-[40px] md:leading-[170px]  mb-8 capitalize font-bold"
+              className="text-[32px] mx-auto md:text-[96px] leading-[40px] md:leading-[170px]  mb-8 capitalize font-bold"
             >
               {t("contact.hero.subtitle")}
             </GradientText>

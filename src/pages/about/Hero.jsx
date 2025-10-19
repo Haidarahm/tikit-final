@@ -2,8 +2,13 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import InfiniteScroll from "../../components/InfiniteScroll";
+import { useTranslation } from "react-i18next";
+import { useI18nLanguage } from "../../store/I18nLanguageContext";
 
 const Hero = () => {
+  const { t } = useTranslation();
+  const { isRtl } = useI18nLanguage();
+
   useEffect(() => {
     AOS.init({
       duration: 3000,
@@ -29,18 +34,23 @@ const Hero = () => {
     { content: <p>Paragraph Item 14</p> },
   ];
   return (
-    <div data-scroll-section className="  flex flex-col">
+    <div
+      data-scroll-section
+      className={`flex flex-col ${isRtl ? "font-cairo" : "font-hero-light"}`}
+      dir={isRtl ? "rtl" : "ltr"}
+    >
       <div style={{ height: "500px", position: "relative" }}>
         <div className="overlay absolute h-full w-full bg-[var(--background)] opacity-50 z-20 "></div>
 
         <div
-          className="title z-30 w-full md:pl-[60px] text-[var(--foreground)] text-center md:text-start absolute text-[32px] md:text-[64px] capitalize  flex items-center  font-bold leading-[60px] h-full "
+          className={`title z-30 px-2 md:px-0 w-full md:w-3/4 text-[var(--foreground)] text-center md:text-start absolute text-[32px] md:text-[64px] capitalize flex items-center font-bold leading-[60px] h-full ${
+            isRtl ? "md:pr-[60px]" : "md:pl-[60px]"
+          }`}
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-delay="200"
         >
-          We are Tikit — a full-service <br className="hidden md:block" />{" "}
-          marketing agency
+          {t("about.hero.title")}
         </div>
         <InfiniteScroll
           items={items}
@@ -52,14 +62,16 @@ const Hero = () => {
           pauseOnHover={true}
         />
       </div>
-      <div className="description relative z-30 text-center md:text-start flex-1 flex md:flex-row flex-col text-[var(--foreground)] px-[20px] md:px-[60px] gap-4 md:gap-14 justify-center items-center">
-        <div className="title uppercase font-bold mt-4 md:mt-0 text-[20px] md:text-[34px] w-2/7 ">
-          About Us
+      <div
+        className={`description relative z-30 text-center md:text-start flex-1 flex md:flex-row flex-col text-[var(--foreground)] gap-4 md:gap-14 justify-center items-center px-[20px] ${
+          isRtl ? "md:pr-[60px]" : "md:pl-[60px]"
+        }`}
+      >
+        <div className="title uppercase font-bold mt-4 md:mt-0 text-[20px] md:text-[34px] w-2/7">
+          {t("about.hero.sectionTitle")}
         </div>
-        <div className="paragraph text-[16px] md:text-[28px] ">
-          Driven by insight and creativity: the story behind "Tikit" — a
-          regional agency powering brands, building trust, and delivering
-          results.
+        <div className="paragraph text-[16px] md:text-[28px]">
+          {t("about.hero.description")}
         </div>
       </div>
     </div>

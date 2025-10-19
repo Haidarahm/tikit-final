@@ -121,7 +121,12 @@
     },
     "about": {
         "title": "À propos",
-        "description": "Page à propos"
+        "description": "Page à propos",
+        "hero": {
+            "title": "Nous sommes Tikit — une agence marketing à service complet",
+            "sectionTitle": "À propos de nous",
+            "description": "Guidés par l'intuition et la créativité : l'histoire derrière \"Tikit\" — une agence régionale qui dynamise les marques, construit la confiance et livre des résultats."
+        }
     },
     "contact": {
         "title": "Contact",

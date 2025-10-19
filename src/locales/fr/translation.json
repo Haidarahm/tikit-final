@@ -184,6 +184,19 @@
             "email": "Email",
             "button": "Contactez-nous",
             "brandsTrust": "20+ Marques nous font confiance"
+        },
+        "animatedText": {
+            "line1": {
+                "text1": "Créativité",
+                "text2": "Portée Élevée",
+                "text3": "Agence SEO"
+            },
+            "line2": {
+                "text1": "Agence SEO",
+                "text2": "Portée Élevée",
+                "text3": "et",
+                "text4": "Agence SEO"
+            }
         }
     },
     "contact": {

@@ -184,6 +184,19 @@
             "email": "Email",
             "button": "Contact Us",
             "brandsTrust": "20+ Brands Trust Us"
+        },
+        "animatedText": {
+            "line1": {
+                "text1": "Creativity",
+                "text2": "High Reach",
+                "text3": "SEO Agency"
+            },
+            "line2": {
+                "text1": "SEO Agency",
+                "text2": "High Reach",
+                "text3": "y",
+                "text4": "SEO Agency"
+            }
         }
     },
     "contact": {

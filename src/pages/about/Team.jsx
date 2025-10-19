@@ -122,7 +122,7 @@ const Team = () => {
       className="relative overflow-visible md:overflow-hidden mt-[50px] text-white font-hero-light"
     >
       <div
-        className="flex flex-col md:flex-row relative md:h-[100vh]"
+        className="hidden md:flex flex-col md:flex-row relative md:h-[100vh]"
         data-scroll
         data-scroll-sticky
         data-scroll-target="#team-section"
@@ -169,6 +169,9 @@ const Team = () => {
           </div>
         </div>
       </div>
+      {/* 
+      mobile view
+      */}
     </div>
   );
 };

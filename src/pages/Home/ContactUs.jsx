@@ -4,6 +4,8 @@ import Hyperspeed from "../../components/Hyperspeed";
 import LogoLoop from "../../components/LogoLoop";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useTranslation } from "react-i18next";
+import { useI18nLanguage } from "../../store/I18nLanguageContext.jsx";
 import b1 from "../../assets/brands/1.svg";
 import b2 from "../../assets/brands/2.svg";
 import b3 from "../../assets/brands/3.svg";
@@ -24,6 +26,8 @@ const ContactUs = ({ className = "" }) => {
     setIsSecondSlide(slideNumber === 2);
   };
   const { theme } = useTheme();
+  const { t } = useTranslation();
+  const { isRtl } = useI18nLanguage();
 
   const gradientColors =
     theme === "light"
@@ -68,8 +72,11 @@ const ContactUs = ({ className = "" }) => {
   // "bg-[#F5F7FB] text-[var(--foreground)] border border-black/5"
   return (
     <div
-    data-scroll-section
-          className={`relative my-5 md:my-10 gap-3.5  overflow-hidden text-[var(--foreground)]  font-hero-light rounded-[25px] flex flex-col mx-auto py-[40px] md:py-[60px] px-[40px] md:px-[50px]  w-[95vw] bg-[#F5F7FB]  dark:bg-black ${className}`}
+      data-scroll-section
+      className={`relative my-5 md:my-10 gap-3.5  overflow-hidden text-[var(--foreground)] ${
+        isRtl ? "font-cairo" : "font-hero-light"
+      } rounded-[25px] flex flex-col mx-auto py-[40px] md:py-[60px] px-[40px] md:px-[50px]  w-[95vw] bg-[#F5F7FB]  dark:bg-black ${className}`}
+      dir={isRtl ? "rtl" : "ltr"}
     >
       <div className="email  w-full flex flex-col md:flex-row h-2/3 justify-between items-center md:items-stretch relative z-10 ">
         <div className="texts flex justify-between flex-col relative   ">
@@ -78,7 +85,7 @@ const ContactUs = ({ className = "" }) => {
             data-aos="fade-up"
             data-aos-delay="0"
           >
-            Kick it off with Tikit!
+            {t("home.contactUs.subtitle")}
           </h3>
           <GradientText
             // colors={["#07D9F5", "#06AEC4", "#4E7CC6", "#CE88C6", "#FB8DEF"]}
@@ -87,16 +94,16 @@ const ContactUs = ({ className = "" }) => {
             showBorder={false}
             className="title text-[32px] text-center md:text-start md:text-[70px] font-bold "
           >
-            Contact Us Now{" "}
+            {t("home.contactUs.title")}{" "}
           </GradientText>
 
           <p
-            className="description hidden md:block text-[16px] md:text-[24px] font-light w-full"
+            className="description  hidden md:block text-[16px] md:text-[24px] font-light w-full"
             data-aos="fade-up"
             data-aos-delay="300"
           >
-            We want to hear from you. let’s us know{" "}
-            <br className="hidden md:block" /> how we can help!
+            {t("home.contactUs.description")} <br className="hidden md:block" />{" "}
+            {t("home.contactUs.description2")}
           </p>
         </div>
         <div
@@ -105,12 +112,22 @@ const ContactUs = ({ className = "" }) => {
           data-aos-delay="0"
         >
           <div className="title text-center font-light md:font-medium md:text-start text-[20px] md:text-[24px]">
-            let’s us know how we can help!
+            {t("home.contactUs.helpText")}
           </div>
-          <div className="swiper-wrapper w-full border flex relative border-[var(--secondary)]  h-[50px] rounded-full">
+          <div
+            className={`swiper-wrapper w-full border flex ${
+              isRtl ? "flex-row-reverse" : ""
+            } relative border-[var(--secondary)]  h-[50px] rounded-full`}
+          >
             <div
               className={`move-item absolute  w-1/2 h-full bg-[var(--secondary)] rounded-full transition-all duration-300 ease-in-out ${
-                isSecondSlide ? "left-1/2" : "left-0"
+                isSecondSlide
+                  ? isRtl
+                    ? "right-0"
+                    : "left-1/2"
+                  : isRtl
+                  ? "right-1/2"
+                  : "left-0"
               }`}
             />
             <div
@@ -121,7 +138,7 @@ const ContactUs = ({ className = "" }) => {
               }`}
               onClick={() => handleSlideClick(1)}
             >
-              Client
+              {t("home.contactUs.client")}
             </div>
             <div
               className={`swiper-slide w-1/2 flex justify-center items-center relative z-10 cursor-pointer ${
@@ -131,25 +148,25 @@ const ContactUs = ({ className = "" }) => {
               }`}
               onClick={() => handleSlideClick(2)}
             >
-              Influencer
+              {t("home.contactUs.influencer")}
             </div>
           </div>
           <div className="inputs flex justify-between gap-[20px]">
             <FloatingInput
               id="name"
-              label="Name"
+              label={t("home.contactUs.name")}
               containerClassName="mt-8 flex-1 hidden md:block"
             />
             <FloatingInput
               id="email"
-              label="Email"
+              label={t("home.contactUs.email")}
               containerClassName="mt-8 flex-1"
             />
           </div>
           <button className="px-5 h-12 md:h-14 cursor-pointer relative col-span-1 sm:col-span-2 rounded-full group  font-medium bg-transparent text-[var(--secondary)] border border-[var(--secondary)] flex items-center justify-center transition-all hover:scale-105 overflow-hidden">
             <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out rounded-full transform translate-y-0 bg-[var(--secondary)]  group-hover:h-full opacity-90"></span>
             <span className="relative uppercase group-hover:text-[var(--background)]  text-sm md:text-base font-semibold">
-              Contact Us
+              {t("home.contactUs.button")}
             </span>
           </button>
         </div>
@@ -159,7 +176,7 @@ const ContactUs = ({ className = "" }) => {
           <div className="h-[1px] w-[42%] bg-gray-400"></div>
 
           <div className="title font-light text-[14px] text-center">
-            20+ Brands Trust Us
+            {t("home.contactUs.brandsTrust")}
           </div>
 
           <div className="h-[1px] w-[42%] bg-gray-400"></div>
@@ -176,11 +193,12 @@ const ContactUs = ({ className = "" }) => {
           <LogoLoop
             logos={imageLogos}
             speed={50}
-            direction="left"
+            direction={isRtl ? "right" : "left"}
             logoHeight={70}
             gap={150}
             pauseOnHover
             scaleOnHover
+            className={isRtl ? "flex-row-reverse" : ""}
             fadeOut
             fadeOutColor={theme === "light" ? "#F5F7FB" : "#000"}
             ariaLabel="Brand partners"

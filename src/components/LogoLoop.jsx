@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, memo } from "react";
+import { useI18nLanguage } from "../store/I18nLanguageContext.jsx";
 
 const ANIMATION_CONFIG = {
   SMOOTH_TAU: 0.25,

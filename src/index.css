@@ -314,3 +314,68 @@ body {
 footer .bottom-section .right-section .items li{
   cursor: pointer;
 }
+
+/* Goals Section Height Media Queries */
+/* .goals-section {
+  min-height: 100vh;
+}
+
+@media (max-width: 767px) {
+  .goals-section {
+    min-height: 100vh;
+  }
+  
+  .goals-section .container-goals > div {
+    min-height: 80vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .goals-section {
+    min-height: 100vh;
+  }
+  
+  .goals-section .scroll-stack-card {
+    height: 100vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .goals-section {
+    min-height: 100vh;
+  }
+  
+  .goals-section .scroll-stack-card {
+    height: 100vh;
+  }
+} */
+
+/* Extra large screens (1280px and up) */
+@media (min-width: 1280px) {
+  .goals-section {
+    min-height: 345vh;
+  }
+  
+  .goals-section .scroll-stack-card {
+    height: 65vh;
+  }
+}
+
+@media (min-width: 1380px) {
+  .goals-section {
+    min-height: 335vh;
+  }
+  
+  .goals-section .scroll-stack-card {
+    height: 65vh;
+  }
+}
+@media (min-width: 1480px) {
+  .goals-section {
+    min-height: 340vh;
+  }
+  
+  .goals-section .scroll-stack-card {
+    height: 65vh;
+  }
+}

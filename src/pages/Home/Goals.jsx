@@ -73,7 +73,7 @@ function Goals() {
     <div
       className={`section ${
         isRtl ? "font-cairo" : "font-hero-light"
-      } flex flex-col md:flex-row mx-auto md:h-[380vh]  z-10 w-full md:w-6/7`}
+      } flex flex-col md:flex-row mx-auto goals-section  z-10 w-full md:w-6/7`}
       dir={isRtl ? "rtl" : "ltr"}
     >
       <ScrollStack

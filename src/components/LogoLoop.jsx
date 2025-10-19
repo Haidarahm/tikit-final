@@ -79,7 +79,8 @@ const useAnimationLoop = (
   targetVelocity,
   seqWidth,
   isHovered,
-  pauseOnHover
+  pauseOnHover,
+  isRtl = false
 ) => {
   const rafRef = useRef(null);
   const lastTimestampRef = useRef(null);
@@ -98,7 +99,8 @@ const useAnimationLoop = (
     if (seqWidth > 0) {
       offsetRef.current =
         ((offsetRef.current % seqWidth) + seqWidth) % seqWidth;
-      track.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
+      const translateX = isRtl ? offsetRef.current : -offsetRef.current;
+      track.style.transform = `translate3d(${translateX}px, 0, 0)`;
     }
 
     if (prefersReduced) {
@@ -128,7 +130,7 @@ const useAnimationLoop = (
         nextOffset = ((nextOffset % seqWidth) + seqWidth) % seqWidth;
         offsetRef.current = nextOffset;
 
-        const translateX = -offsetRef.current;
+        const translateX = isRtl ? offsetRef.current : -offsetRef.current;
         track.style.transform = `translate3d(${translateX}px, 0, 0)`;
       }
 
@@ -163,6 +165,7 @@ export const LogoLoop = memo(
     className,
     style,
   }) => {
+    const { isRtl } = useI18nLanguage();
     const containerRef = useRef(null);
     const trackRef = useRef(null);
     const seqRef = useRef(null);
@@ -189,10 +192,12 @@ export const LogoLoop = memo(
 
     const targetVelocity = useMemo(() => {
       const magnitude = Math.abs(speed);
-      const directionMultiplier = direction === "left" ? 1 : -1;
+      // For RTL, we need to reverse the direction to maintain proper looping
+      const effectiveDirection = isRtl ? "right" : direction;
+      const directionMultiplier = effectiveDirection === "left" ? 1 : -1;
       const speedMultiplier = speed < 0 ? -1 : 1;
       return magnitude * directionMultiplier * speedMultiplier;
-    }, [speed, direction]);
+    }, [speed, direction, isRtl]);
 
     const updateDimensions = useCallback(() => {
       const containerWidth = containerRef.current?.clientWidth ?? 0;
@@ -221,7 +226,8 @@ export const LogoLoop = memo(
       targetVelocity,
       seqWidth,
       isHovered,
-      pauseOnHover
+      pauseOnHover,
+      isRtl
     );
 
     const cssVariables = useMemo(

@@ -6,6 +6,35 @@
         "services": "Services",
         "contact": "Contact Us"
     },
+    "seo": {
+        "defaultDescription": "We are Tikit — a full-service marketing agency driven by insight and creativity. Partnering with brands to deliver results through expert strategy, creative firepower, and flawless execution.",
+        "defaultKeywords": "marketing agency, digital marketing, influencer marketing, social media management, branding, production, creative agency, marketing strategy",
+        "home": {
+            "title": "Tikit Agency - Full-Service Marketing Agency",
+            "description": "ROI-focused marketing agency delivering expert strategy, creative firepower, and flawless execution. Partner with Tikit for influencer marketing, social media management, branding, and production services.",
+            "keywords": "marketing agency, ROI marketing, influencer marketing, social media management, branding, production, creative agency, digital marketing strategy"
+        },
+        "about": {
+            "title": "About Tikit Agency - Our Story & Team",
+            "description": "Learn about Tikit Agency's journey as a full-service marketing agency. Discover our creative team, company values, and commitment to delivering exceptional results for our clients.",
+            "keywords": "about tikit agency, marketing agency team, creative team, company story, marketing agency values"
+        },
+        "services": {
+            "title": "Our Marketing Services - Tikit Agency",
+            "description": "Explore Tikit Agency's comprehensive marketing services including influencer marketing, social media management, branding, and production. Expert strategy and creative execution.",
+            "keywords": "marketing services, influencer marketing services, social media management, branding services, production services, marketing strategy"
+        },
+        "work": {
+            "title": "Our Work & Case Studies - Tikit Agency",
+            "description": "View Tikit Agency's portfolio of successful marketing campaigns and case studies. See how we've helped brands achieve their marketing goals through creative strategy.",
+            "keywords": "marketing portfolio, case studies, marketing campaigns, brand success stories, marketing results"
+        },
+        "contact": {
+            "title": "Contact Tikit Agency - Get Started Today",
+            "description": "Ready to elevate your brand? Contact Tikit Agency for expert marketing services. Get in touch with our team of marketing professionals and start your journey to success.",
+            "keywords": "contact marketing agency, get marketing quote, marketing consultation, brand consultation, marketing services inquiry"
+        }
+    },
     "home": {
         "title": "Home",
         "description": "Home page",

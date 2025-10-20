@@ -6,6 +6,35 @@
         "services": "Services",
         "contact": "Contactez-nous"
     },
+    "seo": {
+        "defaultDescription": "Nous sommes Tikit — une agence de marketing complète guidée par l'insight et la créativité. Nous nous associons aux marques pour livrer des résultats grâce à une stratégie experte, une puissance créative et une exécution impeccable.",
+        "defaultKeywords": "agence marketing, marketing numérique, marketing d'influence, gestion des médias sociaux, branding, production, agence créative, stratégie marketing",
+        "home": {
+            "title": "Agence Tikit - Agence de Marketing Complète",
+            "description": "Agence de marketing axée sur le ROI livrant une stratégie experte, une puissance créative et une exécution impeccable. Partenaire avec Tikit pour le marketing d'influence, la gestion des médias sociaux, le branding et la production.",
+            "keywords": "agence marketing, marketing ROI, marketing d'influence, gestion des médias sociaux, branding, production, agence créative, stratégie marketing numérique"
+        },
+        "about": {
+            "title": "À propos de l'Agence Tikit - Notre Histoire et Équipe",
+            "description": "Découvrez le parcours de l'Agence Tikit en tant qu'agence de marketing complète. Découvrez notre équipe créative, les valeurs de l'entreprise et notre engagement à livrer des résultats exceptionnels à nos clients.",
+            "keywords": "à propos agence tik, équipe agence marketing, équipe créative, histoire entreprise, valeurs agence marketing"
+        },
+        "services": {
+            "title": "Nos Services Marketing - Agence Tikit",
+            "description": "Explorez les services marketing complets de l'Agence Tikit incluant le marketing d'influence, la gestion des médias sociaux, le branding et la production. Stratégie experte et exécution créative.",
+            "keywords": "services marketing, services marketing d'influence, gestion des médias sociaux, services branding, services production, stratégie marketing"
+        },
+        "work": {
+            "title": "Nos Travaux et Études de Cas - Agence Tikit",
+            "description": "Consultez le portfolio de l'Agence Tikit de campagnes marketing réussies et d'études de cas. Voyez comment nous avons aidé les marques à atteindre leurs objectifs marketing grâce à une stratégie créative.",
+            "keywords": "portfolio marketing, études de cas, campagnes marketing, histoires de succès de marques, résultats marketing"
+        },
+        "contact": {
+            "title": "Contactez l'Agence Tikit - Commencez Aujourd'hui",
+            "description": "Prêt à élever votre marque ? Contactez l'Agence Tikit pour des services marketing experts. Entrez en contact avec notre équipe de professionnels du marketing et commencez votre parcours vers le succès.",
+            "keywords": "contacter agence marketing, obtenir devis marketing, consultation marketing, consultation marque, demande services marketing"
+        }
+    },
     "home": {
         "title": "Accueil",
         "description": "Page d'accueil",

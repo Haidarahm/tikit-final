@@ -28,8 +28,8 @@ const Contact = lazy(() => import("./pages/contact/Contact"));
 const LoadingSpinner = () => <Loader />;
 
 const Layout = () => (
- <>
- <ScrollToTop />
+  <>
+    <ScrollToTop />
     <AOSRefresher />
     <div className="relative w-full">
       <Navbar />
@@ -37,8 +37,7 @@ const Layout = () => (
         <Outlet />
       </div>
     </div>
- </>
-    
+  </>
 );
 
 function App() {
@@ -47,13 +46,9 @@ function App() {
   }, []);
   return (
     <ThemeProvider>
-      {/* LogoIntro rendered outside Suspense */}
-      <Routes>
-        <Route path="/" element={<LogoIntro />} />
-      </Routes>
-      {/* Lazy-loaded routes inside Suspense */}
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
+          <Route path="/" element={<LogoIntro />} />
           <Route element={<Layout />}>
             <Route path="/home" element={<Home />} />
             <Route path="/work" element={<Work />} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import StickyPinnedSection from "../../components/ui/StickyPinnedSection";
 import { useWorkStore } from "../../store/workStore";
 import { useI18nLanguage } from "../../store/I18nLanguageContext.jsx";
@@ -16,16 +16,27 @@ export default function WorkSection() {
     nextPage,
     prevPage,
     getPagedWorks,
+    error,
   } = useWorkStore();
   const { language, isRtl } = useI18nLanguage();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure we're on the client side before making API calls
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
-    loadWorks({ lang: language, page, per_page: pageSize });
-  }, [loadWorks, page, pageSize, language]);
+    if (isClient) {
+      loadWorks({ lang: language, page, per_page: pageSize });
+    }
+  }, [loadWorks, page, pageSize, language, isClient]);
 
   const items = useMemo(() => {
+    if (!isClient) return []; // Return empty array during SSR
+    
     const source = getPagedWorks ? getPagedWorks() : (works || []).slice(0, 3);
     return (source || []).map((w) => ({
       id: w.id,
@@ -41,7 +52,39 @@ export default function WorkSection() {
         />
       ) : null,
     }));
-  }, [works, getPagedWorks]);
+  }, [works, getPagedWorks, isClient]);
+
+  // Show loading state during initial load
+  if (!isClient || loading) {
+    return (
+      <div className="section my-6 md:my-16 relative flex flex-col mx-auto z-10 w-full justify-center">
+        <div className="headline mb-4 px-6 md:px-10 flex w-full justify-between items-center">
+          <h1 className="text-[var(--foreground)] md:text-center font-bold text-[18px] md:text-[32px]">
+            {t("home.work.title")}
+          </h1>
+        </div>
+        <div className="flex justify-center items-center h-64">
+          <div className="text-[var(--foreground)]">Loading...</div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state if API call failed
+  if (error) {
+    return (
+      <div className="section my-6 md:my-16 relative flex flex-col mx-auto z-10 w-full justify-center">
+        <div className="headline mb-4 px-6 md:px-10 flex w-full justify-between items-center">
+          <h1 className="text-[var(--foreground)] md:text-center font-bold text-[18px] md:text-[32px]">
+            {t("home.work.title")}
+          </h1>
+        </div>
+        <div className="flex justify-center items-center h-64">
+          <div className="text-red-500">Error loading works: {error}</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

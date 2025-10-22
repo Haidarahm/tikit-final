@@ -1,14 +1,11 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useI18nLanguage } from "../../store/I18nLanguageContext";
 import { useTheme } from "../../store/ThemeContext";
-import { useTranslation } from "react-i18next";
 import { FaInstagram, FaYoutube, FaTiktok, FaTwitter } from "react-icons/fa";
 import influencer from "../../assets/influncer/1.png";
 import overlay from "../../assets/tick-overlay.png";
 import overlayDark from "../../assets/tick-overlay-dark.png";
-gsap.registerPlugin(ScrollTrigger);
 
 // Social Media Icons Component
 const SocialIcon = ({ icon: Icon, href }) => {
@@ -44,167 +41,110 @@ export const InfluencerDetails = ({
 
   const { isRtl } = useI18nLanguage();
   const { theme } = useTheme();
-  const { t } = useTranslation();
 
-  useLayoutEffect(() => {
+  // Set initial hidden states and trigger animations when section comes into view
+  useEffect(() => {
     if (!containerRef.current) return;
 
-    // Clean up any existing ScrollTrigger instances for this component
-    ScrollTrigger.getAll().forEach((trigger) => {
-      if (
-        trigger.trigger === containerRef.current ||
-        trigger.trigger === nameRef.current ||
-        trigger.trigger === subtitleRef.current ||
-        trigger.trigger === socialRef.current ||
-        trigger.trigger === imageRef.current
-      ) {
-        trigger.kill();
-      }
-    });
+    // Set initial hidden states for all elements
+    gsap.set(containerRef.current, { opacity: 0, y: 50 });
+    if (nameRef.current)
+      gsap.set(nameRef.current, { opacity: 0, y: 100, scale: 0.8 });
+    if (subtitleRef.current)
+      gsap.set(subtitleRef.current, {
+        opacity: 0,
+        x: isRtl ? 50 : -50,
+        filter: "blur(10px)",
+      });
+    if (socialRef.current) gsap.set(socialRef.current, { opacity: 0, y: 20 });
+    if (imageRef.current)
+      gsap.set(imageRef.current, {
+        opacity: 0,
+        scale: 1.1,
+        filter: "blur(20px)",
+      });
 
-    const ctx = gsap.context(() => {
-      // Main container animation
-      gsap.fromTo(
-        containerRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-            fastScrollEnd: true,
-          },
-        }
-      );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Trigger animations when section comes into view
+            const tl = gsap.timeline();
 
-      // Name animation
-      if (nameRef.current) {
-        gsap.fromTo(
-          nameRef.current,
-          {
-            opacity: 0,
-            y: 100,
-            scale: 0.8,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 1.2,
-            ease: "power3.out",
-            delay: 0.2,
-            scrollTrigger: {
-              trigger: nameRef.current,
-              start: "top 85%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse",
-              invalidateOnRefresh: true,
-              fastScrollEnd: true,
-            },
+            // Main container animation
+            tl.to(containerRef.current, {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: "power2.out",
+            });
+
+            // Name animation
+            if (nameRef.current) {
+              tl.to(
+                nameRef.current,
+                {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  duration: 1.2,
+                  ease: "power3.out",
+                },
+                "-=0.8"
+              );
+            }
+
+            // Subtitle animation
+            if (subtitleRef.current) {
+              tl.to(
+                subtitleRef.current,
+                {
+                  opacity: 1,
+                  x: 0,
+                  filter: "blur(0px)",
+                  duration: 1,
+                  ease: "power2.out",
+                },
+                "-=0.6"
+              );
+            }
+
+            // Social media animation
+            if (socialRef.current) {
+              tl.to(
+                socialRef.current,
+                { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+                "-=0.4"
+              );
+            }
+
+            // Image animation
+            if (imageRef.current) {
+              tl.to(
+                imageRef.current,
+                {
+                  opacity: 1,
+                  scale: 1,
+                  filter: "blur(0px)",
+                  duration: 1.5,
+                  ease: "power2.out",
+                },
+                "-=1.2"
+              );
+            }
+
+            // Disconnect observer after animation triggers
+            observer.disconnect();
           }
-        );
-      }
+        });
+      },
+      { threshold: 0.3 }
+    );
 
-      // Subtitle animation
-      if (subtitleRef.current) {
-        gsap.fromTo(
-          subtitleRef.current,
-          {
-            opacity: 0,
-            x: isRtl ? 50 : -50,
-            filter: "blur(10px)",
-          },
-          {
-            opacity: 1,
-            x: 0,
-            filter: "blur(0px)",
-            duration: 1,
-            ease: "power2.out",
-            delay: 0.4,
-            scrollTrigger: {
-              trigger: subtitleRef.current,
-              start: "top 85%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse",
-              invalidateOnRefresh: true,
-              fastScrollEnd: true,
-            },
-          }
-        );
-      }
-
-      // Social media animation (container only, no per-icon stagger)
-      if (socialRef.current) {
-        gsap.fromTo(
-          socialRef.current,
-          { opacity: 0, y: 20 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-            delay: 0.6,
-            scrollTrigger: {
-              trigger: socialRef.current,
-              start: "top 85%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse",
-              invalidateOnRefresh: true,
-              fastScrollEnd: true,
-            },
-          }
-        );
-      }
-
-      // Image animation
-      if (imageRef.current) {
-        gsap.fromTo(
-          imageRef.current,
-          {
-            opacity: 0,
-            scale: 1.1,
-            filter: "blur(20px)",
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            filter: "blur(0px)",
-            duration: 1.5,
-            ease: "power2.out",
-            delay: 0.3,
-            scrollTrigger: {
-              trigger: imageRef.current,
-              start: "top 80%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse",
-              invalidateOnRefresh: true,
-              fastScrollEnd: true,
-            },
-          }
-        );
-      }
-    });
+    observer.observe(containerRef.current);
 
     return () => {
-      ctx.revert();
-      // Additional cleanup for ScrollTrigger instances
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (
-          trigger.trigger === containerRef.current ||
-          trigger.trigger === nameRef.current ||
-          trigger.trigger === subtitleRef.current ||
-          trigger.trigger === socialRef.current ||
-          trigger.trigger === imageRef.current
-        ) {
-          trigger.kill();
-        }
-      });
+      observer.disconnect();
     };
   }, [isRtl, theme]);
 

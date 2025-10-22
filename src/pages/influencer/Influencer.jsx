@@ -60,7 +60,7 @@ export const Influencer = () => {
   ];
 
   return (
-    <div className="influencers-section snap-y snap-proximity w-full">
+    <div className="influencers-section w-full">
       <Hero />
       {influencersData.map((influencer) => (
         <InfluencerDetails

@@ -1,5 +1,4 @@
-import React, { useRef, useEffect } from "react";
-import { gsap } from "gsap";
+import React, { useRef } from "react";
 import { useI18nLanguage } from "../../store/I18nLanguageContext";
 import { useTheme } from "../../store/ThemeContext";
 import { FaInstagram, FaYoutube, FaTiktok, FaTwitter } from "react-icons/fa";
@@ -33,125 +32,12 @@ export const InfluencerDetails = ({
     { platform: "twitter", href: "https://twitter.com/sarahjohnson" },
   ],
 }) => {
-  const nameRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const socialRef = useRef(null);
-  const imageRef = useRef(null);
-  const containerRef = useRef(null);
-
   const { isRtl } = useI18nLanguage();
   const { theme } = useTheme();
 
-  // Set initial hidden states and trigger animations when section comes into view
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    // Set initial hidden states for all elements
-    gsap.set(containerRef.current, { opacity: 0, y: 50 });
-    if (nameRef.current)
-      gsap.set(nameRef.current, { opacity: 0, y: 100, scale: 0.8 });
-    if (subtitleRef.current)
-      gsap.set(subtitleRef.current, {
-        opacity: 0,
-        x: isRtl ? 50 : -50,
-        filter: "blur(10px)",
-      });
-    if (socialRef.current) gsap.set(socialRef.current, { opacity: 0, y: 20 });
-    if (imageRef.current)
-      gsap.set(imageRef.current, {
-        opacity: 0,
-        scale: 1.1,
-        filter: "blur(20px)",
-      });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Trigger animations when section comes into view
-            const tl = gsap.timeline();
-
-            // Main container animation
-            tl.to(containerRef.current, {
-              opacity: 1,
-              y: 0,
-              duration: 1,
-              ease: "power2.out",
-            });
-
-            // Name animation
-            if (nameRef.current) {
-              tl.to(
-                nameRef.current,
-                {
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  duration: 1.2,
-                  ease: "power3.out",
-                },
-                "-=0.8"
-              );
-            }
-
-            // Subtitle animation
-            if (subtitleRef.current) {
-              tl.to(
-                subtitleRef.current,
-                {
-                  opacity: 1,
-                  x: 0,
-                  filter: "blur(0px)",
-                  duration: 1,
-                  ease: "power2.out",
-                },
-                "-=0.6"
-              );
-            }
-
-            // Social media animation
-            if (socialRef.current) {
-              tl.to(
-                socialRef.current,
-                { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-                "-=0.4"
-              );
-            }
-
-            // Image animation
-            if (imageRef.current) {
-              tl.to(
-                imageRef.current,
-                {
-                  opacity: 1,
-                  scale: 1,
-                  filter: "blur(0px)",
-                  duration: 1.5,
-                  ease: "power2.out",
-                },
-                "-=1.2"
-              );
-            }
-
-            // Disconnect observer after animation triggers
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(containerRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [isRtl, theme]);
-
   return (
     <section
-      ref={containerRef}
-      className={`snap-start snap-always overflow-hidden w-full min-h-screen flex flex-col lg:flex-row items-center gap-8 md:gap-16 lg:gap-24 xl:gap-32 py-8 md:py-12 px-4 md:px-8 lg:px-14 ${
+      className={`overflow-hidden w-full min-h-screen flex flex-col lg:flex-row items-center gap-8 md:gap-16 lg:gap-24 xl:gap-32 py-8 md:py-12 px-4 md:px-8 lg:px-14 ${
         isRtl ? "font-cairo" : "font-hero-light"
       }`}
       dir={isRtl ? "rtl" : "ltr"}
@@ -160,32 +46,23 @@ export const InfluencerDetails = ({
       <div className="flex-1 flex flex-col justify-center space-y-6 md:space-y-8 lg:space-y-10">
         {/* Name */}
         <div className="space-y-2">
-          <h1
-            ref={nameRef}
-            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-[var(--foreground)] leading-tight"
-          >
+          <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-[var(--foreground)] leading-tight">
             {name}
           </h1>
         </div>
 
         {/* Subtitle */}
         <div className="space-y-4">
-          <h2
-            ref={subtitleRef}
-            className="text-xl md:text-2xl lg:text-3xl text-[var(--secondary)] font-medium"
-          >
+          <h2 className="text-xl md:text-2xl lg:text-3xl text-[var(--secondary)] font-medium">
             {primarySubtitle}
           </h2>
-          <h3
-            ref={subtitleRef}
-            className="text-lg md:text-xl lg:text-2xl text-[var(--foreground)]/80 font-light"
-          >
+          <h3 className="text-lg md:text-xl lg:text-2xl text-[var(--foreground)]/80 font-light">
             {secondarySubtitle}
           </h3>
         </div>
 
         {/* Social Media Links */}
-        <div ref={socialRef} className="flex flex-wrap gap-4 md:gap-6">
+        <div className="flex flex-wrap gap-4 md:gap-6">
           {socialLinks.map((social, index) => {
             const getIcon = (platform) => {
               switch (platform) {
@@ -214,20 +91,17 @@ export const InfluencerDetails = ({
       </div>
 
       {/* Right Image */}
-      <div
-        ref={imageRef}
-        className="relative  flex justify-end flex-1  h-[200px] md:h-[300px] lg:h-[400px] xl:h-[500px] rounded-2xl "
-      >
+      <div className="relative flex justify-end flex-1 h-[200px] md:h-[300px] lg:h-[400px] xl:h-[500px] rounded-2xl">
         <img
           src={image}
           alt={`${name} - ${primarySubtitle}`}
-          className="w-[90%] h-full px-8 "
+          className="w-[90%] h-full px-8"
           loading="lazy"
         />
         <img
           src={theme === "dark" ? overlayDark : overlay}
           alt="overlay"
-          className="absolute bottom-4 md:-bottom-2  right-0 md:h-2/3 w-[90%]"
+          className="absolute bottom-4 md:-bottom-2 right-0 md:h-2/3 w-[90%]"
         />
       </div>
     </section>

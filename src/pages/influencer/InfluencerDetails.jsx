@@ -1,10 +1,15 @@
-import React, { useRef } from "react";
+import React, { useRef, useLayoutEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useI18nLanguage } from "../../store/I18nLanguageContext";
 import { useTheme } from "../../store/ThemeContext";
 import { FaInstagram, FaYoutube, FaTiktok, FaTwitter } from "react-icons/fa";
 import influencer from "../../assets/influncer/1.png";
 import overlay from "../../assets/tick-overlay.png";
 import overlayDark from "../../assets/tick-overlay-dark.png";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 // Social Media Icons Component
 const SocialIcon = ({ icon: Icon, href }) => {
@@ -35,8 +40,90 @@ export const InfluencerDetails = ({
   const { isRtl } = useI18nLanguage();
   const { theme } = useTheme();
 
+  // Refs for GSAP animations
+  const sectionRef = useRef(null);
+  const nameRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const socialRef = useRef(null);
+  const imageRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Set initial states
+      gsap.set(nameRef.current, {
+        opacity: 0,
+        x: -100,
+        rotation: -10,
+      });
+      gsap.set([subtitleRef.current, socialRef.current, imageRef.current], {
+        opacity: 0,
+        y: 50,
+        scale: 0.8,
+      });
+
+      // Create timeline for animations
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+          invalidateOnRefresh: true,
+          fastScrollEnd: true,
+        },
+      });
+
+      // Animate elements in sequence
+      tl.to(nameRef.current, {
+        opacity: 1,
+        x: 0,
+        rotation: 0,
+        duration: 1.2,
+        ease: "back.out(1.7)",
+      })
+        .to(
+          imageRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.6"
+        )
+        .to(
+          subtitleRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        )
+        .to(
+          socialRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.3"
+        );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [theme]);
+
   return (
     <section
+      ref={sectionRef}
       className={`overflow-hidden w-full min-h-screen flex flex-col lg:flex-row items-center gap-8 md:gap-16 lg:gap-24 xl:gap-32 py-8 md:py-12 px-4 md:px-8 lg:px-14 ${
         isRtl ? "font-cairo" : "font-hero-light"
       }`}
@@ -46,13 +133,16 @@ export const InfluencerDetails = ({
       <div className="flex-1 flex flex-col justify-center space-y-6 md:space-y-8 lg:space-y-10">
         {/* Name */}
         <div className="space-y-2">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-[var(--foreground)] leading-tight">
+          <h1
+            ref={nameRef}
+            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-[var(--foreground)] leading-tight"
+          >
             {name}
           </h1>
         </div>
 
         {/* Subtitle */}
-        <div className="space-y-4">
+        <div ref={subtitleRef} className="space-y-4">
           <h2 className="text-xl md:text-2xl lg:text-3xl text-[var(--secondary)] font-medium">
             {primarySubtitle}
           </h2>
@@ -62,7 +152,7 @@ export const InfluencerDetails = ({
         </div>
 
         {/* Social Media Links */}
-        <div className="flex flex-wrap gap-4 md:gap-6">
+        <div ref={socialRef} className="flex flex-wrap gap-4 md:gap-6">
           {socialLinks.map((social, index) => {
             const getIcon = (platform) => {
               switch (platform) {
@@ -91,7 +181,10 @@ export const InfluencerDetails = ({
       </div>
 
       {/* Right Image */}
-      <div className="relative flex justify-end flex-1 h-[200px] md:h-[300px] lg:h-[400px] xl:h-[500px] rounded-2xl">
+      <div
+        ref={imageRef}
+        className="relative flex justify-end flex-1 h-[200px] md:h-[300px] lg:h-[400px] xl:h-[500px] rounded-2xl"
+      >
         <img
           src={image}
           alt={`${name} - ${primarySubtitle}`}

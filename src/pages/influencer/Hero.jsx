@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
 import GradientText from "../../components/GradientText";
 import { useTheme } from "../../store/ThemeContext";
 import { useTranslation } from "react-i18next";
 import { useI18nLanguage } from "../../store/I18nLanguageContext";
 
 const Hero = () => {
+  const h1WrapRef = useRef(null);
+  const h1Ref = useRef(null);
+  const h2WrapRef = useRef(null);
+  const h2Ref = useRef(null);
   const { theme } = useTheme();
   const { t } = useTranslation();
   const { isRtl } = useI18nLanguage();
+
+  useLayoutEffect(() => {
+    if (!h1Ref.current || !h2Ref.current) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        h1Ref.current,
+        { y: "150%", autoAlpha: 1 },
+        { y: 0, duration: 0.9, ease: "power2.out", delay: 0.1 }
+      );
+      gsap.fromTo(
+        h2Ref.current,
+        { y: "150%", autoAlpha: 1 },
+        { y: 0, duration: 1, ease: "power2.out", delay: 0.3 }
+      );
+    });
+    return () => ctx.revert();
+  }, []);
 
   const gradientColors =
     theme === "light"
@@ -22,13 +44,16 @@ const Hero = () => {
       dir={isRtl ? "rtl" : "ltr"}
     >
       <div className="text-center mt-[104px]">
-        <div className="overflow-hidden">
-          <h1 className="text-[32px] md:text-[70px] leading-[40px] capitalize py-2">
+        <div ref={h1WrapRef} className="overflow-hidden">
+          <h1
+            ref={h1Ref}
+            className="text-[32px] md:text-[70px] leading-[40px] capitalize py-2 will-change-transform translate-y-full"
+          >
             Showcase of Partner
           </h1>
         </div>
-        <div className="overflow-hidden">
-          <div>
+        <div ref={h2WrapRef} className="overflow-hidden">
+          <div ref={h2Ref} className="will-change-transform translate-y-full">
             <GradientText
               colors={gradientColors}
               animationSpeed={5}

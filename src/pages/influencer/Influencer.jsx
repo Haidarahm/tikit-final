@@ -7,6 +7,7 @@ export const Influencer = () => {
     <div className='influencers-section  snap-mandatory snap-y w-full '>
       <Hero />
       <InfluencerDetails/>
+      <InfluencerDetails/>
     </div>
   )
 }

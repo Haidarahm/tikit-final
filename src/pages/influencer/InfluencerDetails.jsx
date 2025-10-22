@@ -36,6 +36,7 @@ export const InfluencerDetails = ({
     { platform: "tiktok", href: "https://tiktok.com/@sarahjohnson" },
     { platform: "twitter", href: "https://twitter.com/sarahjohnson" },
   ],
+  isReversed = false,
 }) => {
   const { isRtl } = useI18nLanguage();
   const { theme } = useTheme();
@@ -51,11 +52,11 @@ export const InfluencerDetails = ({
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Set initial states
+      // Set initial states based on isReversed
       gsap.set(nameRef.current, {
         opacity: 0,
-        x: -100,
-        rotation: -10,
+        x: isReversed ? 100 : -100,
+        rotation: isReversed ? 10 : -10,
       });
       gsap.set([subtitleRef.current, socialRef.current, imageRef.current], {
         opacity: 0,
@@ -119,17 +120,17 @@ export const InfluencerDetails = ({
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [theme]);
+  }, [theme, isReversed]);
 
   return (
     <section
       ref={sectionRef}
       className={`overflow-hidden w-full min-h-screen flex flex-col lg:flex-row items-center gap-8 md:gap-16 lg:gap-24 xl:gap-32 py-8 md:py-12 px-4 md:px-8 lg:px-14 ${
         isRtl ? "font-cairo" : "font-hero-light"
-      }`}
+      } ${isReversed ? "lg:flex-row-reverse" : ""}`}
       dir={isRtl ? "rtl" : "ltr"}
     >
-      {/* Left Content */}
+      {/* Content Section */}
       <div className="flex-1 flex flex-col justify-center space-y-6 md:space-y-8 lg:space-y-10">
         {/* Name */}
         <div className="space-y-2">
@@ -180,10 +181,12 @@ export const InfluencerDetails = ({
         </div>
       </div>
 
-      {/* Right Image */}
+      {/* Image Section */}
       <div
         ref={imageRef}
-        className="relative flex justify-end flex-1 h-[200px] md:h-[300px] lg:h-[400px] xl:h-[500px] rounded-2xl"
+        className={`relative flex flex-1 h-[200px] md:h-[300px] lg:h-[400px] xl:h-[500px] rounded-2xl ${
+          isReversed ? "justify-start" : "justify-end"
+        }`}
       >
         <img
           src={image}
@@ -194,7 +197,9 @@ export const InfluencerDetails = ({
         <img
           src={theme === "dark" ? overlayDark : overlay}
           alt="overlay"
-          className="absolute bottom-4 md:-bottom-2 right-0 md:h-2/3 w-[90%]"
+          className={`absolute bottom-4 md:-bottom-2 md:h-2/3 w-[90%] ${
+            isReversed ? "left-0" : "right-0"
+          }`}
         />
       </div>
     </section>

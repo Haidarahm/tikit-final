@@ -62,7 +62,7 @@ export const Influencer = () => {
   return (
     <div className="influencers-section w-full">
       <Hero />
-      {influencersData.map((influencer) => (
+      {influencersData.map((influencer, index) => (
         <InfluencerDetails
           key={influencer.id}
           name={influencer.name}
@@ -70,6 +70,7 @@ export const Influencer = () => {
           secondarySubtitle={influencer.secondarySubtitle}
           image={influencer.image}
           socialLinks={influencer.socialLinks}
+          isReversed={index % 2 === 1}
         />
       ))}
     </div>

@@ -36,7 +36,7 @@ export default function WorkSection() {
 
   const items = useMemo(() => {
     if (!isClient) return []; // Return empty array during SSR
-    
+
     const source = getPagedWorks ? getPagedWorks() : (works || []).slice(0, 3);
     return (source || []).map((w) => ({
       id: w.id,
@@ -88,21 +88,22 @@ export default function WorkSection() {
 
   return (
     <>
-      <div
-        className={`relative hidden md:block h-[540vh] z-10 w-full overflow-visible text-[var(--foreground)] ${
-          isRtl ? "font-cairo" : "font-hero-light"
-        }`}
-        dir={isRtl ? "rtl" : "ltr"}
-      >
-        <StickyPinnedSection items={items} heightPerItemVh={150} />
-      </div>
+      {items && items.length > 0 && (
+        <div
+          className={`relative hidden md:block z-10 w-full overflow-visible text-[var(--foreground)] ${
+            isRtl ? "font-cairo" : "font-hero-light"
+          }`}
+          dir={isRtl ? "rtl" : "ltr"}
+        >
+          <StickyPinnedSection items={items} heightPerItemVh={100} />
+        </div>
+      )}
       <div
         className={`mobile-view gap-[30px] md:hidden relative text-[var(--foreground)] flex flex-col w-full px-[20px] ${
           isRtl ? "font-cairo" : "font-hero-light"
         }`}
         dir={isRtl ? "rtl" : "ltr"}
       >
-      
         <div className="main-content w-full flex flex-col gap-[20px] mt-16">
           {(items || []).map((item, index) => (
             <div

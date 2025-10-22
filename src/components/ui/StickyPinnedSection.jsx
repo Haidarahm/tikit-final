@@ -33,7 +33,15 @@ export default function StickyPinnedSection({
     const el = sectionRef.current;
     if (!el || !count) return;
 
-    const pinDistance = window.innerHeight * (count * (heightPerItemVh / 100));
+    // Clean up any existing ScrollTrigger instances for this element
+    ScrollTrigger.getAll().forEach((trigger) => {
+      if (trigger.trigger === el) {
+        trigger.kill();
+      }
+    });
+
+    const pinDistance =
+      window.innerHeight * Math.min(count * (heightPerItemVh / 100), 4); // Cap at 4x viewport height
 
     const ctx = gsap.context(() => {
       // Reset states
@@ -57,6 +65,7 @@ export default function StickyPinnedSection({
           pinSpacing: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          refreshPriority: -1, // Lower priority to prevent conflicts
         },
       });
 
@@ -319,6 +328,7 @@ export default function StickyPinnedSection({
           trigger: el,
           start: "top 80%",
           onEnter: playFeaturedTitle,
+          refreshPriority: -1, // Lower priority to prevent conflicts
         });
       }
     });

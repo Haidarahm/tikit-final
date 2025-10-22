@@ -125,7 +125,7 @@ function Home() {
   return (
     <div
       id="home"
-      className="sections   relative w-full home-scroll-trigger"
+      className="sections   overflow-hidden relative w-full home-scroll-trigger"
     >
       {/* Element 1 */}
       <img

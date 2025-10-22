@@ -57,7 +57,7 @@ export default function WorkSection() {
   // Show loading state during initial load
   if (!isClient || loading) {
     return (
-      <div className="section my-6 md:my-16 relative flex flex-col mx-auto z-10 w-full justify-center">
+      <div className="section work-section-container my-6 md:my-16 relative flex flex-col mx-auto z-10 w-full justify-center">
         <div className="headline mb-4 px-6 md:px-10 flex w-full justify-between items-center">
           <h1 className="text-[var(--foreground)] md:text-center font-bold text-[18px] md:text-[32px]">
             {t("home.work.title")}

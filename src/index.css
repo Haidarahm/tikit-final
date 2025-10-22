@@ -379,3 +379,24 @@ footer .bottom-section .right-section .items li{
     height: 65vh;
   }
 }
+@media (min-width: 1080px) {
+.work-section-container{
+  height: 345vh;
+}
+}
+
+@media (min-width: 1280px) {
+  .work-section-container{
+    height: 365vh;
+  }
+  }
+  @media (min-width: 1450px) {
+    .work-section-container{
+      height: 370vh;
+    }
+    }
+    @media (min-width: 1650px) {
+      .work-section-container{
+        height: 375vh;
+      }
+}

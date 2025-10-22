@@ -12,6 +12,7 @@ import "aos/dist/aos.css";
 import LogoIntro from "./components/LogoIntro";
 import TickLoader from "./components/TickLoader";
 import Loader from "./components/Loader.jsx";
+import { Influencer } from "./pages/influencer/Influencer.jsx";
 
 // Lazy load components
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -31,7 +32,7 @@ const Layout = () => (
   <>
     <ScrollToTop />
     <AOSRefresher />
-    <div className="relative w-full min-h-full overflow-hidden">
+    <div className="relative w-full min-h-full">
       <Navbar />
       <div>
         <Outlet />
@@ -55,6 +56,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/influencer" element={<Influencer />} />
             <Route path="/details/:id" element={<Details />} />
             <Route path="/service-details/:id" element={<ServiceDetails />} />
           </Route>

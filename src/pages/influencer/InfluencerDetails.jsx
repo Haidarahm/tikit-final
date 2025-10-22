@@ -2,48 +2,18 @@ import React, { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useI18nLanguage } from "../../store/I18nLanguageContext";
+import { useTheme } from "../../store/ThemeContext";
 import { useTranslation } from "react-i18next";
 import { FaInstagram, FaYoutube, FaTiktok, FaTwitter } from "react-icons/fa";
-import influencer from '../../assets/influncer/1.png'
+import influencer from "../../assets/influncer/1.png";
+import overlay from "../../assets/tick-overlay.png";
+import overlayDark from "../../assets/tick-overlay-dark.png";
 gsap.registerPlugin(ScrollTrigger);
 
 // Social Media Icons Component
-const SocialIcon = ({ icon: Icon, href, delay = 0 }) => {
-  const iconRef = useRef(null);
-
-  useLayoutEffect(() => {
-    if (!iconRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        iconRef.current,
-        {
-          scale: 0,
-          rotation: -180,
-          opacity: 0,
-        },
-        {
-          scale: 1,
-          rotation: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "back.out(1.7)",
-          delay: delay,
-          scrollTrigger: {
-            trigger: iconRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    });
-
-    return () => ctx.revert();
-  }, [delay]);
-
+const SocialIcon = ({ icon: Icon, href }) => {
   return (
     <a
-      ref={iconRef}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
@@ -54,7 +24,18 @@ const SocialIcon = ({ icon: Icon, href, delay = 0 }) => {
   );
 };
 
-export const InfluencerDetails = () => {
+export const InfluencerDetails = ({
+  name = "Sarah Johnson",
+  primarySubtitle = "Digital Content Creator",
+  secondarySubtitle = "Lifestyle & Fashion Influencer",
+  image = influencer,
+  socialLinks = [
+    { platform: "instagram", href: "https://instagram.com/sarahjohnson" },
+    { platform: "youtube", href: "https://youtube.com/@sarahjohnson" },
+    { platform: "tiktok", href: "https://tiktok.com/@sarahjohnson" },
+    { platform: "twitter", href: "https://twitter.com/sarahjohnson" },
+  ],
+}) => {
   const nameRef = useRef(null);
   const subtitleRef = useRef(null);
   const socialRef = useRef(null);
@@ -62,10 +43,24 @@ export const InfluencerDetails = () => {
   const containerRef = useRef(null);
 
   const { isRtl } = useI18nLanguage();
+  const { theme } = useTheme();
   const { t } = useTranslation();
 
   useLayoutEffect(() => {
     if (!containerRef.current) return;
+
+    // Clean up any existing ScrollTrigger instances for this component
+    ScrollTrigger.getAll().forEach((trigger) => {
+      if (
+        trigger.trigger === containerRef.current ||
+        trigger.trigger === nameRef.current ||
+        trigger.trigger === subtitleRef.current ||
+        trigger.trigger === socialRef.current ||
+        trigger.trigger === imageRef.current
+      ) {
+        trigger.kill();
+      }
+    });
 
     const ctx = gsap.context(() => {
       // Main container animation
@@ -80,7 +75,10 @@ export const InfluencerDetails = () => {
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top 80%",
+            end: "bottom 20%",
             toggleActions: "play none none reverse",
+            invalidateOnRefresh: true,
+            fastScrollEnd: true,
           },
         }
       );
@@ -104,7 +102,10 @@ export const InfluencerDetails = () => {
             scrollTrigger: {
               trigger: nameRef.current,
               start: "top 85%",
+              end: "bottom 20%",
               toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+              fastScrollEnd: true,
             },
           }
         );
@@ -129,32 +130,33 @@ export const InfluencerDetails = () => {
             scrollTrigger: {
               trigger: subtitleRef.current,
               start: "top 85%",
+              end: "bottom 20%",
               toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+              fastScrollEnd: true,
             },
           }
         );
       }
 
-      // Social media animation
+      // Social media animation (container only, no per-icon stagger)
       if (socialRef.current) {
         gsap.fromTo(
           socialRef.current,
-          {
-            opacity: 0,
-            y: 20,
-            scale: 0.8,
-          },
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
             y: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: "back.out(1.7)",
-            delay: 0.8,
+            duration: 0.6,
+            ease: "power2.out",
+            delay: 0.6,
             scrollTrigger: {
               trigger: socialRef.current,
               start: "top 85%",
+              end: "bottom 20%",
               toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+              fastScrollEnd: true,
             },
           }
         );
@@ -179,20 +181,37 @@ export const InfluencerDetails = () => {
             scrollTrigger: {
               trigger: imageRef.current,
               start: "top 80%",
+              end: "bottom 20%",
               toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+              fastScrollEnd: true,
             },
           }
         );
       }
     });
 
-    return () => ctx.revert();
-  }, [isRtl]);
+    return () => {
+      ctx.revert();
+      // Additional cleanup for ScrollTrigger instances
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (
+          trigger.trigger === containerRef.current ||
+          trigger.trigger === nameRef.current ||
+          trigger.trigger === subtitleRef.current ||
+          trigger.trigger === socialRef.current ||
+          trigger.trigger === imageRef.current
+        ) {
+          trigger.kill();
+        }
+      });
+    };
+  }, [isRtl, theme]);
 
   return (
     <section
       ref={containerRef}
-      className={`snap-start snap-always min-h-screen flex flex-col lg:flex-row items-center gap-8 md:gap-16 lg:gap-24 xl:gap-32 py-8 md:py-12 px-4 md:px-8 lg:px-14 ${
+      className={`snap-start snap-always overflow-hidden w-full min-h-screen flex flex-col lg:flex-row items-center gap-8 md:gap-16 lg:gap-24 xl:gap-32 py-8 md:py-12 px-4 md:px-8 lg:px-14 ${
         isRtl ? "font-cairo" : "font-hero-light"
       }`}
       dir={isRtl ? "rtl" : "ltr"}
@@ -205,7 +224,7 @@ export const InfluencerDetails = () => {
             ref={nameRef}
             className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-[var(--foreground)] leading-tight"
           >
-            Sarah Johnson
+            {name}
           </h1>
         </div>
 
@@ -215,55 +234,61 @@ export const InfluencerDetails = () => {
             ref={subtitleRef}
             className="text-xl md:text-2xl lg:text-3xl text-[var(--secondary)] font-medium"
           >
-            Digital Content Creator
+            {primarySubtitle}
           </h2>
           <h3
             ref={subtitleRef}
             className="text-lg md:text-xl lg:text-2xl text-[var(--foreground)]/80 font-light"
           >
-            Lifestyle & Fashion Influencer
+            {secondarySubtitle}
           </h3>
         </div>
 
         {/* Social Media Links */}
         <div ref={socialRef} className="flex flex-wrap gap-4 md:gap-6">
-          <SocialIcon
-            icon={FaInstagram}
-            href="https://instagram.com/sarahjohnson"
-            delay={0}
-          />
-          <SocialIcon
-            icon={FaYoutube}
-            href="https://youtube.com/@sarahjohnson"
-            delay={0.1}
-          />
-          <SocialIcon
-            icon={FaTiktok}
-            href="https://tiktok.com/@sarahjohnson"
-            delay={0.2}
-          />
-          <SocialIcon
-            icon={FaTwitter}
-            href="https://twitter.com/sarahjohnson"
-            delay={0.3}
-          />
+          {socialLinks.map((social, index) => {
+            const getIcon = (platform) => {
+              switch (platform) {
+                case "instagram":
+                  return FaInstagram;
+                case "youtube":
+                  return FaYoutube;
+                case "tiktok":
+                  return FaTiktok;
+                case "twitter":
+                  return FaTwitter;
+                default:
+                  return FaInstagram;
+              }
+            };
+
+            return (
+              <SocialIcon
+                key={social.platform}
+                icon={getIcon(social.platform)}
+                href={social.href}
+              />
+            );
+          })}
         </div>
       </div>
 
       {/* Right Image */}
-      <div className="flex-1 w-full lg:w-auto">
-        <div
-          ref={imageRef}
-          className="relative w-full h-[300px] md:h-[300px] lg:h-[400px] xl:h-[600px] rounded-2xl overflow-hidden"
-        >
-          <img
-            src={influencer}
-            alt="Sarah Johnson - Digital Content Creator"
-            className="w-full h-full px-8 transition-transform duration-700 hover:scale-105"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-        </div>
+      <div
+        ref={imageRef}
+        className="relative  flex justify-end flex-1  h-[200px] md:h-[300px] lg:h-[400px] xl:h-[500px] rounded-2xl "
+      >
+        <img
+          src={image}
+          alt={`${name} - ${primarySubtitle}`}
+          className="w-[90%] h-full px-8 "
+          loading="lazy"
+        />
+        <img
+          src={theme === "dark" ? overlayDark : overlay}
+          alt="overlay"
+          className="absolute bottom-4 md:-bottom-2  right-0 md:h-2/3 w-[90%]"
+        />
       </div>
     </section>
   );

@@ -38,8 +38,7 @@ const Hero = () => {
 
   return (
     <section
-      data-scroll-section
-      className={`text-[var(--foreground)] snap-start snap-always h-[50vh] md:h-screen w-full flex items-center justify-center ${
+      className={`text-[var(--foreground)]  snap-start snap-always h-[50vh] md:h-screen w-full flex items-center justify-center ${
         isRtl ? "font-cairo" : "font-hero-light"
       }`}
       dir={isRtl ? "rtl" : "ltr"}

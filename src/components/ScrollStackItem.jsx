@@ -1,5 +1,4 @@
 import { useLayoutEffect, useRef, useCallback, useMemo } from "react";
-import Lenis from "lenis";
 
 export const ScrollStackItem = ({ children, itemClassName = "" }) => (
   <div
@@ -30,8 +29,6 @@ const ScrollStack = ({
 }) => {
   const scrollerRef = useRef(null);
   const stackCompletedRef = useRef(false);
-  const animationFrameRef = useRef(null);
-  const lenisRef = useRef(null);
   const cardsRef = useRef([]);
   const lastTransformsRef = useRef(new Map());
   const isUpdatingRef = useRef(false);
@@ -262,61 +259,6 @@ const ScrollStack = ({
     });
   }, [updateCardTransforms]);
 
-  const setupLenis = useCallback(() => {
-    if (useWindowScroll) {
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-        touchMultiplier: 2,
-        infinite: false,
-        wheelMultiplier: 1,
-        lerp: 0.1,
-        syncTouch: true,
-        syncTouchLerp: 0.075,
-      });
-
-      lenis.on("scroll", handleScroll);
-
-      const raf = (time) => {
-        lenis.raf(time);
-        animationFrameRef.current = requestAnimationFrame(raf);
-      };
-      animationFrameRef.current = requestAnimationFrame(raf);
-
-      lenisRef.current = lenis;
-      return lenis;
-    } else {
-      const scroller = scrollerRef.current;
-      if (!scroller) return;
-
-      const lenis = new Lenis({
-        wrapper: scroller,
-        content: scroller.querySelector(".scroll-stack-inner"),
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-        touchMultiplier: 2,
-        infinite: false,
-        wheelMultiplier: 1,
-        lerp: 0.1,
-        syncTouch: true,
-        syncTouchLerp: 0.075,
-      });
-
-      lenis.on("scroll", handleScroll);
-
-      const raf = (time) => {
-        lenis.raf(time);
-        animationFrameRef.current = requestAnimationFrame(raf);
-      };
-      animationFrameRef.current = requestAnimationFrame(raf);
-
-      lenisRef.current = lenis;
-      return lenis;
-    }
-  }, [handleScroll, useWindowScroll]);
-
   useLayoutEffect(() => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
@@ -344,12 +286,15 @@ const ScrollStack = ({
       card.style.webkitPerspective = "1000px";
     });
 
-    // Initialize positions and scroll engine
+    // Initialize positions
     updatePositions();
-    setupLenis();
 
     // Initial render
     updateCardTransforms();
+
+    // Add scroll event listeners
+    const scrollElement = useWindowScroll ? window : scroller;
+    scrollElement.addEventListener("scroll", handleScroll, { passive: true });
 
     // ✅ Passive resize listener
     const handleResize = () => {
@@ -359,12 +304,10 @@ const ScrollStack = ({
     window.addEventListener("resize", handleResize, { passive: true });
 
     return () => {
+      scrollElement.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-      if (lenisRef.current) {
-        lenisRef.current.destroy();
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
       }
       stackCompletedRef.current = false;
       cardsRef.current = [];
@@ -374,11 +317,11 @@ const ScrollStack = ({
     };
   }, [
     itemDistance,
-    setupLenis,
     updateCardTransforms,
     updatePositions,
     scrollConfig, // ← Stable dependency
     useWindowScroll,
+    handleScroll,
   ]);
 
   const containerStyles = useWindowScroll
@@ -387,6 +330,7 @@ const ScrollStack = ({
         WebkitOverflowScrolling: "touch",
         WebkitTransform: "translateZ(0)",
         transform: "translateZ(0)",
+        zIndex: 1,
       }
     : {
         overscrollBehavior: "contain",
@@ -395,6 +339,7 @@ const ScrollStack = ({
         WebkitTransform: "translateZ(0)",
         transform: "translateZ(0)",
         willChange: "scroll-position",
+        zIndex: 1,
       };
 
   const containerClassName = useWindowScroll

@@ -1,5 +1,5 @@
 // src/app/(whatever)/Home.tsx
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Hero from "./Hero";
 import Numbers from "./Numbers";
 import element1Dark from "../../assets/elements/6.png";
@@ -9,6 +9,7 @@ import element1 from "../../assets/elements/1-light.png";
 import { useTheme } from "../../store/ThemeContext.jsx";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 import Goals from "./Goals";
 import Services from "./Services";
 import AboutUs from "./AboutUs";
@@ -23,12 +24,45 @@ gsap.registerPlugin(ScrollTrigger);
 
 function Home() {
   const { theme } = useTheme();
+  const lenisRef = useRef(null);
 
   useEffect(() => {
     // Safety: ensure no leftover locomotive-scroll styles block scrolling
     const htmlEl = document.documentElement;
     htmlEl.classList.remove("has-scroll-smooth", "has-scroll-init");
     document.body.style.removeProperty("overflow");
+
+    // Initialize Lenis smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 2,
+      infinite: false,
+      wheelMultiplier: 1,
+      lerp: 0.1,
+      syncTouch: true,
+      syncTouchLerp: 0.075,
+      wrapper: window,
+    content: document.documentElement,
+    });
+
+    // Connect Lenis with ScrollTrigger
+    lenis.on("scroll", ScrollTrigger.update);
+
+    // Add a small delay to ensure all components are mounted before ScrollTrigger refresh
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+
+    // RAF loop for Lenis
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    lenisRef.current = lenis;
 
     // Function to get responsive values
     const getResponsiveValues = () => {
@@ -75,17 +109,23 @@ function Home() {
 
     window.addEventListener("resize", handleResize);
 
+    // Refresh ScrollTrigger after Lenis is initialized
+    ScrollTrigger.refresh();
+
     // Cleanup on unmount
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       window.removeEventListener("resize", handleResize);
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+      }
     };
   }, []);
 
   return (
     <div
       id="home"
-      className="sections overflow-hidden  relative w-full home-scroll-trigger"
+      className="sections   relative w-full home-scroll-trigger"
     >
       {/* Element 1 */}
       <img
@@ -104,6 +144,7 @@ function Home() {
       <Goals />
       <Services />
       <Connections />
+   
       <WorkSection />
       <AboutUs />
       <Reviews />

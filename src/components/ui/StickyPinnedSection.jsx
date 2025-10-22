@@ -41,7 +41,7 @@ export default function StickyPinnedSection({
     });
 
     const pinDistance =
-      window.innerHeight * Math.min(count * (heightPerItemVh / 100), 4); // Cap at 4x viewport height
+      window.innerHeight * Math.min(count * (heightPerItemVh / 100), 3.5); // Cap at 3.5x viewport height for proper pinned section
 
     const ctx = gsap.context(() => {
       // Reset states
@@ -60,19 +60,20 @@ export default function StickyPinnedSection({
           trigger: el,
           start: "top top",
           end: `+=${pinDistance}`,
-          scrub: 0.8, // smoother scrub
+          scrub: 1.0, // smooth scrub for proper pinned effect
           pin: true,
-          pinSpacing: true,
+          pinSpacing: true, // Enable pin spacing for proper scroll behavior
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          refreshPriority: -1, // Lower priority to prevent conflicts
+          refreshPriority: 0, // Normal priority
+          fastScrollEnd: true, // Better performance
         },
       });
 
-      // Adjusted values
-      const segment = 2.0; // per item span
-      const textFadeDur = 0.25;
-      const switchDelay = 0.02;
+      // Adjusted values - balanced for proper pinned section
+      const segment = 1.8; // per item span - balanced for good pinned effect
+      const textFadeDur = 0.25; // restored for smooth transitions
+      const switchDelay = 0.02; // restored for proper timing
 
       // Media easing
       const inEase = "power3.out";
@@ -328,12 +329,21 @@ export default function StickyPinnedSection({
           trigger: el,
           start: "top 80%",
           onEnter: playFeaturedTitle,
-          refreshPriority: -1, // Lower priority to prevent conflicts
+          refreshPriority: 1, // Higher priority for title animation
+          fastScrollEnd: true,
         });
       }
     });
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      // Additional cleanup for ScrollTrigger instances
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.trigger === el) {
+          trigger.kill();
+        }
+      });
+    };
   }, [count, heightPerItemVh, isRtl]);
 
   if (!count) return null;

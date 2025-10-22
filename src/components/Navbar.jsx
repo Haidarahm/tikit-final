@@ -329,13 +329,13 @@ function Navbar() {
         >
           {/* Logo */}
           <div
-            className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center ${
+            className={`h-10 md:h-12 flex items-center justify-center ${
               language === "ar" ? "order-4" : ""
             }`}
           >
             <div
               ref={logoRef}
-              className="w-10 h-10 md:w-12 md:h-12 transform-gpu"
+              className="h-10  md:h-12 transform-gpu"
             >
               <SVGComponent
                 color={theme === "dark" ? "#FFFFFF" : "#363737"}

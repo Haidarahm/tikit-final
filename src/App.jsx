@@ -31,7 +31,7 @@ const Layout = () => (
   <>
     <ScrollToTop />
     <AOSRefresher />
-    <div className="relative w-full">
+    <div className="relative w-full min-h-full overflow-hidden">
       <Navbar />
       <div>
         <Outlet />

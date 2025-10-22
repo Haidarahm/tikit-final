@@ -107,7 +107,7 @@ function Goals() {
           </ScrollStackItem>
         ))}
       </ScrollStack>
-      <div className="container-goals mx-2 block md:hidden">
+      <div className="container-goals w-full overflow-hidden block md:hidden">
         {goalsData.map((goal, index) => {
           const animationDirection = isRtl
             ? index % 2 === 0

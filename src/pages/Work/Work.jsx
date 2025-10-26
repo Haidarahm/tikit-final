@@ -183,7 +183,7 @@ const Work = () => {
             {/* Overlay: only title & subtitle */}
             <div className=" content-work absolute  inset-0 flex flex-col items-center overflow-hidden justify-center bg-black/30 md:bg-black/60 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
               {w.title ? (
-                <h3 className="text-white text-[30px] font-bold ">{w.title}</h3>
+                <h3 className="text-white text-[30px] font-bold text-center ">{w.title}</h3>
               ) : null}
               {w.subtitle ? (
                 <p className="text-gray-200 text-[20px] mb-4">{w.subtitle}</p>

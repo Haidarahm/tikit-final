@@ -55,7 +55,7 @@ const Hero = ({ id }) => {
         className="texts flex flex-col relative z-20"
       >
         <h1
-          className={`title text-[62px] md:text-[92px] font-bold transition-all duration-1000 ease-out ${
+          className={`title text-[62px] md:text-[92px] font-bold transition-all text-center duration-1000 ease-out ${
             show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
